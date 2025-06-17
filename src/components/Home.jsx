@@ -1,3 +1,5 @@
+import { Link } from 'react-router';
+
 export default function HomeTab() {
     return (
         <div id="content-home" className="content-section">
@@ -9,7 +11,8 @@ export default function HomeTab() {
                     Bulgaria manages 7 multiplexes in 6 different cities in the country – Sofia, Plovdiv, Stara Zagora, Ruse, Burgas and Varna
                 </p>
                 <div className="button-about-us">
-                    <a href="/about-us" className="link1 tab-link" data-tab="about-us"><span><span>Learn More</span></span></a>
+                    {/* <a href="/about-us" className="link1 tab-link" data-tab="about-us"><span><span>Learn More</span></span></a> */}
+                    <Link to={"/about-us"} className="link1 tab-link" data-tab="about-us"><span><span>Learn More</span></span></Link>
                 </div>
                 </div>
             </div>

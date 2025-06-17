@@ -1,4 +1,4 @@
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom'
+import { Routes, Route } from 'react-router'
 import './css/style.css'
 
 import Header from "./components/Header"
@@ -12,16 +12,9 @@ import AboutUs from './components/AboutUs'
 import ContactUs from './components/ContactUs'
 
 
-const router = {
-  future: {
-    v7_startTransition: true,
-    v7_relativeSplatPath: true
-  }
-};
-
 function App() {
   return (
-    <Router {...router}>
+   
       <div className="tail-top">
         <div className="tail-bottom">
           <div id="main">
@@ -39,7 +32,6 @@ function App() {
           </div>
         </div>
       </div>
-    </Router>
   )
 }
 
