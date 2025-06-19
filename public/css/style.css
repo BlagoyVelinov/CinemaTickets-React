@@ -55,6 +55,113 @@ ul, ol {
     width: 940px;
     margin: 0 auto;
     font-size: 0.875em;
+    min-height: 60vh;
+}
+
+.centered-form-container {
+    min-height: 60vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 6em;
+}
+
+.wrapper {
+    width: 100%;
+    max-width: 36em;
+    background: rgba(30, 30, 30, 0.95);
+    box-shadow: 0 4px 24px rgba(0,0,0,0.18);
+    color: white;
+    border-radius: 16px;
+    padding: 32px 32px 24px 32px;
+    border: 1.5px solid rgba(255, 255, 255, .15);
+    margin: 40px auto;
+    transition: box-shadow 0.2s;
+}
+.wrapper:hover {
+    box-shadow: 0 8px 32px rgba(0,0,0,0.28);
+}
+
+.wrapper h2 {
+    text-align: center;
+    margin-bottom: 1.5em;
+    font-size: 2em;
+    letter-spacing: 1px;
+    color: #ffb347;
+}
+
+.input-box {
+    display: flex;
+    align-items: center;
+    border-radius: 8px;
+}
+.input-box input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #fff;
+    font-size: 1em;
+    padding: 0.7em 0.5em;
+}
+.input-box i {
+    color: #ffb347;
+    font-size: 1.2em;
+    margin-left: 0.5em;
+}
+
+.remember-me {
+    margin-bottom: 1.2em;
+    font-size: 0.98em;
+    color: #ccc;
+}
+
+.btn {
+    width: 100%;
+    padding: 0.8em 0;
+    background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%);
+    color: #222;
+    border: none;
+    border-radius: 8px;
+    font-size: 1.1em;
+    font-weight: bold;
+    cursor: pointer;
+    margin-bottom: 1.2em;
+    transition: background 0.2s, color 0.2s;
+}
+.btn:hover {
+    background: linear-gradient(90deg, #ff9800 0%, #ffb347 100%);
+    color: #fff;
+}
+
+.register-link {
+    text-align: center;
+    margin-top: 0.5em;
+    font-size: 1em;
+}
+.register-link a {
+    color: #ffb347;
+    text-decoration: underline;
+    transition: color 0.2s;
+}
+.register-link a:hover {
+    color: #ff9800;
+}
+
+.text-danger {
+    color: #ff4d4f !important;
+    margin-bottom: 1em;
+    display: block;
+    text-align: center;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    width: 98vw;
+    max-width: 98vw;
+    padding: 18px 2vw;
+  }
 }
 
 #header {
@@ -98,20 +205,6 @@ ul, ol {
 
 .aligncenter {
     text-align: center;
-}
-
-.wrapper {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 420px;
-    background: transparent;
-    backdrop-filter: blur(10px);
-    color: white;
-    border-radius: 12px;
-    padding: 30px 40px;
-    border: 2px solid rgba(255, 255, 255, .2);
 }
 
 .extra-wrap {
@@ -996,9 +1089,9 @@ element.style {
 }
 
 /*============================language bar*/
-.language {
+/* .language {
     margin-top: -14px;
-}
+} */
 .nav-item {
     /*color: white;*/
     color: #ffffff;
@@ -2146,7 +2239,7 @@ header.navigation ul li a:hover {
 .wrapper .input-box {
     position: relative;
     width: 100%;
-    height: 50px;
+    /* height: 50px; */
     margin: 30px 0;
 }
 
@@ -2844,4 +2937,11 @@ header a.active {
 
 .ticket-type-dialog .btn-cancel:hover {
     background: #f4511e;
+}
+
+@media (max-width: 600px) {
+  .wrapper {
+    width: 95vw;
+    padding: 20px 5vw;
+  }
 }

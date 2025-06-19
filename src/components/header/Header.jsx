@@ -1,8 +1,8 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router'
+import { Link, NavLink, useLocation } from 'react-router'
 
 export default function Header() {
-  const [show, setShow] = useState(true);
+    const location = useLocation();
+    const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
 
     return (
         <header id="nav">
@@ -11,10 +11,10 @@ export default function Header() {
                     <div className="fleft"><Link to="/">Cinema <span>Tickets</span></Link></div>
                     <ul>
                         <div className="form-inline my-2 my-lg-0 border px-3 welcome-message">
-                            <div className="logged-user">
+                            <div className="logged-user" style={{display: "none"}}>
                                 <span>Welcome, User</span>
                             </div>
-                            <form method="post" action="/api/users/logout">
+                            <form method="post" action="/api/users/logout" style={{display: "none"}}>
                                 <input type="submit" className="btn btn-info btn-logout" value="Logout" />
                             </form>
                         </div>
@@ -33,19 +33,21 @@ export default function Header() {
                         </li>
                     </ul>
                 </div>
-                <div className="row-2" data-show-tabs="true" style={{ display: show ? "block" : "none" }}>
-                    <ul>
-                        <li>
-                            <NavLink to="/" style={({ isActive }) => isActive ? {color: 'green'} : {}}
-                            >
-                                Home
-                            </NavLink></li>
-                        <li><NavLink to="/program">Program</NavLink></li>
-                        <li><NavLink to="/offers">Offers</NavLink></li>
-                        <li><NavLink to="/4dx">4-DX</NavLink></li>
-                        <li className="last"><NavLink to="/imax">IMAX</NavLink></li>
-                    </ul>
-                </div>
+                {!hideNav && (
+                  <div className="row-2" data-show-tabs="true">
+                      <ul>
+                          <li>
+                              <NavLink to="/" style={({ isActive }) => isActive ? {color: 'green'} : {}}
+                              >
+                                  Home
+                              </NavLink></li>
+                          <li><NavLink to="/program">Program</NavLink></li>
+                          <li><NavLink to="/offers">Offers</NavLink></li>
+                          <li><NavLink to="/4dx">4-DX</NavLink></li>
+                          <li className="last"><NavLink to="/imax">IMAX</NavLink></li>
+                      </ul>
+                  </div>
+                )}
             </nav>
         </header>
     );
