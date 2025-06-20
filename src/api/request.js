@@ -20,8 +20,9 @@ const request = async (method, url, data) => {
     }
 
     const response = await fetch(url, options);
-    const result = await response.json();
 
+    
+    const result = await response.json();
     return result;
 };
 
