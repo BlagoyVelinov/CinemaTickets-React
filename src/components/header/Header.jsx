@@ -19,7 +19,7 @@ export default function Header() {
                             </form>
                         </div>
 
-                        <li><Link to="/users/login"><img src="/images/login-icon.gif" alt="login" onClick={() => setShow((s) => !s)} /></Link></li>
+                        <li><Link to="/users/login"><img src="/images/login-icon.gif" alt="login" /></Link></li>
 
                         <li><Link to="/users/register"><img src="/images/signup-green3.gif" alt="register" /></Link></li>
                         <li className="nav-item">
