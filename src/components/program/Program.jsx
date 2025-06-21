@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import Movie from "./movie/Movie";
+import Movie from "./movie/MovieProgram";
 import movieService from "../../services/movieService";
 
 export default function ProgramTab() {
@@ -67,7 +67,7 @@ export default function ProgramTab() {
                                         </button>
                                     </div>
                                 </div>
-                                <h1>Movie list</h1>
+
                                 {movies.length > 0 
                                     ? movies.map(movie => <Movie key={movie.id} {...movie} />) 
                                     : <h3 className="no-articles">No movies yet</h3>
