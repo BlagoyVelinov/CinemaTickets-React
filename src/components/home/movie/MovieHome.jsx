@@ -22,7 +22,7 @@ export default function MovieHome({
             <p>{description || 'Няма описание'}</p>
 
             <div className="button-trailer-button">
-                <Link onClick={() => {
+                <Link to={`/?trailer=${id}`} onClick={() => {
                     console.log("Clicked See Trailer for id:", id);
                     onSeeTrailer(id);
                 }} className="link2">

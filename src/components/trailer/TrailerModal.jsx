@@ -1,21 +1,46 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router";
+
 import useTrailer from "../../hooks/useTrailer";
 
 export default function TrailerModal({ movieId, onClose }) {
     const { movie, isLoading, hasError, errorMessage } = useTrailer(movieId);
+    const [visible, setVisible] = useState(false);
     const [show, setShow] = useState(false);
+    const navigate = useNavigate();
 
     useEffect(() => {
-        setShow(true);
+        setVisible(true);
+        setTimeout(() => setShow(true), 10);
     }, []);
 
+    const handleClose = () => {
+        setShow(false);
+        setTimeout(() => {
+            setVisible(false);
+            if (onClose) onClose();
+            navigate(-1);
+          }, 100);
+    };
+
     useEffect(() => {
-        console.log("TrailerModal movie:", movie);
-    }, [movie]);
+        const onEscPress = (e) => {
+          if (e.key === 'Escape') handleClose();
+        };
+        window.addEventListener('keydown', onEscPress);
+        return () => window.removeEventListener('keydown', onEscPress);
+      }, []);
+
+    if (!visible) return null;
 
     return (
-        <div className="trailer-modal show">
-            <div id="trailer-app" className="show">
+        <div
+            className={`trailer-modal${show ? ' show' : ''}`}
+            onClick={e => {
+                if (e.target.classList.contains('trailer-modal')) handleClose();
+            }}
+        >
+            <div id="trailer-app" className={show ? 'show' : ''} onClick={e => e.stopPropagation()}>
                 {isLoading && (
                     <div className="loading">
                         <p>Loading...</p>
@@ -32,11 +57,7 @@ export default function TrailerModal({ movieId, onClose }) {
                         <header className="trailer-header">
                             <h3>{movie.name}</h3>
                         </header>
-                        <button onClick={() => {
-                            console.log("TrailerModal close button clicked");
-                            setShow(false);
-                            setTimeout(onClose, 300);
-                        }} className="trailer-close-button">×</button>
+                        <button onClick={handleClose} className="trailer-close-button">X</button>
                         <div>
                             <iframe
                                 width="780"

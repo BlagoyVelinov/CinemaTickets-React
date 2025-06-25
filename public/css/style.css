@@ -2790,7 +2790,7 @@ header.navigation ul li a:hover {
   position: absolute;
   top: 10px;
   right: 10px;
-  background: rgb(255, 0, 0);
+  background: transparent;
   color: white;
   border: none;
   border-radius: 50%;
@@ -2800,11 +2800,9 @@ header.navigation ul li a:hover {
   line-height: 22px;
   cursor: pointer;
   z-index: 1010;
-  transition: all 0.3s ease;
 }
 
 .trailer-close-button:hover {
-  background: rgb(200, 0, 0);
   transform: scale(1.1);
 }
 
@@ -2830,6 +2828,7 @@ header.navigation ul li a:hover {
 .movie-trailer p {
   margin-top: 2em;
   line-height: 1.5;
+  color: #fff;
 }
 
 

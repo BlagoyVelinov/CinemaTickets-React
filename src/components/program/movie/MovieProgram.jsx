@@ -17,7 +17,7 @@ export default function Movie({
     <li className="movieList">
         <img src={imageUrl} alt={name} width="204" height="219" />
         <section className="movie-details">
-            <Link onClick={() => onSeeTrailer(id)} className="title-movie">{name}</Link>
+            <Link to={`/program/?trailer=${id}`} onClick={() => onSeeTrailer(id)} className="title-movie">{name}</Link>
 
             <span className="qb-movie-rating-info">
                 <img src={icon} alt="Rating" height="30" className="rating-icon mr-sm" />
