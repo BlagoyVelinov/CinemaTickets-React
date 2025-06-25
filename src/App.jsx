@@ -1,3 +1,5 @@
+import { MovieProvider } from './context/MovieContext';
+
 import { Routes, Route } from 'react-router';
 import HomeTab from './components/home/Home';
 import ProgramTab from './components/program/Program';
@@ -12,25 +14,26 @@ import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
 
 
-
 function App() {
   return (
    
     <div className="tail-top">
         <div className="tail-bottom">
             <div id="main">
-                <Header />
-                    <Routes>
-                        <Route path="/" element={<HomeTab />} />
-                        <Route path="/program" element={<ProgramTab />} />
-                        <Route path="/4dx" element={<FourDxTab />} />
-                        <Route path="/imax" element={<ImaxTab />} />
-                        <Route path="/offers" element={<OffersTab />} />
-                        <Route path="/about-us" element={<AboutUs />} />
-                        <Route path="/contact-us" element={<ContactUs />} />
-                        <Route path="/users/login" element={<Login />} />
-                        <Route path="/users/register" element={<SignUp />} />
-                    </Routes>
+                <MovieProvider>
+                    <Header />
+                        <Routes>
+                            <Route path="/" element={<HomeTab />} />
+                            <Route path="/program" element={<ProgramTab />} />
+                            <Route path="/4dx" element={<FourDxTab />} />
+                            <Route path="/imax" element={<ImaxTab />} />
+                            <Route path="/offers" element={<OffersTab />} />
+                            <Route path="/about-us" element={<AboutUs />} />
+                            <Route path="/contact-us" element={<ContactUs />} />
+                            <Route path="/users/login" element={<Login />} />
+                            <Route path="/users/register" element={<SignUp />} />
+                        </Routes>
+                </MovieProvider>
                 <Footer />
             </div>
         </div>

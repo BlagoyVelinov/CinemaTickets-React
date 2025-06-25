@@ -1,18 +1,24 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useMovies } from "../../context/MovieContext";
 import Movie from "./movie/MovieProgram";
-import movieService from "../../services/movieService";
+import useTrailerModal from "../../hooks/useTrailerModal";
+import TrailerModal from "../trailer/TrailerModal";
 
 export default function ProgramTab() {
 
-    const [movies, setMovies] = useState([]);
+    const { allMovies, loadAllMovies } = useMovies();
+
+    const {
+        showTrailer,
+        selectedMovieId,
+        openTrailer,
+        closeTrailer
+    } = useTrailerModal();
 
     useEffect(() => {
-        movieService.getAll()
-            .then(setMovies)
-
+        loadAllMovies();
     }, []);
 
-    
     return (
         <div id="content-program" className="content-section">
             <div className="line-hor"></div>
@@ -68,10 +74,18 @@ export default function ProgramTab() {
                                     </div>
                                 </div>
 
-                                {movies.length > 0 
-                                    ? movies.map(movie => <Movie key={movie.id} {...movie} />) 
+                                {allMovies.length > 0 
+                                    ? allMovies.map(movie => (
+                                    <Movie key={movie.id}
+                                     {...movie}
+                                     onSeeTrailer={openTrailer}
+                                    />
+                                )) 
                                     : <h3 className="no-articles">No movies yet</h3>
                                 }
+                                {showTrailer && (
+                                        <TrailerModal movieId={selectedMovieId} onClose={closeTrailer} />
+                                    )}
                             </div>
                         </div>
                     </div>

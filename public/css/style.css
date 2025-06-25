@@ -944,7 +944,6 @@ a.cinema-card {
 }
 a:visited, a:active {
     outline: 0 none;
-    color: #f5821e;
     text-decoration: none;
 }
 
@@ -2551,6 +2550,9 @@ header.navigation ul li a:hover {
     color: #c5c1c1;
     text-decoration: none;
 }
+.title-movie:hover {
+    color: #c7792c;
+}
 
 .qb-movie-rating-info {
     display: flex;
@@ -2761,6 +2763,7 @@ header.navigation ul li a:hover {
 }
 
 .trailer-modal.show {
+  display: flex;
   background-color: rgba(50, 44, 44, 0.6);
   opacity: 1;
 }

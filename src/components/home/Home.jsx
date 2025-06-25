@@ -1,6 +1,23 @@
 import { Link } from 'react-router';
+import { useMovies } from "../../context/MovieContext";
+import TrailerModal from "../trailer/TrailerModal";
+import MovieHome from './movie/MovieHome';
+import { useEffect } from 'react';
+import useTrailerModal from '../../hooks/useTrailerModal';
 
 export default function HomeTab() {
+    const { premieres, loadPremieres } = useMovies();
+    
+    const {
+        showTrailer,
+        selectedMovieId,
+        openTrailer,
+        closeTrailer
+    } = useTrailerModal();
+
+    useEffect(() => {
+        loadPremieres();
+    }, []);
     return (
         <div id="content-home" className="content-section">
             <div id="slogan">
@@ -26,7 +43,23 @@ export default function HomeTab() {
 
                             <div className="content">
                                 <h3>Upcoming <span>Premieres</span></h3>
-                                <div id="movie-app" className="movies-container">
+                                <div id="movie-app" className="movies-container">                   
+                                    <ul className="movies">
+
+                                        {premieres.length > 0 
+                                            ? premieres.map(movie => (
+                                            <MovieHome 
+                                                key={movie.id}
+                                                {...movie} 
+                                                onSeeTrailer={openTrailer}
+                                                 />
+                                                )) 
+                                            : <h3 className="no-articles">No Upcoming Premieres</h3>
+                                        }
+                                        {showTrailer && (
+                                            <TrailerModal movieId={selectedMovieId} onClose={closeTrailer} />
+                                        )}
+                                    </ul>
                                 </div>
                             </div>
                         </div>

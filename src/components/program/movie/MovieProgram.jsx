@@ -1,3 +1,5 @@
+import { Link } from "react-router";
+
 export default function Movie({
   id,
   name,
@@ -9,12 +11,13 @@ export default function Movie({
   subtitles,
   projectionFormat,
   bookingTimes,
+  onSeeTrailer,
 }) {
   return (
     <li className="movieList">
         <img src={imageUrl} alt={name} width="204" height="219" />
         <section className="movie-details">
-            <a href={`/?trailer=${id}`} className="title-movie">{name}</a>
+            <Link onClick={() => onSeeTrailer(id)} className="title-movie">{name}</Link>
 
             <span className="qb-movie-rating-info">
                 <img src={icon} alt="Rating" height="30" className="rating-icon mr-sm" />
