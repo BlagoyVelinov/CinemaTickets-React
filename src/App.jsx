@@ -16,12 +16,10 @@ import { useState } from 'react';
 
 
 function App() {
-    const [username, setUsername] = useState('');
+    const [authData, setAuthData] = useState({});
 
-    const userLoginHandler = (authData) => {
-        console.log(authData);
-        
-        setUsername(authData.username);
+    const userLoginHandler = (resultData) => {        
+        setAuthData(resultData);
     };
 
   return (
