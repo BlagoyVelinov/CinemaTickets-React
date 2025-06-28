@@ -1,7 +1,26 @@
-import { Link } from "react-router";
+import { useActionState } from "react";
+import { Link, useNavigate } from "react-router";
+import { useLogin } from "../../api/authApi";
 
 
-export default function Login() {
+export default function Login({
+    onLogin,
+}) {
+    const navigate = useNavigate();
+    const { login } = useLogin();
+
+    const loginHandler = async (_, formData) => {
+        const values = Object.fromEntries(formData);
+
+        const authData = await login(values.username, values.password);
+        
+        onLogin(authData);
+
+        navigate('/')
+
+    };
+
+    const [_, loginAction, isPending] = useActionState(loginHandler, {username: '', password: ''});
 
  return (
     <>
@@ -9,7 +28,7 @@ export default function Login() {
             <div className="wrapper wrapper-login">
                 <h2>Login</h2>
 
-                <form id="login-form" action="#" className="auth-form-box">
+                <form id="login-form" action={loginAction} className="auth-form-box">
                     {/* <!-- Error message --> */}
                     <small className="text-danger" style={{display: "none"}}>Incorrect username or password!</small>
 

@@ -12,25 +12,33 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
+import { useState } from 'react';
 
 
 function App() {
+    const [username, setUsername] = useState('');
+
+    const userLoginHandler = (authData) => {
+        console.log(authData);
+        
+        setUsername(authData.username);
+    };
+
   return (
-   
     <div className="tail-top">
         <div className="tail-bottom">
             <div id="main">
                 <MovieProvider>
                     <Header />
                         <Routes>
-                            <Route path="/" element={<HomeTab />} />
+                            <Route index element={<HomeTab />} />
                             <Route path="/program" element={<ProgramTab />} />
                             <Route path="/4dx" element={<FourDxTab />} />
                             <Route path="/imax" element={<ImaxTab />} />
                             <Route path="/offers" element={<OffersTab />} />
                             <Route path="/about-us" element={<AboutUs />} />
                             <Route path="/contact-us" element={<ContactUs />} />
-                            <Route path="/users/login" element={<Login />} />
+                            <Route path="/users/login" element={<Login onLogin={userLoginHandler} />} />
                             <Route path="/users/register" element={<SignUp />} />
                         </Routes>
                 </MovieProvider>
