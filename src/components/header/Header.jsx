@@ -1,9 +1,11 @@
+import { useContext } from 'react';
 import { Link, NavLink, useLocation } from 'react-router'
+import { UserContext } from '../../contexts/UserContext';
 
 export default function Header() {
     const location = useLocation();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
-
+    const { username } = useContext(UserContext);
     return (
         <header id="nav">
             <nav id="header">

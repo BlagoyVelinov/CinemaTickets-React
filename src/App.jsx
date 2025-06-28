@@ -1,6 +1,9 @@
-import { MovieProvider } from './context/MovieContext';
-
+import { useState } from 'react';
 import { Routes, Route } from 'react-router';
+
+import { MovieProvider } from './contexts/MovieContext';
+import { UserContext } from './contexts/UserContext';
+
 import HomeTab from './components/home/Home';
 import ProgramTab from './components/program/Program';
 import FourDxTab from './components/four-dx/4dx';
@@ -12,7 +15,6 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
-import { useState } from 'react';
 
 
 function App() {
@@ -23,27 +25,29 @@ function App() {
     };
 
   return (
-    <div className="tail-top">
-        <div className="tail-bottom">
-            <div id="main">
-                <MovieProvider>
-                    <Header />
-                        <Routes>
-                            <Route index element={<HomeTab />} />
-                            <Route path="/program" element={<ProgramTab />} />
-                            <Route path="/4dx" element={<FourDxTab />} />
-                            <Route path="/imax" element={<ImaxTab />} />
-                            <Route path="/offers" element={<OffersTab />} />
-                            <Route path="/about-us" element={<AboutUs />} />
-                            <Route path="/contact-us" element={<ContactUs />} />
-                            <Route path="/users/login" element={<Login onLogin={userLoginHandler} />} />
-                            <Route path="/users/register" element={<SignUp />} />
-                        </Routes>
-                </MovieProvider>
-                <Footer />
+    <UserContext.Provider value={{...authData, userLoginHandler}}>
+        <div className="tail-top">
+            <div className="tail-bottom">
+                <div id="main">
+                    <MovieProvider>
+                        <Header />
+                            <Routes>
+                                <Route index element={<HomeTab />} />
+                                <Route path="/program" element={<ProgramTab />} />
+                                <Route path="/4dx" element={<FourDxTab />} />
+                                <Route path="/imax" element={<ImaxTab />} />
+                                <Route path="/offers" element={<OffersTab />} />
+                                <Route path="/about-us" element={<AboutUs />} />
+                                <Route path="/contact-us" element={<ContactUs />} />
+                                <Route path="/users/login" element={<Login />} />
+                                <Route path="/users/register" element={<SignUp />} />
+                            </Routes>
+                    </MovieProvider>
+                    <Footer />
+                </div>
             </div>
         </div>
-    </div>
+    </UserContext.Provider>
   )
 }
 

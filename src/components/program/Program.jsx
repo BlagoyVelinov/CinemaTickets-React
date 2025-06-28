@@ -1,5 +1,5 @@
 import { useEffect } from "react";
-import { useMovies } from "../../context/MovieContext";
+import { useMovies } from "../../contexts/MovieContext";
 import Movie from "./movie/MovieProgram";
 import useTrailerModal from "../../hooks/useTrailerModal";
 import TrailerModal from "../trailer/TrailerModal";

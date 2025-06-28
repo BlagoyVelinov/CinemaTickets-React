@@ -1,5 +1,5 @@
 import { Link } from 'react-router';
-import { useMovies } from "../../context/MovieContext";
+import { useMovies } from "../../contexts/MovieContext";
 import TrailerModal from "../trailer/TrailerModal";
 import MovieHome from './movie/MovieHome';
 import { useEffect } from 'react';
