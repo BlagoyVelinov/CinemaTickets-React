@@ -10,47 +10,105 @@ export function MovieProvider({ children }) {
     const [loadedPremieres, setLoadedPremieres] = useState(false);
     const [loadedCurrentMovie, setLoadedCurrentMovie] = useState(false);
     const [currentMovie, setCurrentMovie] = useState(null);
+    const [error, setError] = useState(null);
+    const [loading, setLoading] = useState(false);
 
     const loadAllMovies = async () => {
         if (!loadedAll) {
-            const data = await movieService.getAll();
-            setAllMovies(data);
-            setLoadedAll(true);
+            try {
+                setLoading(true);
+                setError(null);
+                const data = await movieService.getAll();
+                setAllMovies(data);
+                setLoadedAll(true);
+            } catch (err) {
+                console.error('Failed to load movies:', err);
+                setError(err.message);
+                setAllMovies([]);
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
     const loadPremieres = async () => {
         if (!loadedPremieres) {
-            const data = await movieService.getUpcomingPremiers();
-            setPremieres(data);
-            setLoadedPremieres(true);
+            try {
+                setLoading(true);
+                setError(null);
+                const data = await movieService.getUpcomingPremiers();
+                setPremieres(data);
+                setLoadedPremieres(true);
+            } catch (err) {
+                console.error('Failed to load premieres:', err);
+                setError(err.message);
+                setPremieres([]);
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
     const refreshAllMovies = async () => {
-        const data = await movieService.getAll();
-        setAllMovies(data);
-        setLoadedAll(true);
+        try {
+            setLoading(true);
+            setError(null);
+            const data = await movieService.getAll();
+            setAllMovies(data);
+            setLoadedAll(true);
+        } catch (err) {
+            console.error('Failed to refresh movies:', err);
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const refreshPremieres = async () => {
-        const data = await movieService.getUpcomingPremiers();
-        setPremieres(data);
-        setLoadedPremieres(true);
+        try {
+            setLoading(true);
+            setError(null);
+            const data = await movieService.getUpcomingPremiers();
+            setPremieres(data);
+            setLoadedPremieres(true);
+        } catch (err) {
+            console.error('Failed to refresh premieres:', err);
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     const loadCurrentMovie = async (id) => {
         if (!loadedCurrentMovie) {
-            const data = await movieService.getMovieById(id);
-            setCurrentMovie(data);
-            setLoadedCurrentMovie(true);
+            try {
+                setLoading(true);
+                setError(null);
+                const data = await movieService.getMovieById(id);
+                setCurrentMovie(data);
+                setLoadedCurrentMovie(true);
+            } catch (err) {
+                console.error('Failed to load current movie:', err);
+                setError(err.message);
+            } finally {
+                setLoading(false);
+            }
         }
     };
 
     const refreshCurrentMovie = async (id) => {
-        const data = await movieService.getMovieById(id);
-        setCurrentMovie(data);
-        setLoadedCurrentMovie(true);
+        try {
+            setLoading(true);
+            setError(null);
+            const data = await movieService.getMovieById(id);
+            setCurrentMovie(data);
+            setLoadedCurrentMovie(true);
+        } catch (err) {
+            console.error('Failed to refresh current movie:', err);
+            setError(err.message);
+        } finally {
+            setLoading(false);
+        }
     };
 
     return (
@@ -58,6 +116,8 @@ export function MovieProvider({ children }) {
             allMovies,
             premieres,
             currentMovie,
+            error,
+            loading,
             loadAllMovies,
             refreshAllMovies,
             loadPremieres,

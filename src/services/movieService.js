@@ -5,23 +5,34 @@ const BASE_URL = "http://localhost:8080";
 
 export default {
     async getAll() {
-        const result = await request.get(`${BASE_URL}/api/program`);
-
-        const movies = Object.values(result);
-
-        return movies;
+        try {
+            const result = await request.get(`${BASE_URL}/api/program`);
+            const movies = Object.values(result);
+            return movies;
+        } catch (error) {
+            console.error('Error fetching all movies:', error);
+            throw error;
+        }
     },
 
     async getUpcomingPremiers() {
-        const result = await request.get(`${BASE_URL}/movies/upcoming`);
-
-        const movies = Object.values(result);
-
-        return movies;
+        try {
+            const result = await request.get(`${BASE_URL}/movies/upcoming`);
+            const movies = Object.values(result);
+            return movies;
+        } catch (error) {
+            console.error('Error fetching upcoming premieres:', error);
+            throw error;
+        }
     },
 
     async getMovieById(id) {
-        const result = await request.get(`${BASE_URL}/movies/${id}`);
-        return result;
+        try {
+            const result = await request.get(`${BASE_URL}/movies/${id}`);
+            return result;
+        } catch (error) {
+            console.error(`Error fetching movie with id ${id}:`, error);
+            throw error;
+        }
     }
 }
