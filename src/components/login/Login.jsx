@@ -46,7 +46,7 @@ export default function Login({
                         <label><input type="checkbox" name="rememberMe" /> Remember Me</label>
                     </div>
 
-                    <button type="submit" className="btn">Login</button>
+                    <button type="submit" className="btn" disabled={isPending}>Login</button>
 
                     <div className="register-link">
                         <p>Don't have an account? <Link to="/users/register">Register</Link></p>
