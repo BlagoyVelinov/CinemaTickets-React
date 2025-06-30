@@ -1,4 +1,4 @@
-import { useEffect, useRef } from "react";
+import { useContext, useEffect, useRef } from "react";
 import request from "./request";
 
 const baseUrl = 'http://localhost:8080/api/users';
@@ -42,7 +42,7 @@ export const useLogin = () => {
     return {
         login,
     }
-}
+};
 
 export const useRegister = () => {
     const abortRef = useRef(new AbortController());
@@ -76,4 +76,22 @@ export const useRegister = () => {
     return {
         register,
     }
-}
+};
+
+export const useLogout = () => {
+    const { accessToken } = useContext(useContext);
+    
+    const options = {
+        headers: { 
+            Authorization: `Bearer ${accessToken}`
+        }
+    }
+
+    const logout = () => request.post(`${baseUrl}/logout`, null, options).then(()=> {
+        localStorage.removeItem('accessToken');
+    });
+
+    return {
+        logout,
+    }
+};
