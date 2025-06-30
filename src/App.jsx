@@ -15,6 +15,7 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
+import Logout from './components/logout/Logout';
 
 
 function App() {
@@ -24,8 +25,12 @@ function App() {
         setAuthData(resultData);
     };
 
+    const userLogoutHandler = () => {        
+        setAuthData({});
+    };
+
   return (
-    <UserContext.Provider value={{...authData, userLoginHandler}}>
+    <UserContext.Provider value={{...authData, userLoginHandler, userLogoutHandler}}>
         <div className="tail-top">
             <div className="tail-bottom">
                 <div id="main">
@@ -41,6 +46,7 @@ function App() {
                                 <Route path="/contact-us" element={<ContactUs />} />
                                 <Route path="/users/login" element={<Login />} />
                                 <Route path="/users/register" element={<SignUp />} />
+                                <Route path="/users/logout" element={<Logout />} />
                             </Routes>
                     </MovieProvider>
                     <Footer />

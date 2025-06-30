@@ -79,19 +79,27 @@ export const useRegister = () => {
 };
 
 export const useLogout = () => {
-    const { accessToken } = useContext(useContext);
-    
-    const options = {
-        headers: { 
-            Authorization: `Bearer ${accessToken}`
-        }
-    }
+    const { accessToken, userLogoutHandler } = useContext(useContext);
 
-    const logout = () => request.post(`${baseUrl}/logout`, null, options).then(()=> {
-        localStorage.removeItem('accessToken');
-    });
+    useEffect(() => {
+        if (!accessToken) {
+            return;
+        }
+        const options = {
+            headers: { 
+                Authorization: `Bearer ${accessToken}`
+            }
+        }
+    
+        request.post(`${baseUrl}/logout`, null, options).then(()=> {
+            localStorage.removeItem('accessToken');
+            userLogoutHandler();
+        });
+    
+    }, [accessToken, userLogoutHandler]);
 
     return {
-        logout,
+        isLoggedOut: !!accessToken,
     }
+    
 };
