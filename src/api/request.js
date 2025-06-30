@@ -18,6 +18,11 @@ const request = async (method, url, data, options = {}) => {
     }
 
     const response = await fetch(url, options);
+    const resContentType = response.headers.get('Content-Type');
+    if (!resContentType) {
+        return;
+    }
+    
     const result = await response.json();
     
     return result;
