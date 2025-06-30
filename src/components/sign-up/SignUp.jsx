@@ -1,53 +1,152 @@
-import { Link } from "react-router";
+import { useActionState, useState } from "react";
+import { Link, useNavigate } from "react-router";
+import { useRegister } from "../../api/authApi";
+import { UserRegister } from "../../models/UserRegister";
 
 export default function SignUp() {
- return (
-    <>
-        <div className="centered-form-container">
-            <div className="wrapper wrapper-register">
-                <h2>Register</h2>
-                <form method="post" action="/users/register" className="auth-form-box">
-                {/* <!-- Error message --> */}
-                    <small className="text-danger" style={{display: "none"}}>Registration error!</small>
+    const [errors, setErrors] = useState([]);
+    const { register } = useRegister();
+    const navigate = useNavigate();
 
-                    <div className="input-box">
-                        <input id="username" name="username" type="text" placeholder="Username" required />
-                        <i className='bx bxs-user'></i>
-                    </div>
+    const registerHandler = async (_, formData) => {
+        try {
+            setErrors([]);
+            
+            const values = Object.fromEntries(formData);
 
-                    <div className="input-box">
-                        <input id="email" name="email" type="email" placeholder="Email" required />
-                        <i className='bx bxs-envelope'></i>
-                    </div>
+            const userData = new UserRegister(
+                values.username,
+                values.email,
+                values.name,
+                values.birthdate,
+                values.password,
+                values.confirmPassword
+            );
 
-                    <div className="input-box">
-                        <input id="name" name="name" type="text" placeholder="Name" required />
-                        <i className='bx bxs-user-detail'></i>
-                    </div>
+            const result = await register(userData);
+            
+            console.log('Registration successful:', result);
+            
+            navigate('/users/login');
+            
+        } catch (error) {
+            console.error('Registration error:', error);
+            
+            if (error.message) {
+                setErrors([error.message]);
+            } else if (error.status === 409) {
+                setErrors(['Username or email already exists']);
+            } else if (error.status === 400) {
+                setErrors(['Invalid data provided. Please check your input.']);
+            } else {
+                setErrors(['Registration failed. Please try again.']);
+            }
+        }
+    };
 
-                    <div className="input-box">
-                        <input id="birthdate" name="birthdate" type="date" required />
-                        <i className='bx bxs-calendar'></i>
-                    </div>
+    const [_, registerAction, isPending] = useActionState(registerHandler, {
+        username: '',
+        email: '',
+        name: '',
+        birthdate: '',
+        password: '',
+        confirmPassword: ''
+    });
 
-                    <div className="input-box">
-                        <input id="password" name="password" type="password" placeholder="Password" required />
-                        <i className='bx bxs-lock-alt'></i>
-                    </div>
+    return (
+        <>
+            <div className="centered-form-container">
+                <div className="wrapper wrapper-register">
+                    <h2>Register</h2>
+                    <form action={registerAction} className="auth-form-box">
+                        {/* Error message */}
+                        {errors.length > 0 && (
+                            <div className="alert alert-danger" role="alert">
+                                {errors.map((error, index) => (
+                                    <div key={index}>{error}</div>
+                                ))}
+                            </div>
+                        )}
 
-                    <div className="input-box">
-                        <input id="confirmPassword" name="confirmPassword" type="password" placeholder="Confirm Password" required />
-                        <i className='bx bxs-lock-alt'></i>
-                    </div>
+                        <div className="input-box">
+                            <input 
+                                id="username" 
+                                name="username" 
+                                type="text" 
+                                placeholder="Username" 
+                                required 
+                            />
+                            <i className='bx bxs-user'></i>
+                        </div>
 
-                    <button type="submit" className="btn">Register</button>
+                        <div className="input-box">
+                            <input 
+                                id="email" 
+                                name="email" 
+                                type="email" 
+                                placeholder="Email" 
+                                required 
+                            />
+                            <i className='bx bxs-envelope'></i>
+                        </div>
 
-                    <div className="register-link">
-                        <p>Already have an account? <Link to="/users/login">Login</Link></p>
-                    </div>
-                </form>
+                        <div className="input-box">
+                            <input 
+                                id="name" 
+                                name="name" 
+                                type="text" 
+                                placeholder="Name" 
+                                required 
+                            />
+                            <i className='bx bxs-user-detail'></i>
+                        </div>
+
+                        <div className="input-box">
+                            <input 
+                                id="birthdate" 
+                                name="birthdate" 
+                                type="date" 
+                                required 
+                            />
+                            <i className='bx bxs-calendar'></i>
+                        </div>
+
+                        <div className="input-box">
+                            <input 
+                                id="password" 
+                                name="password" 
+                                type="password" 
+                                placeholder="Password" 
+                                required 
+                            />
+                            <i className='bx bxs-lock-alt'></i>
+                        </div>
+
+                        <div className="input-box">
+                            <input 
+                                id="confirmPassword" 
+                                name="confirmPassword" 
+                                type="password" 
+                                placeholder="Confirm Password" 
+                                required 
+                            />
+                            <i className='bx bxs-lock-alt'></i>
+                        </div>
+
+                        <button 
+                            type="submit" 
+                            className="btn" 
+                            disabled={isPending}
+                        >
+                            {isPending ? 'Registering...' : 'Register'}
+                        </button>
+
+                        <div className="register-link">
+                            <p>Already have an account? <Link to="/users/login">Login</Link></p>
+                        </div>
+                    </form>
+                </div>
             </div>
-        </div>
-    </>
-  );
+        </>
+    );
 }
