@@ -6,24 +6,34 @@ export default function Header() {
     const location = useLocation();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
     const { username } = useContext(UserContext);
+
     return (
         <header id="nav">
             <nav id="header">
                 <div className="row-1">
                     <div className="fleft"><Link to="/">Cinema <span>Tickets</span></Link></div>
                     <ul>
-                        <div className="form-inline my-2 my-lg-0 border px-3 welcome-message">
-                            <div className="logged-user" style={{display: "none"}}>
-                                <span>Welcome, User</span>
-                            </div>
-                            <form method="post" action="/api/users/logout" style={{display: "none"}}>
-                                <input type="submit" className="btn btn-info btn-logout" value="Logout" />
-                            </form>
-                        </div>
+                        {username 
+                            ? (
+                                <div className="form-inline my-2 my-lg-0 border px-3 welcome-message">
+                                    <div className="logged-user">
+                                        <span>{username}</span>
+                                    </div>
+                                    <form method="post">
+                                        <input type="submit" className="btn btn-info btn-logout" value="Logout" />
+                                    </form>
+                                </div>
+                            )
+                            : (
+                                // <ul>
+                                <div>
+                                    <li><Link to="/users/login"><img src="/images/login-icon.gif" alt="login" /></Link></li>
+                                    <li><Link to="/users/register"><img src="/images/signup-green3.gif" alt="register" /></Link></li>
+                                    </div>
+                                // </ul>
+                            )
+                        }
 
-                        <li><Link to="/users/login"><img src="/images/login-icon.gif" alt="login" /></Link></li>
-
-                        <li><Link to="/users/register"><img src="/images/signup-green3.gif" alt="register" /></Link></li>
                         <li className="nav-item">
                             <form className="language" method="get">
                             <label className="text-white" htmlFor="lang">Language</label>
