@@ -1,11 +1,18 @@
 import { useContext } from 'react';
-import { Link, NavLink, useLocation } from 'react-router'
+import { Link, NavLink, useLocation, useNavigate } from 'react-router'
 import { UserContext } from '../../contexts/UserContext';
 
 export default function Header() {
     const location = useLocation();
+    const navigate = useNavigate();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
-    const { username } = useContext(UserContext);
+    const { username, userLogoutHandler } = useContext(UserContext);
+
+    const handleLogout = (e) => {
+        e.preventDefault();
+        userLogoutHandler();
+        navigate('/');
+    };
 
     return (
         <header id="nav">
@@ -19,9 +26,7 @@ export default function Header() {
                                     <div className="logged-user">
                                         <span>{username}</span>
                                     </div>
-                                    <form method="post">
-                                        <input type="submit" className="btn btn-info btn-logout" value="Logout" />
-                                    </form>
+                                    <button className="btn btn-info btn-logout" onClick={handleLogout}>Logout</button>
                                 </div>
                             )
                             : (

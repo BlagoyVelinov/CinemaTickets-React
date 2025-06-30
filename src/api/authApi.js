@@ -92,7 +92,6 @@ export const useLogout = () => {
         }
     
         request.post(`${baseUrl}/logout`, null, options).then(()=> {
-            localStorage.removeItem('accessToken');
             userLogoutHandler();
         });
     
