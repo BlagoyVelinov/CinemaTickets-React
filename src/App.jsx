@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Routes, Route } from 'react-router';
 
 import { MovieProvider } from './contexts/MovieContext';
@@ -15,23 +14,17 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
+import usePersistedState from './hooks/usePersistedState';
 
 
 function App() {
-
-     const [authData, setAuthData] = useState(() => {
-        const stored = localStorage.getItem('authData');
-        return stored ? JSON.parse(stored) : {};
-    });
+    const [authData, setAuthData] = usePersistedState('authData', {});
 
     const userLoginHandler = (resultData) => {        
         setAuthData(resultData);
-        localStorage.setItem('authData', JSON.stringify(resultData));
     };
-
     const userLogoutHandler = () => {        
         setAuthData({});
-        localStorage.removeItem('authData');
     };
 
   return (

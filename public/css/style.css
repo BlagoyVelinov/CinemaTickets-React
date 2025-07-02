@@ -787,6 +787,8 @@ a {
     cursor: pointer;
 }
 
+/* !TODO: Need to fix the logout button */
+
 .btn-info.btn-logout {
     display: inline-block;
     text-align: center;
