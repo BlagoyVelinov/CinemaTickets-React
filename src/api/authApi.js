@@ -1,5 +1,6 @@
 import { useContext, useEffect, useRef } from "react";
 import request from "./request";
+import { UserContext } from "../contexts/UserContext";
 
 const baseUrl = 'http://localhost:8080/api/users';
 
@@ -79,7 +80,7 @@ export const useRegister = () => {
 };
 
 export const useLogout = () => {
-    const { accessToken, userLogoutHandler } = useContext(useContext);
+    const { accessToken, userLogoutHandler } = useContext(UserContext);
 
     useEffect(() => {
         if (!accessToken) {
@@ -101,4 +102,9 @@ export const useLogout = () => {
         isLoggedOut: !!accessToken,
     }
     
+};
+
+export const useAuthStatus = () => {
+    const { accessToken } = useContext(UserContext);
+    return !!accessToken;
 };

@@ -14,6 +14,7 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
+import GuestGuard from './components/guards/GuestGuard';
 
 
 function App() {
@@ -33,8 +34,10 @@ function App() {
                                 <Route path="/offers" element={<OffersTab />} />
                                 <Route path="/about-us" element={<AboutUs />} />
                                 <Route path="/contact-us" element={<ContactUs />} />
-                                <Route path="/users/login" element={<Login />} />
-                                <Route path="/users/register" element={<SignUp />} />
+                                <Route element={<GuestGuard />}>
+                                    <Route path="/users/login" element={<Login />} />
+                                    <Route path="/users/register" element={<SignUp />} />
+                                </Route>
                             </Routes>
                     </MovieProvider>
                     <Footer />
