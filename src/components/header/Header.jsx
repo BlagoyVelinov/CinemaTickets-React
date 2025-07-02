@@ -1,12 +1,11 @@
-import { useContext } from 'react';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router'
-import { UserContext } from '../../contexts/UserContext';
+import { useUserContext } from '../../contexts/UserContext';
 
 export default function Header() {
     const location = useLocation();
     const navigate = useNavigate();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
-    const { username, userLogoutHandler } = useContext(UserContext);
+    const { username, userLogoutHandler } = useUserContext();
 
     const handleLogout = (e) => {
         e.preventDefault();

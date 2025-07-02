@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router';
 
 import { MovieProvider } from './contexts/MovieContext';
-import { UserProvider } from './contexts/UserContext';
+import { UserProvider } from './providers/UserProvider';
 
 import HomeTab from './components/home/Home';
 import ProgramTab from './components/program/Program';
