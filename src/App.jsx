@@ -1,7 +1,7 @@
 import { Routes, Route } from 'react-router';
 
 import { MovieProvider } from './contexts/MovieContext';
-import { UserContext } from './contexts/UserContext';
+import { UserProvider } from './contexts/UserContext';
 
 import HomeTab from './components/home/Home';
 import ProgramTab from './components/program/Program';
@@ -14,21 +14,12 @@ import Header from './components/header/Header';
 import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
-import usePersistedState from './hooks/usePersistedState';
 
 
 function App() {
-    const [authData, setAuthData] = usePersistedState('authData', {});
-
-    const userLoginHandler = (resultData) => {        
-        setAuthData(resultData);
-    };
-    const userLogoutHandler = () => {        
-        setAuthData({});
-    };
 
   return (
-    <UserContext.Provider value={{...authData, userLoginHandler, userLogoutHandler}}>
+    <UserProvider>
         <div className="tail-top">
             <div className="tail-bottom">
                 <div id="main">
@@ -50,7 +41,7 @@ function App() {
                 </div>
             </div>
         </div>
-    </UserContext.Provider>
+    </UserProvider>
   )
 }
 
