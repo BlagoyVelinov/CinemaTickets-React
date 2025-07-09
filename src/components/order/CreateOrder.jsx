@@ -23,7 +23,7 @@ const occupiedSeats = [
   { row: 10, col: 8 }, { row: 10, col: 9 }, { row: 10, col: 10 },
 ];
 
-export default function CreateOrder() {
+export default function CreateOrder({ onClose }) {
   const [selectedSeats, setSelectedSeats] = useState([]);
   const [seatTicketTypes, setSeatTicketTypes] = useState({});
   const [showTicketSelection, setShowTicketSelection] = useState(false);
@@ -280,7 +280,7 @@ export default function CreateOrder() {
                 <span>{selectedSeats.length}</span>
               </div>
               <div className="actions">
-                <button className="btn-cancel" onClick={goBack}>Cancel</button>
+                <button className="btn-cancel" onClick={onClose}>Cancel</button>
                 <button className="btn-confirm" disabled={selectedSeats.length === 0} onClick={confirmSelection}>Confirm</button>
               </div>
             </div>

@@ -1,4 +1,5 @@
 import { createContext, useCallback, useContext, useState } from "react";
+import { useNavigate } from "react-router";
 import CreateOrder from "../components/order/CreateOrder";
 
 const OrderModalContext = createContext();
@@ -10,6 +11,7 @@ export function useOrderModal() {
 export function OrderModalProvider({ children }) {
     const [showOrderModal, setShowOrderModal] = useState(false);
     const [orderModalData, setOrderModalData] = useState(null);
+    const navigate = useNavigate();
 
     const openOrderModal = useCallback((id, name, time, selectedDate, selectedCity) => {
         sessionStorage.setItem('bookingTimeData', JSON.stringify(time));
@@ -28,15 +30,18 @@ export function OrderModalProvider({ children }) {
     const closeOrderModal = useCallback(() => {
         setShowOrderModal(false);
         setOrderModalData(null);
-        window.history.back();
-    }, []);
+        navigate(-1);
+    }, [navigate]);
 
     return (
         <OrderModalContext.Provider value={{ showOrderModal, orderModalData, openOrderModal, closeOrderModal }}>
             {children}
             {showOrderModal && (
                 <div className="modal-overlay">
-                    <div>
+                    <div
+                        className="modal-content"
+                        onClick={e => e.stopPropagation()}
+                    >
                         <CreateOrder onClose={closeOrderModal} />
                     </div>
                 </div>
