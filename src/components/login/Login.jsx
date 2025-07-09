@@ -23,7 +23,7 @@ export default function Login() {
             const authData = await login(values.username, values.password);
             
             userLoginHandler(authData);
-            navigate('/');
+            navigate(-1);
             
         } catch (error) {
             console.error('Login error:', error);
