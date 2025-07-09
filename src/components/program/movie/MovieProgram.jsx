@@ -1,4 +1,6 @@
 import { Link } from "react-router";
+import CreateOrder from "../../order/CreateOrder";
+import { useState } from "react";
 
 export default function Movie({
   id,
@@ -12,6 +14,9 @@ export default function Movie({
   projectionFormat,
   bookingTimes,
   onSeeTrailer,
+  onBookingClick,
+  selectedDate,
+  selectedCity,
 }) {
   return (
     <li className="movieList">
@@ -42,9 +47,17 @@ export default function Movie({
                 <div className="info-booking-times">
                     {bookingTimes?.length > 0 ? (
                         bookingTimes.map((time) => (
-                        <a key={time.id} className="btn btn-primary btn-lg">
-                            {time.bookingTime}
-                        </a>
+                            <button 
+                                key={time.id} 
+                                onClick={() => onBookingClick(
+                                    { id, name, imageUrl, movieClass: { icon }, genreCategories, movieLength, audio, subtitles, projectionFormat },
+                                    time,
+                                    selectedDate,
+                                    selectedCity
+                                )}
+                                >
+                                {time.bookingTime}
+                            </button>
                         ))
                     ) : (
                         <a className="h4">Coming soon</a>

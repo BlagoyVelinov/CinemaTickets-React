@@ -1,12 +1,18 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useMovies } from "../../contexts/MovieContext";
+import { useOrderModal } from "../../contexts/OrderModalContext";
 import Movie from "./movie/MovieProgram";
 import useTrailerModal from "../../hooks/useTrailerModal";
 import TrailerModal from "../trailer/TrailerModal";
 
 export default function ProgramTab() {
+    const [selectedDate, setSelectedDate] = useState("");
+    const [selectedCity, setSelectedCity] = useState("");
+    const [filterActive, setFilterActive] = useState(false);
+
 
     const { allMovies, loadAllMovies } = useMovies();
+    const { openOrderModal } = useOrderModal();
 
     const {
         showTrailer,
@@ -18,6 +24,10 @@ export default function ProgramTab() {
     useEffect(() => {
         loadAllMovies();
     }, []);
+
+    const filteredMovies = filterActive
+    ? allMovies.filter(movie => movie.bookingTimes && movie.bookingTimes.length > 0)
+    : allMovies;
 
     return (
         <div id="content-program" className="content-section">
@@ -37,7 +47,8 @@ export default function ProgramTab() {
                                                 name="projectionDate" 
                                                 id="dateInput" 
                                                 className="form-control"
-                                                v-model="selectedDate" 
+                                                value={selectedDate}
+                                                onChange={e => setSelectedDate(e.target.value)}
                                             />
                                             <small className="text-danger" v-show="errors.dateError" style={{display: "none"}}>Reserved date cannot be in the past</small>
                                         </div>
@@ -48,7 +59,8 @@ export default function ProgramTab() {
                                                 className="browser-default custom-select" 
                                                 id="cityName" 
                                                 name="location"
-                                                v-model="selectedCity"
+                                                value={selectedCity}
+                                                onChange={e => setSelectedCity(e.target.value)}
                                             >
                                                 <option value="">Select City</option>
                                                 <option value="Sofia">Sofia</option>
@@ -62,7 +74,14 @@ export default function ProgramTab() {
                                         </div>
 
                                         <div className="button-holder d-flex justify-content-center">
-                                            <button type="button" className="btn btn-primary btn-lg">Continue</button>
+                                            <button 
+                                                type="button" 
+                                                className="btn btn-primary btn-lg"
+                                                onClick={() => setFilterActive(true)}
+                                                disabled={!selectedDate || !selectedCity}
+                                            >
+                                                Continue
+                                            </button>
                                         </div>
                                     </form>
                                     {/* <!-- Admin button for adding a movie --> */}
@@ -74,13 +93,17 @@ export default function ProgramTab() {
                                     </div>
                                 </div>
 
-                                {allMovies.length > 0 
-                                    ? allMovies.map(movie => (
-                                    <Movie key={movie.id}
-                                     {...movie}
-                                     onSeeTrailer={openTrailer}
-                                    />
-                                )) 
+                                {filteredMovies.length > 0 
+                                    ? filteredMovies.map(movie => (
+                                        <Movie
+                                            key={movie.id}
+                                            {...movie}
+                                            selectedDate={selectedDate}
+                                            selectedCity={selectedCity}
+                                            onSeeTrailer={openTrailer}
+                                            onBookingClick={openOrderModal}
+                                        />
+                                    )) 
                                     : <h3 className="no-articles">No movies yet</h3>
                                 }
                                 {showTrailer && (

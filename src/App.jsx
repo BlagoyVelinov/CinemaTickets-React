@@ -1,7 +1,8 @@
 import { Routes, Route } from 'react-router';
 
-import { MovieProvider } from './contexts/MovieContext';
 import { UserProvider } from './providers/UserProvider';
+import { MovieProvider } from './contexts/MovieContext';
+import { OrderModalProvider } from './contexts/OrderModalContext';
 
 import HomeTab from './components/home/Home';
 import ProgramTab from './components/program/Program';
@@ -21,29 +22,31 @@ function App() {
 
   return (
     <UserProvider>
-        <div className="tail-top">
-            <div className="tail-bottom">
-                <div id="main">
-                    <MovieProvider>
-                        <Header />
-                            <Routes>
-                                <Route index element={<HomeTab />} />
-                                <Route path="/program" element={<ProgramTab />} />
-                                <Route path="/4dx" element={<FourDxTab />} />
-                                <Route path="/imax" element={<ImaxTab />} />
-                                <Route path="/offers" element={<OffersTab />} />
-                                <Route path="/about-us" element={<AboutUs />} />
-                                <Route path="/contact-us" element={<ContactUs />} />
-                                <Route element={<GuestGuard />}>
-                                    <Route path="/users/login" element={<Login />} />
-                                    <Route path="/users/register" element={<SignUp />} />
-                                </Route>
-                            </Routes>
-                    </MovieProvider>
-                    <Footer />
+        <OrderModalProvider>
+            <div className="tail-top">
+                <div className="tail-bottom">
+                    <div id="main">
+                        <MovieProvider>
+                            <Header />
+                                <Routes>
+                                    <Route index element={<HomeTab />} />
+                                    <Route path="/program" element={<ProgramTab />} />
+                                    <Route path="/4dx" element={<FourDxTab />} />
+                                    <Route path="/imax" element={<ImaxTab />} />
+                                    <Route path="/offers" element={<OffersTab />} />
+                                    <Route path="/about-us" element={<AboutUs />} />
+                                    <Route path="/contact-us" element={<ContactUs />} />
+                                    <Route element={<GuestGuard />}>
+                                        <Route path="/users/login" element={<Login />} />
+                                        <Route path="/users/register" element={<SignUp />} />
+                                    </Route>
+                                </Routes>
+                        </MovieProvider>
+                        <Footer />
+                    </div>
                 </div>
             </div>
-        </div>
+        </OrderModalProvider>
     </UserProvider>
   )
 }
