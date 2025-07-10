@@ -1758,18 +1758,14 @@ element.style {
 
 /* Order Styles */
 
-.modal-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(0,0,0,0.6);
-    z-index: 1000;
+div.modal-overlay {
+    min-height: 100vh;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-}
+    z-index: 1;
+    height: calc(100vh - 80px); 
+  }
 
 .order-tickets-wrapper {
     min-height: 100vh;

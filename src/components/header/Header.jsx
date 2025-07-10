@@ -5,6 +5,8 @@ export default function Header() {
     const location = useLocation();
     const navigate = useNavigate();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
+    const isOrderModal = location.pathname === '/program/order';
+
     const { username, userLogoutHandler } = useUserContext();
 
     const handleLogout = (e) => {
@@ -59,7 +61,7 @@ export default function Header() {
                         </li>
                     </ul>
                 </div>
-                {!hideNav && (
+                {!hideNav && !isOrderModal && (
                   <div className="row-2" data-show-tabs="true">
                       <ul>
                           <li>

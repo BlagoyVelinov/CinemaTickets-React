@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route, useLocation } from 'react-router';
 
 import { UserProvider } from './providers/UserProvider';
 import { MovieProvider } from './contexts/MovieContext';
@@ -19,6 +19,8 @@ import GuestGuard from './components/guards/GuestGuard';
 
 
 function App() {
+    const location = useLocation();
+    const isOrderModal = location.pathname === '/program/order';
 
   return (
     <UserProvider>
@@ -27,23 +29,23 @@ function App() {
                     <div id="main">
                         <MovieProvider>
                             <OrderModalProvider>
-                            <Header />
-                                <Routes>
-                                    <Route index element={<HomeTab />} />
-                                    <Route path="/program" element={<ProgramTab />} />
-                                    <Route path="/4dx" element={<FourDxTab />} />
-                                    <Route path="/imax" element={<ImaxTab />} />
-                                    <Route path="/offers" element={<OffersTab />} />
-                                    <Route path="/about-us" element={<AboutUs />} />
-                                    <Route path="/contact-us" element={<ContactUs />} />
-                                    <Route element={<GuestGuard />}>
-                                        <Route path="/users/login" element={<Login />} />
-                                        <Route path="/users/register" element={<SignUp />} />
-                                    </Route>
-                                </Routes>
+                                <Header />
+                                    <Routes>
+                                        <Route index element={<HomeTab />} />
+                                        <Route path="/program" element={<ProgramTab />} />
+                                        <Route path="/4dx" element={<FourDxTab />} />
+                                        <Route path="/imax" element={<ImaxTab />} />
+                                        <Route path="/offers" element={<OffersTab />} />
+                                        <Route path="/about-us" element={<AboutUs />} />
+                                        <Route path="/contact-us" element={<ContactUs />} />
+                                        <Route element={<GuestGuard />}>
+                                            <Route path="/users/login" element={<Login />} />
+                                            <Route path="/users/register" element={<SignUp />} />
+                                        </Route>
+                                    </Routes>
                             </OrderModalProvider>
                         </MovieProvider>
-                        <Footer />
+                        {!isOrderModal && <Footer />}
                     </div>
                 </div>
             </div>

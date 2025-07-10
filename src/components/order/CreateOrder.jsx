@@ -39,7 +39,19 @@ export default function CreateOrder({ onClose }) {
   const { user, accessToken } = useContext(UserContext) || {};
   const locationHook = useLocation();
   const navigate = useNavigate();
+  const location = useLocation();
   const { loadCurrentMovie, currentMovie } = useMovies();
+
+  useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    const step = params.get("step");
+    // Ако няма step или е невалиден, навигирай към първата стъпка
+    if (!step || !["seats", "tickets", "order"].includes(step)) {
+      params.set("step", "seats");
+      navigate(`${location.pathname}?${params.toString()}`, { replace: true });
+    }
+    // eslint-disable-next-line
+  }, []);
 
   // --- СТЪПКИ ---
   const params = new URLSearchParams(locationHook.search);

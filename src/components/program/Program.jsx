@@ -125,7 +125,7 @@ export default function ProgramTab() {
                                             {...movie}
                                             selectedDate={selectedDate}
                                             selectedCity={selectedCity}
-                                            onSeeqTrailer={openTrailer}
+                                            onSeeTrailer={openTrailer}
                                             onBookingClick={openOrderModal}
                                         />
                                     )) 
