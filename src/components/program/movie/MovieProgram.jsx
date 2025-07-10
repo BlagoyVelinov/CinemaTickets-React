@@ -18,6 +18,27 @@ export default function Movie({
   selectedDate,
   selectedCity,
 }) {
+  const [errorMsg, setErrorMsg] = useState("");
+
+  const handleBookingClick = (time) => {
+    const authDataRaw = localStorage.getItem("authData");
+    let accessToken = null;
+    if (authDataRaw) {
+      try {
+        const authData = JSON.parse(authDataRaw);
+        accessToken = authData && authData.accessToken;
+      } catch (e) {
+        accessToken = null;
+      }
+    }
+    if (!accessToken) {
+      setErrorMsg("Should to be logged in for book this movie.");
+      return;
+    }
+    setErrorMsg("");
+    onBookingClick(id, name, time, selectedDate, selectedCity);
+  };
+
   return (
     <li className="movieList">
         <img src={imageUrl} alt={name} width="204" height="219" />
@@ -49,20 +70,18 @@ export default function Movie({
                         bookingTimes.map((time) => (
                             <button 
                                 key={time.id} 
-                                onClick={() => onBookingClick(
-                                    { id, name, imageUrl, movieClass: { icon }, genreCategories, movieLength, audio, subtitles, projectionFormat },
-                                    time,
-                                    selectedDate,
-                                    selectedCity
-                                )}
+                                onClick={() => handleBookingClick(time)}
                                 >
                                 {time.bookingTime}
                             </button>
                         ))
                     ) : (
-                        <a className="h4">Coming soon</a>
+                        <span className="no-times">Coming Soon</span>
                     )}
                 </div>
+                {errorMsg && (
+                  <div className="booking-error-msg" style={{color: 'red', marginTop: 8}}>{errorMsg}</div>
+                )}
             </section>
         </section>
         

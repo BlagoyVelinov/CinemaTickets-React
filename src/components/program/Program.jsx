@@ -5,11 +5,16 @@ import Movie from "./movie/MovieProgram";
 import useTrailerModal from "../../hooks/useTrailerModal";
 import TrailerModal from "../trailer/TrailerModal";
 
-export default function ProgramTab() {
-    const [selectedDate, setSelectedDate] = useState("");
-    const [selectedCity, setSelectedCity] = useState("");
-    const [filterActive, setFilterActive] = useState(false);
+function getTodayISO() {
+    const today = new Date();
+    const offset = today.getTimezoneOffset();
+    const localDate = new Date(today.getTime() - offset * 60 * 1000);
+    return localDate.toISOString().split('T')[0];
+}
 
+export default function ProgramTab() {
+    const [selectedDate, setSelectedDate] = useState(getTodayISO());
+    const [selectedCity, setSelectedCity] = useState("Sofia");
 
     const { allMovies, loadAllMovies } = useMovies();
     const { openOrderModal } = useOrderModal();
@@ -25,9 +30,10 @@ export default function ProgramTab() {
         loadAllMovies();
     }, []);
 
-    const filteredMovies = filterActive
-    ? allMovies.filter(movie => movie.bookingTimes && movie.bookingTimes.length > 0)
-    : allMovies;
+    const filteredMovies = allMovies.filter(movie => {
+        if (!movie.bookingTimes || movie.bookingTimes.length === 0) return false;
+        return true;
+    });
 
     return (
         <div id="content-program" className="content-section">
@@ -62,7 +68,6 @@ export default function ProgramTab() {
                                                 value={selectedCity}
                                                 onChange={e => setSelectedCity(e.target.value)}
                                             >
-                                                <option value="">Select City</option>
                                                 <option value="Sofia">Sofia</option>
                                                 <option value="Plovdiv">Plovdiv</option>
                                                 <option value="Stara_Zagora">Stara Zagora</option>
@@ -71,17 +76,6 @@ export default function ProgramTab() {
                                                 <option value="Varna">Varna</option>
                                             </select>
                                             <small className="text-danger" v-show="errors.cityError" style={{display: "none"}}>City Name is required</small>
-                                        </div>
-
-                                        <div className="button-holder d-flex justify-content-center">
-                                            <button 
-                                                type="button" 
-                                                className="btn btn-primary btn-lg"
-                                                onClick={() => setFilterActive(true)}
-                                                disabled={!selectedDate || !selectedCity}
-                                            >
-                                                Continue
-                                            </button>
                                         </div>
                                     </form>
                                     {/* <!-- Admin button for adding a movie --> */}
