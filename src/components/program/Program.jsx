@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useLocation, useNavigate } from "react-router";
 import { useMovies } from "../../contexts/MovieContext";
 import { useOrderModal } from "../../contexts/OrderModalContext";
 import Movie from "./movie/MovieProgram";
@@ -13,8 +14,38 @@ function getTodayISO() {
 }
 
 export default function ProgramTab() {
-    const [selectedDate, setSelectedDate] = useState(getTodayISO());
-    const [selectedCity, setSelectedCity] = useState("Sofia");
+    const location = useLocation();
+    const navigate = useNavigate();
+
+    const params = new URLSearchParams(location.search);
+    const initialDate = params.get("date") || getTodayISO();
+    const initialCity = params.get("location") || "Sofia";
+
+    const [selectedDate, setSelectedDate] = useState(initialDate);
+    const [selectedCity, setSelectedCity] = useState(initialCity);
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        setSelectedDate(params.get("date") || getTodayISO());
+        setSelectedCity(params.get("location") || "Sofia");
+    }, [location.search]);
+
+    useEffect(() => {
+        const params = new URLSearchParams(location.search);
+        let changed = false;
+        if (selectedDate !== (params.get("date") || getTodayISO())) {
+            params.set("date", selectedDate);
+            changed = true;
+        }
+        if (selectedCity !== (params.get("location") || "Sofia")) {
+            params.set("location", selectedCity);
+            changed = true;
+        }
+        if (changed) {
+            navigate(`?${params.toString()}`, { replace: true });
+        }
+        // eslint-disable-next-line
+    }, [selectedDate, selectedCity]);
 
     const { allMovies, loadAllMovies } = useMovies();
     const { openOrderModal } = useOrderModal();
@@ -94,7 +125,7 @@ export default function ProgramTab() {
                                             {...movie}
                                             selectedDate={selectedDate}
                                             selectedCity={selectedCity}
-                                            onSeeTrailer={openTrailer}
+                                            onSeeqTrailer={openTrailer}
                                             onBookingClick={openOrderModal}
                                         />
                                     )) 

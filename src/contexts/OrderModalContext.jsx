@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useState } from "react";
-import { useNavigate } from "react-router";
+import { useLocation, useNavigate } from "react-router";
 import CreateOrder from "../components/order/CreateOrder";
 
 const OrderModalContext = createContext();
@@ -9,34 +9,45 @@ export function useOrderModal() {
 }
 
 export function OrderModalProvider({ children }) {
-    const [showOrderModal, setShowOrderModal] = useState(false);
     const [orderModalData, setOrderModalData] = useState(null);
     const navigate = useNavigate();
+    const location  = useLocation();
+
+    const params = new URLSearchParams(location.search);
+    const shouldShowOrderModal = params.get("movieId") && params.get("bookingTimeId");
 
     const openOrderModal = useCallback((id, name, time, selectedDate, selectedCity) => {
         sessionStorage.setItem('bookingTimeData', JSON.stringify(time));
         const params = new URLSearchParams({
             movieId: id,
-            bookingTimeValue: time.bookingTime,
+            bookingTimeId: time.id,
             movieName: name,
             date: selectedDate,
             location: selectedCity
         });
-        window.history.pushState({}, '', `?${params.toString()}`);
+        navigate(`/program/order?${params.toString()}`, { replace: true });
         setOrderModalData({ id, name, time, selectedDate, selectedCity });
-        setShowOrderModal(true);
-    }, []);
+    }, [navigate]);
     
     const closeOrderModal = useCallback(() => {
-        setShowOrderModal(false);
         setOrderModalData(null);
-        navigate(-1);
-    }, [navigate]);
+        const params = new URLSearchParams(location.search);
+
+        const date = params.get("date");
+        const locationCity = params.get("location");
+
+        let programUrl = '/program';
+        const query = [];
+        if (date) query.push(`date=${encodeURIComponent(date)}`);
+        if (locationCity) query.push(`location=${encodeURIComponent(locationCity)}`);
+        if (query.length > 0) programUrl += `?${query.join('&')}`;
+        navigate(programUrl, { replace: true });
+    }, [navigate, location]);
 
     return (
-        <OrderModalContext.Provider value={{ showOrderModal, orderModalData, openOrderModal, closeOrderModal }}>
+        <OrderModalContext.Provider value={{ showOrderModal: shouldShowOrderModal, orderModalData, openOrderModal, closeOrderModal }}>
             {children}
-            {showOrderModal && (
+            {shouldShowOrderModal && (
                 <div className="modal-overlay">
                     <div
                         className="modal-content"

@@ -22,11 +22,11 @@ function App() {
 
   return (
     <UserProvider>
-        <OrderModalProvider>
             <div className="tail-top">
                 <div className="tail-bottom">
                     <div id="main">
                         <MovieProvider>
+                            <OrderModalProvider>
                             <Header />
                                 <Routes>
                                     <Route index element={<HomeTab />} />
@@ -41,12 +41,12 @@ function App() {
                                         <Route path="/users/register" element={<SignUp />} />
                                     </Route>
                                 </Routes>
+                            </OrderModalProvider>
                         </MovieProvider>
                         <Footer />
                     </div>
                 </div>
             </div>
-        </OrderModalProvider>
     </UserProvider>
   )
 }
