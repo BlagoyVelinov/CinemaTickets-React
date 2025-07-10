@@ -104,6 +104,30 @@ export const useLogout = () => {
     
 };
 
+export const useUser = () => {
+    const { accessToken } = useContext(UserContext);
+
+    const fetchUser = async (username) => {
+        console.log("accessToken:", accessToken, "username:", username);
+        if (!accessToken) {
+            return;
+        }
+        const options = {
+            headers: { 
+                Authorization: `Bearer ${accessToken}`
+            }
+        }
+    
+        const result = request.get(`${baseUrl}/${username}`, null, options);
+        console.log("User fetch result:", result);
+        return result;
+    }
+
+    return {
+        fetchUser,
+    }
+};
+
 export const useAuthStatus = () => {
     const { accessToken } = useContext(UserContext);
     return !!accessToken;
