@@ -23,6 +23,7 @@ export default function Login() {
             const authData = await login(values.username, values.password);
             
             userLoginHandler(authData);
+            localStorage.setItem("accessToken", authData.accessToken);
             navigate(-1);
             
         } catch (error) {

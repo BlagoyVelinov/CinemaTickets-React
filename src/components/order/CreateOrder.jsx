@@ -3,6 +3,8 @@ import orderService from "../../services/orderService";
 import { UserContext } from "../../contexts/UserContext";
 import { useLocation, useNavigate } from "react-router";
 import { useMovies } from "../../contexts/MovieContext";
+import { useUser } from "../../api/authApi";
+import OrderDto from "../../models/orderDto";
 
 const TICKET_TYPES = {
   CHILDREN_UNDER_16: { value: "Children under 16", price: 10.5 },
@@ -36,7 +38,8 @@ export default function CreateOrder({ onClose }) {
   const [order, setOrder] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
-  const { user, accessToken } = useContext(UserContext) || {};
+  const { username, accessToken } = useContext(UserContext) || {};
+  const { fetchUser } = useUser();
   const locationHook = useLocation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -65,15 +68,11 @@ export default function CreateOrder({ onClose }) {
   useEffect(() => {
     const params = new URLSearchParams(locationHook.search);
     const movieId = params.get("movieId");
-    console.log("useEffect1 movieId:", movieId);
+   
     if (movieId) {
       loadCurrentMovie(movieId);
     }
   }, [locationHook, loadCurrentMovie]);
-
-  useEffect(() => {
-    console.log("currentMovie:", currentMovie);
-  }, [currentMovie]);
 
   // Когато currentMovie се зареди, филтрирай bookingTime по id
   useEffect(() => {
@@ -84,25 +83,43 @@ export default function CreateOrder({ onClose }) {
     if (!currentMovie || !bookingTimeId) return;
     const bookingTimes = currentMovie.bookingTimes || [];
     const selectedBookingTime = bookingTimes.find(bt => String(bt.id) === String(bookingTimeId));
+    const formatTime = selectedBookingTime?.bookingTime.toString().replace(/^_/, "").replace("_", ":");
+
     setOrder({
       ...currentMovie,
       cinema: locationCity,
       dayOfWeek: "", // можеш да го изчислиш по date
       date: date,
-      time: selectedBookingTime?.bookingTime || "",
+      time: formatTime || "",
       bookingTimeId: selectedBookingTime?.id || ""
     });
+
+
     setIsLoading(false);
   }, [currentMovie, locationHook]);
-
+  
 
   useEffect(() => {
-    setUserInfo({
-      firstName: user?.username || "Ivan",
-      lastName: user?.name || "Ivanov",
-      email: user?.email || "ivan@example.com"
-    });
-  }, [user]);
+    const getUser = async () => {
+
+      if (username) {
+        try {
+          const userData = await fetchUser(username);
+          console.log(userData);
+          
+          setUserInfo(userData); 
+        } catch (e) {
+          setUserInfo({
+            firstName: "Ivan",
+            lastName: "Ivanov",
+            email: "ivan@example.com"
+          });
+        }
+      }
+    };
+    getUser();
+
+  }, [username]);
 
   const onSeatClick = (row, col) => {
     if (
@@ -200,12 +217,12 @@ export default function CreateOrder({ onClose }) {
         alert("Please accept the terms and conditions");
         return;
       }
-      const orderDto = {
+      const orderDto = new OrderDto({
         movieId: order.id,
         movieViewName: order.name,
         bookingTimeId: order.bookingTimeId,
         projectionDate: order.date,
-        location: order.cinema.toUpperCase(),
+        location: order.cinema?.toUpperCase(),
         bookingTime: order.time,
         childQuantity: getTicketCount("CHILDREN_UNDER_16"),
         overSixtyQuantity: getTicketCount("PERSONS_OVER_60"),
@@ -220,16 +237,17 @@ export default function CreateOrder({ onClose }) {
           movieName: order.name,
           projectionDate: order.date,
           bookingTime: order.time,
-          city: { location: order.cinema.toUpperCase() }
+          city: { location: order.cinema?.toUpperCase() }
         })),
         user: userInfo,
         isFinished: false
-      };
+      });
       try {
-        const result = await orderService.createOrder(orderDto);
+        const result = await orderService.createOrder(orderDto.toJSON());
+  
         if (result) {
           alert("Order created successfully!");
-          window.location.href = "/orders";
+          window.location.href = "/program";
         }
       } catch (error) {
         alert("Error creating order: " + error.message);
@@ -381,9 +399,9 @@ export default function CreateOrder({ onClose }) {
 				<section className="user-contacts">
 					<h2 className="title-summary">Your contacts</h2>
 					<p className="user-first-name">Username</p>
-					<p className="text">{userInfo?.firstName || "N/A"}</p>
+					<p className="text">{userInfo?.username || "N/A"}</p>
 					<p className="user-last-name">Full Name</p>
-					<p className="text">{userInfo?.lastName || "N/A"}</p>
+					<p className="text">{userInfo?.name || "N/A"}</p>
 					<p className="user-email">Email</p>
 					<p className="text">{userInfo?.email || "N/A"}</p>
 				</section>
