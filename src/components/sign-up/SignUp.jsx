@@ -23,9 +23,7 @@ export default function SignUp() {
                 values.confirmPassword
             );
 
-            const result = await register(userData);
-            
-            console.log('Registration successful:', result);
+            await register(userData);
             
             navigate('/users/login');
             

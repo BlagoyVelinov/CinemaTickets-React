@@ -38,25 +38,26 @@ export default function CreateOrder({ onClose }) {
   const [order, setOrder] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
-  const { username, accessToken } = useContext(UserContext) || {};
+  const { username } = useContext(UserContext) || {};
+  const accessToken = localStorage.getItem('accessToken');
   const { fetchUser } = useUser();
   const locationHook = useLocation();
   const navigate = useNavigate();
   const location = useLocation();
-  const { loadCurrentMovie, currentMovie } = useMovies();
+  const { currentMovie, refreshCurrentMovie } = useMovies();
 
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const step = params.get("step");
-    // Ако няма step или е невалиден, навигирай към първата стъпка
+
     if (!step || !["seats", "tickets", "order"].includes(step)) {
       params.set("step", "seats");
       navigate(`${location.pathname}?${params.toString()}`, { replace: true });
     }
-    // eslint-disable-next-line
+
   }, []);
 
-  // --- СТЪПКИ ---
+
   const params = new URLSearchParams(locationHook.search);
   const step = params.get("step") || "seats";
   const goToStep = (newStep) => {
@@ -64,17 +65,16 @@ export default function CreateOrder({ onClose }) {
     navigate(`${locationHook.pathname}?${params.toString()}`, { replace: true });
   };
 
-  // Вземи movieId и bookingTimeId от params
+
   useEffect(() => {
     const params = new URLSearchParams(locationHook.search);
     const movieId = params.get("movieId");
    
     if (movieId) {
-      loadCurrentMovie(movieId);
+      refreshCurrentMovie(movieId);
     }
-  }, [locationHook, loadCurrentMovie]);
+  }, [locationHook]);
 
-  // Когато currentMovie се зареди, филтрирай bookingTime по id
   useEffect(() => {
     const params = new URLSearchParams(locationHook.search);
     const bookingTimeId = params.get("bookingTimeId");
@@ -85,10 +85,15 @@ export default function CreateOrder({ onClose }) {
     const selectedBookingTime = bookingTimes.find(bt => String(bt.id) === String(bookingTimeId));
     const formatTime = selectedBookingTime?.bookingTime.toString().replace(/^_/, "").replace("_", ":");
 
+    const getDayOfWeek = (dateString) => {
+      const date = new Date(dateString);
+      return date.toLocaleDateString('en-US', { weekday: 'long' });
+    };
+
     setOrder({
       ...currentMovie,
-      cinema: locationCity,
-      dayOfWeek: "", // можеш да го изчислиш по date
+      city: locationCity,
+      dayOfWeek: getDayOfWeek(date),
       date: date,
       time: formatTime || "",
       bookingTimeId: selectedBookingTime?.id || ""
@@ -96,7 +101,7 @@ export default function CreateOrder({ onClose }) {
 
 
     setIsLoading(false);
-  }, [currentMovie, locationHook]);
+  }, [currentMovie]);
   
 
   useEffect(() => {
@@ -105,7 +110,6 @@ export default function CreateOrder({ onClose }) {
       if (username) {
         try {
           const userData = await fetchUser(username);
-          console.log(userData);
           
           setUserInfo(userData); 
         } catch (e) {
@@ -271,14 +275,14 @@ export default function CreateOrder({ onClose }) {
 			<div className="movie-info">
 				<img src={order.imageUrl} className="movie-poster" alt="Plakat" />
 				<div className="movie-details">
-				<h2 className="movie-title">{order.name}</h2>
-				<div className="info-row">{order.cinema}</div>
+				<h2 className="movie-title">{currentMovie.name}</h2>
+				<div className="info-row">{order.city.replace("_", " ")}</div>
 				<div className="info-row">
-					<span>Projection in {order.dayOfWeek} {order.date} {order.time}</span>
+					<span>Projection in {order.time} on {order.date} {order.dayOfWeek}</span>
 				</div>
 				<div className="info-row">
-					<span>{order.duration}</span>
-					<span>{order.audio} / {order.language}</span>
+					<span>{currentMovie.movieLength} min.</span>
+					<span>{currentMovie.audio} / {currentMovie.subtitles}</span>
 					<span>{order.premiere}</span>
 				</div>
 				</div>
@@ -292,6 +296,7 @@ export default function CreateOrder({ onClose }) {
 					<div className="seats">
 					{[...Array(ROWS)].map((_, rowIdx) => (
 						<div key={rowIdx + 1} className="seat-row">
+						<div className="row-number">{rowIdx + 1}</div>
 						{[...Array(COLS)].map((_, colIdx) => {
 							const row = rowIdx + 1;
 							const col = colIdx + 1;
@@ -314,17 +319,40 @@ export default function CreateOrder({ onClose }) {
 					))}
 					</div>
 					<div className="legend">
-					<span className="legend-item legend-free"></span> free seats
-					<span className="legend-item legend-selected"></span> your choice
-					<span className="legend-item legend-occupied"></span> occupied seats
-					<span className="legend-item legend-wheelchair"></span> wheelchair spaces
+						<span className="legend-item legend-free"></span> free seats
+						<span className="legend-item legend-selected"></span> your choice
+						<span className="legend-item legend-occupied"></span> occupied seats
+						<span className="legend-item legend-wheelchair"></span> wheelchair spaces
 					</div>
 					<div className="seat-counter">
-					<span>{selectedSeats.length}</span>
+						<article className="seats-info">
+							{selectedSeats.length === 0 ? (
+								<span></span>
+							) : (
+								<span>
+								{Object.entries(
+									selectedSeats.reduce((acc, seat) => {
+									acc[seat.row] = acc[seat.row] || [];
+									acc[seat.row].push(seat.col);
+									return acc;
+									}, {})
+								).map(([row, cols]) => (
+									<span className="seats-text" key={row}>
+									<span style={{ color: "#d3c9c9" }}>Row:</span>{" "} {row} {" "}
+									<span style={{ color: "#d3c9c9" }}>{cols.length === 1 ? 'Place' : 'Places'}:</span>{" "}  {cols.join(",")}&nbsp;
+									</span>
+								))}
+								</span>
+							)}
+						</article>
+						<article className="ticket-count-icon">
+							<img className="ticket-icon" src="/images/icons/ticket-100.png" alt="ticket-icon" />
+							<span>{selectedSeats.length}</span>
+						</article>
 					</div>
 					<div className="actions">
-					<button className="btn-cancel" onClick={onClose}>Cancel</button>
-					<button className="btn-confirm" disabled={selectedSeats.length === 0} onClick={confirmSelection}>Confirm</button>
+						<button className="btn-cancel" onClick={onClose}>Cancel</button>
+						<button className="btn-confirm" disabled={selectedSeats.length === 0} onClick={confirmSelection}>Confirm</button>
 					</div>
 				</div>
 				</div>

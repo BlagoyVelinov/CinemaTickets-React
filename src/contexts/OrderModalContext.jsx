@@ -52,8 +52,10 @@ export function OrderModalProvider({ children }) {
                     <div
                         className="modal-content"
                         onClick={e => e.stopPropagation()}
-                    >
-                        <CreateOrder onClose={closeOrderModal} />
+                        >
+                        <CreateOrder 
+                            onClose={closeOrderModal} 
+                        />
                     </div>
                 </div>
             )}

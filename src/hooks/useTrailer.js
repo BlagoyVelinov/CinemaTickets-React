@@ -24,12 +24,10 @@ export default function useTrailer(propMovieId) {
     
     movieService.getMovieById(movieId)
       .then(result => {
-        console.log("movieService.getMovieById result:", result);
         setMovie(result);
       })
       .catch(err => {
         setHasError(true);
-        console.log("movieService.getMovieById result: Catching the error");
         setErrorMessage(err.message || "An error occurred while loading the trailer.");
       })
       .finally(() => setIsLoading(false));
