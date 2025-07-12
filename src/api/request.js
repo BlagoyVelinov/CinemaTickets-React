@@ -18,6 +18,14 @@ const request = async (method, url, data, options = {}) => {
     }
 
     const response = await fetch(url, options);
+
+    if (response.status === 401 || response.status === 403) {
+        localStorage.removeItem('accessToken');
+        localStorage.removeItem('authData');
+        window.location.href = '/users/login';
+        return;
+    }
+
     const resContentType = response.headers.get('Content-Type');
     if (!resContentType) {
         return;

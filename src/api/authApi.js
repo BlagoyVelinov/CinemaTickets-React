@@ -80,7 +80,8 @@ export const useRegister = () => {
 };
 
 export const useLogout = () => {
-    const { accessToken, userLogoutHandler } = useContext(UserContext);
+    const { userLogoutHandler } = useContext(UserContext);
+    const accessToken = localStorage.getItem('accessToken');
 
     useEffect(() => {
         if (!accessToken) {
@@ -105,10 +106,8 @@ export const useLogout = () => {
 };
 
 export const useUser = () => {
-    const { accessToken } = useContext(UserContext);
-
     const fetchUser = async (username) => {
-        console.log("accessToken:", accessToken, "username:", username);
+        const accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
             return;
         }
@@ -118,8 +117,7 @@ export const useUser = () => {
             }
         }
     
-        const result = request.get(`${baseUrl}/${username}`, null, options);
-        console.log("User fetch result:", result);
+        const result = await request.get(`${baseUrl}/${username}`, null, options);
         return result;
     }
 
@@ -129,6 +127,17 @@ export const useUser = () => {
 };
 
 export const useAuthStatus = () => {
-    const { accessToken } = useContext(UserContext);
-    return !!accessToken;
+    const accessToken = localStorage.getItem('accessToken');
+    const authData = localStorage.getItem('authData');
+    
+    if (!accessToken || !authData) {
+        return false;
+    }
+    
+    try {
+        const parsedAuthData = JSON.parse(authData);
+        return !!(accessToken && parsedAuthData.username);
+    } catch (e) {
+        return false;
+    }
 };

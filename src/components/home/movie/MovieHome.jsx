@@ -23,7 +23,6 @@ export default function MovieHome({
 
             <div className="button-trailer-button">
                 <Link to={`/?trailer=${id}`} onClick={() => {
-                    console.log("Clicked See Trailer for id:", id);
                     onSeeTrailer(id);
                 }} className="link2">
                     <span><span>See Trailer</span></span>
