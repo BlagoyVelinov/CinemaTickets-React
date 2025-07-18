@@ -138,6 +138,7 @@ export const useAuthStatus = () => {
         const parsedAuthData = JSON.parse(authData);
         return !!(accessToken && parsedAuthData.username);
     } catch (e) {
+        console.error(e);
         return false;
     }
 };
