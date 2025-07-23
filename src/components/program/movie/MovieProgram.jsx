@@ -1,5 +1,6 @@
 import { Link } from "react-router";
 import { useState } from "react";
+import { formatBookingTime } from "../../../utils/formatBookingTimes";
 
 export default function Movie({
   id,
@@ -71,7 +72,7 @@ export default function Movie({
                                 key={time.id} 
                                 onClick={() => handleBookingClick(time)}
                                 >
-                                {time.bookingTime}
+                                {formatBookingTime(time.bookingTime)}
                             </button>
                         ))
                     ) : (

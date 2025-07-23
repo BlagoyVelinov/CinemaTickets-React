@@ -5,6 +5,7 @@ import { useLocation, useNavigate } from "react-router";
 import { useMovies } from "../../contexts/MovieContext";
 import { useUser } from "../../api/authApi";
 import OrderDto from "../../models/orderDto";
+import { formatBookingTime } from "../../utils/formatBookingTimes";
 
 const TICKET_TYPES = {
   CHILDREN_UNDER_16: { value: "Children under 16", price: 10.5 },
@@ -79,8 +80,8 @@ export default function CreateOrder({ onClose }) {
     const locationCity = params.get("location");
     if (!currentMovie || !bookingTimeId) return;
     const bookingTimes = currentMovie.bookingTimes || [];
-    const selectedBookingTime = bookingTimes.find(bt => String(bt.id) === String(bookingTimeId));
-    const formatTime = selectedBookingTime?.bookingTime.toString().replace(/^_/, "").replace("_", ":");
+    const selectedBookingTimeObject = bookingTimes.find(bt => String(bt.id) === String(bookingTimeId));
+    const formatTime = formatBookingTime(selectedBookingTimeObject.bookingTime.toString());
 
     const getDayOfWeek = (dateString) => {
       const date = new Date(dateString);
@@ -93,7 +94,7 @@ export default function CreateOrder({ onClose }) {
       dayOfWeek: getDayOfWeek(date),
       date: date,
       time: formatTime || "",
-      bookingTimeId: selectedBookingTime?.id || ""
+      bookingTimeId: selectedBookingTimeObject?.id || ""
     });
 
 
