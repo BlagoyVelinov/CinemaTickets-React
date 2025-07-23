@@ -17,7 +17,7 @@ export default function HomeTab() {
 
     useEffect(() => {
         loadPremieres();
-    }, []);
+    }, [loadPremieres]);
     return (
         <div id="content-home" className="content-section">
             <div id="slogan">

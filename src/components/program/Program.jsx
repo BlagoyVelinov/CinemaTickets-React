@@ -59,7 +59,7 @@ export default function ProgramTab() {
 
     useEffect(() => {
         loadAllMovies();
-    }, []);
+    }, [loadAllMovies]);
 
     const filteredMovies = allMovies.filter(movie => {
         if (!movie.bookingTimes || movie.bookingTimes.length === 0) return false;

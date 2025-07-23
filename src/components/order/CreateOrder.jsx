@@ -65,15 +65,12 @@ export default function CreateOrder({ onClose }) {
     navigate(`${locationHook.pathname}?${params.toString()}`, { replace: true });
   };
 
-
+  const movieId = params.get("movieId");
   useEffect(() => {
-    const params = new URLSearchParams(locationHook.search);
-    const movieId = params.get("movieId");
-   
     if (movieId) {
       refreshCurrentMovie(movieId);
     }
-  }, [locationHook]);
+  }, [movieId]);
 
   useEffect(() => {
     const params = new URLSearchParams(locationHook.search);
@@ -226,7 +223,7 @@ export default function CreateOrder({ onClose }) {
         movieViewName: order.name,
         bookingTimeId: order.bookingTimeId,
         projectionDate: order.date,
-        location: order.cinema?.toUpperCase(),
+        location: order.city?.toUpperCase().replace(/ /g, "_"),
         bookingTime: order.time,
         childQuantity: getTicketCount("CHILDREN_UNDER_16"),
         overSixtyQuantity: getTicketCount("PERSONS_OVER_60"),
@@ -246,6 +243,7 @@ export default function CreateOrder({ onClose }) {
         user: userInfo,
         isFinished: false
       });
+        console.log("order.city:", order.city);
       try {
         const result = await orderService.createOrder(orderDto.toJSON());
   
