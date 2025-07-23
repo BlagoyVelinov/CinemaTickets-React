@@ -1,5 +1,8 @@
 import { Link, NavLink, useLocation, useNavigate } from 'react-router'
+import React, { useState, useRef, useEffect } from 'react';
+
 import { useUserContext } from '../../contexts/UserContext';
+import styles from './Header.module.css'
 
 export default function Header() {
     const location = useLocation();
@@ -7,7 +10,10 @@ export default function Header() {
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
     const isOrderModal = location.pathname === '/program/order';
 
-    const { username, userLogoutHandler } = useUserContext();
+    const [showDropdown, setShowDropdown] = useState(false);
+    const dropdownRef = useRef(null);
+
+    const { username, userLogoutHandler, admin } = useUserContext();
 
     const handleLogout = (e) => {
         e.preventDefault();
@@ -15,19 +21,48 @@ export default function Header() {
         navigate('/');
     };
 
+    useEffect(() => {
+        function handleClickOutside(e) {
+            if(dropdownRef.current && !dropdownRef.current.contains(e.target)) {
+                setShowDropdown(false);
+            }
+        }
+        document.addEventListener("mousedown", handleClickOutside);
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside);
+        };
+    }, []);
+
+    useEffect(() => {
+        setShowDropdown(false);
+    }, [username]);
+
     return (
         <header id="nav">
             <nav id="header">
                 <div className="row-1">
                     <div className="fleft"><Link to="/">Cinema <span>Tickets</span></Link></div>
                     <ul>
-                        {username 
+                        {username
                             ? (
-                                <div className="form-inline my-2 my-lg-0 border px-3 welcome-message">
-                                    <div className="logged-user">
+                                <div className={styles.userDropdownWrapper} ref={dropdownRef}>
+                                    <div
+                                        className="logged-user"
+                                        onClick={() => setShowDropdown((prev) => !prev)}
+                                        style={{ cursor: "pointer" }}
+                                    >
                                         <span>{username}</span>
                                     </div>
-                                    <button className="btn btn-info btn-logout" onClick={handleLogout}>Logout</button>
+                                  
+                                        <div className={`${styles.userDropdownMenu} ${showDropdown ? styles.userDropdownMenuActive : ""}`}>
+                                            {admin == true && (
+                                                <Link to="/admin" className={styles.dropdownItem}>Admin Panel</Link>
+                                            )}
+                                            <Link to="/account/settings" className={styles.dropdownItem}>Account Settings</Link>
+                                            <button className={`${styles.dropdownItem} ${styles.logoutBtn}`} onClick={handleLogout}>Logout</button>
+                                        </div>
+
+                                   
                                 </div>
                             )
                             : (
