@@ -16,6 +16,8 @@ import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
 import GuestGuard from './components/guards/GuestGuard';
+import CreateOrder from './components/order/CreateOrder';
+import AuthGuard from './components/guards/AuthGuard';
 
 
 function App() {
@@ -33,6 +35,9 @@ function App() {
                                     <Routes>
                                         <Route index element={<HomeTab />} />
                                         <Route path="/program" element={<ProgramTab />} />
+                                        <Route element={<AuthGuard />} >
+                                            <Route path="/program/order?" element={<CreateOrder />} />
+                                        </Route>
                                         <Route path="/4dx" element={<FourDxTab />} />
                                         <Route path="/imax" element={<ImaxTab />} />
                                         <Route path="/offers" element={<OffersTab />} />
