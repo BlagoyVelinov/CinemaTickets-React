@@ -12,9 +12,14 @@ export default function HeaderUserMenu() {
 
     const handleLogout = (e) => {
         e.preventDefault();
+        setShowDropdown(false);
         userLogoutHandler();
         navigate('/');
     };
+
+    const handleClickMenu = (e) => {
+        setShowDropdown(false);
+    }
 
     useEffect(() => {
         function handleClickOutside(e) {
@@ -44,9 +49,9 @@ export default function HeaderUserMenu() {
             
                 <div className={`${styles.userDropdownMenu} ${showDropdown ? styles.userDropdownMenuActive : ""}`}>
                     {admin == true && (
-                        <Link to="/admin-section" className={styles.dropdownItem}>Admin Panel</Link>
+                        <Link to="/admin-section" className={styles.dropdownItem} onClick={handleClickMenu}>Admin Panel</Link>
                     )}
-                    <Link to="/account/settings" className={styles.dropdownItem}>Account Settings</Link>
+                    <Link to="/account/settings" className={styles.dropdownItem} onClick={handleClickMenu}>Account Settings</Link>
                     <button className={`${styles.dropdownItem} ${styles.logoutBtn}`} onClick={handleLogout}>Logout</button>
                 </div>
         </div>

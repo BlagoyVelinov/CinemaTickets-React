@@ -1,4 +1,4 @@
-import { useLocation, useNavigate } from 'react-router'
+import { useLocation } from 'react-router'
 import React from 'react';
 
 import { useUserContext } from '../../contexts/UserContext';
@@ -10,9 +10,9 @@ import HeaderAuthLinks from './auth-links/HeaderAuthLinks';
 
 export default function Header() {
     const location = useLocation();
-    const navigate = useNavigate();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
     const isOrderModal = location.pathname === '/program/order';
+    const isAdminSection = location.pathname === '/admin-section';
     const { username } = useUserContext();
 
     return (
@@ -25,7 +25,7 @@ export default function Header() {
                         <HeaderLanguageSelector />
                     </ul>
                 </div>
-                {!hideNav && !isOrderModal && <HeaderNav />}
+                {!hideNav && !isOrderModal && !isAdminSection && <HeaderNav />}
             </nav>
         </header>
     );
