@@ -1,0 +1,48 @@
+
+.bookingTimeBtn {
+    padding: 0.7em 1em;
+    min-width: 2em;
+    text-align: center;
+    margin-bottom: 0.8em;
+    margin-right: 0.2em;
+    color: #000;
+    font-size: 14px;
+    font-weight: 700;
+    background-color: #f67f00;
+    border-radius: 0.25em;
+    border: 0 none;
+    box-shadow: none;
+    transition: background-color 0.3s ease;
+}
+
+.bookingTimeBtn:hover {
+    cursor: pointer;
+    background-color: #d26201;
+}
+
+.movieImage {
+    position: relative;
+}
+
+.movieImage:hover {
+    cursor: pointer;
+}
+
+.movieImage::after {
+    position: absolute;
+    content: "";
+    left: 25%;
+    top: 30%;
+    width: 50%;
+    height: 50%;
+    background-image: url(/images/icons/play-arrow-white-circle-solid.png);
+    background-size: contain;
+    background-repeat: no-repeat;
+    opacity: 0;
+    transition: opacity 0.3s;
+    pointer-events: none;
+}
+
+.movieImage:hover::after {
+    opacity: 0.5; 
+}
