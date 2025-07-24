@@ -1,0 +1,9 @@
+
+.mainScreen {
+    min-height: 100vh;
+    text-align: center;
+}
+
+.mainScreen h1 {
+    color: #fff;
+}

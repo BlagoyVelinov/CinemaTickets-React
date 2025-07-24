@@ -19,6 +19,7 @@ import SignUp from './components/sign-up/SignUp';
 import GuestGuard from './components/guards/GuestGuard';
 import CreateOrder from './components/order/CreateOrder';
 import AuthGuard from './components/guards/AuthGuard';
+import AccountSettings from './components/user-account/AccountSettings';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
 
@@ -39,6 +40,7 @@ function App() {
                                         <Route path="/program" element={<ProgramTab />} />
                                         <Route element={<AuthGuard />} >
                                             <Route path="/program/order?" element={<CreateOrder />} />
+                                            <Route path="/account/settings" element={<AccountSettings />} />
                                         </Route>
                                         <Route path="/4dx" element={<FourDxTab />} />
                                         <Route path="/imax" element={<ImaxTab />} />
