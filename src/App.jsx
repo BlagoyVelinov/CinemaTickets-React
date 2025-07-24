@@ -1,3 +1,4 @@
+import { lazy, Suspense } from 'react';
 import { Routes, Route, useLocation } from 'react-router';
 
 import { UserProvider } from './providers/UserProvider';
@@ -18,6 +19,7 @@ import SignUp from './components/sign-up/SignUp';
 import GuestGuard from './components/guards/GuestGuard';
 import CreateOrder from './components/order/CreateOrder';
 import AuthGuard from './components/guards/AuthGuard';
+const Admin = lazy(() => import('./components/admin/Admin'));
 
 
 function App() {
@@ -47,6 +49,11 @@ function App() {
                                             <Route path="/users/login" element={<Login />} />
                                             <Route path="/users/register" element={<SignUp />} />
                                         </Route>
+                                        <Route path="/admin-section" element={(
+                                            <Suspense fallback={<p>Loading...</p>}>
+                                                <Admin />
+                                            </Suspense>
+                                        )} />
                                     </Routes>
                             </OrderModalProvider>
                         </MovieProvider>
