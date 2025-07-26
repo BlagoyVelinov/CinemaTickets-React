@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { useUserContext } from "../../../contexts/UserContext";
 
-import styles from '../Header.module.css';
+import styles from './HeaderUserMenu.module.css';
 
 export default function HeaderUserMenu() {
     const { username, userLogoutHandler, admin } = useUserContext();
@@ -44,15 +44,24 @@ export default function HeaderUserMenu() {
                 onClick={() => setShowDropdown((prev) => !prev)}
                 style={{ cursor: "pointer" }}
             >
-                <span>{username}</span>
+                <article className={styles.userInfo}>
+                    <span>{username}</span>
+                    <img className={styles.avatarImage} src="../images/avatar.png" alt="" />
+                </article>
             </div>
             
                 <div className={`${styles.userDropdownMenu} ${showDropdown ? styles.userDropdownMenuActive : ""}`}>
                     {admin == true && (
-                        <Link to="/admin-section" className={styles.dropdownItem} onClick={handleClickMenu}>Admin Panel</Link>
+                        <Link to="/admin-section" className={styles.dropdownItem} onClick={handleClickMenu}>
+                            <span className={styles.dropdownItemContent}>Admin Panel</span>
+                        </Link>
                     )}
-                    <Link to="/account/settings" className={styles.dropdownItem} onClick={handleClickMenu}>Account Settings</Link>
-                    <button className={`${styles.dropdownItem} ${styles.logoutBtn}`} onClick={handleLogout}>Logout</button>
+                    <Link to="/account/settings" className={styles.dropdownItem} onClick={handleClickMenu}>
+                        <span className={styles.dropdownItemContent}>Account Settings</span>
+                    </Link>
+                    <button className={`${styles.dropdownItem} ${styles.logoutBtn}`} onClick={handleLogout}>
+                        <span className={styles.dropdownItemContent}>Logout</span>
+                    </button>
                 </div>
         </div>
     );

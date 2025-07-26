@@ -7,6 +7,7 @@ import HeaderUserMenu from './user-menu/HeaderUserMenu';
 import HeaderNav from './nav-links/HeaderNav';
 import HeaderLanguageSelector from './language-selector/HeaderLanguageSelector';
 import HeaderAuthLinks from './auth-links/HeaderAuthLinks';
+import styles from './Header.module.css';
 
 export default function Header() {
     const location = useLocation();
@@ -21,7 +22,7 @@ export default function Header() {
             <nav id="header">
                 <div className="row-1">
                     <HeaderLogo />
-                    <ul>
+                    <ul className={styles.topItems}>
                         {username ? <HeaderUserMenu /> : <HeaderAuthLinks />}
                         <HeaderLanguageSelector />
                     </ul>

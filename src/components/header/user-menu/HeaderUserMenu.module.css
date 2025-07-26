@@ -1,0 +1,106 @@
+.userDropdownWrapper {
+    position: relative;
+    display: inline-block;
+}
+
+.userDropdownMenu {
+    position: absolute;
+    left: 108%;
+    top: 10%;
+    background-color: #0000002c;
+    border-radius: 0 0.5em 0.5em 0;
+    overflow: hidden;
+    min-width: 12em;
+    z-index: 1000;
+    box-shadow: 1px 1px 12px rgba(241, 106, 3, 1);
+
+    opacity: 0;
+    transform: translateX(30);
+    pointer-events: none;
+    transition:
+        opacity 0.35s cubic-bezier(.4,0,.2,1),
+        transform 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.userDropdownMenuActive {
+    opacity: 0.9;
+    transform: translateX(0);
+    pointer-events: auto;
+}
+
+
+.dropdownItem {
+    display: block;
+    padding: 0.7em 1.4em;
+    color: #ffffff;
+    text-decoration: none;
+    background-color: transparent;
+    border: none;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1.4em;
+    position: relative;
+    overflow: hidden;
+    transition: color 0.15s cubic-bezier(.4,0,.2,1) 0.15s;
+}
+
+.dropdownItem::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 0;
+    background: rgba(249, 249, 249, 0.804);
+    z-index: 1;
+    transition: width 0.35s cubic-bezier(.4,0,.2,1);
+}
+
+.dropdownItemContent {
+    position: relative;
+    z-index: 2;
+}
+
+.dropdownItem:hover::before {
+    width: 100%;
+}
+
+.dropdownItem:hover {
+    color: #000;
+}
+
+.dropdownItem > * {
+    position: relative;
+    z-index: 1;
+}
+
+.logoutBtn {
+    width: 100%;
+    padding: 0.7em 4em;
+    color: #d74000;
+    font-weight: 700;
+    transition: color 0.15s cubic-bezier(.4,0,.2,1) 0.15s;
+}
+
+.logoutBtn::before {
+    background: rgba(215, 64, 0, 0.804);
+}
+
+.logoutBtn:hover {
+    color: #fff;
+    font-weight: 700;
+}
+
+
+.userInfo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 0.5em;
+}
+
+.avatarImage {
+    display: block;
+    width: 2em;
+}
