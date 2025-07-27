@@ -4,7 +4,7 @@ export default function Admin() {
     
     return(
         <div className={styles.mainScreen}>
-        <h1>Admin Section</h1>
+            <h1>Admin Section</h1>
         </div>
     );
 }

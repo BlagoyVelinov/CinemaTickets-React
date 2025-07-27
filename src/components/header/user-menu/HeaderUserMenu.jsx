@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useNavigate, Link } from "react-router";
 import { useUserContext } from "../../../contexts/UserContext";
+import { useUser } from "../../../api/authApi";
 
 import styles from './HeaderUserMenu.module.css';
 
@@ -8,6 +9,7 @@ export default function HeaderUserMenu() {
     const { username, userLogoutHandler, admin } = useUserContext();
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef(null);
+    const { user } = useUser();
     const navigate = useNavigate();
 
     const handleLogout = (e) => {
@@ -46,7 +48,13 @@ export default function HeaderUserMenu() {
             >
                 <article className={styles.userInfo}>
                     <span>{username}</span>
-                    <img className={styles.avatarImage} src="../images/avatar.png" alt="" />
+                    <div className={styles.imageContainer}>
+                        <img 
+                            className={styles.avatarImage} 
+                            src={user?.imageUrl || "/images/avatar.png"} 
+                            alt="User avatar" 
+                        />
+                    </div>
                 </article>
             </div>
             

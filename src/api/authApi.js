@@ -1,4 +1,4 @@
-import { useContext, useEffect, useRef } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import request from "./request";
 import { UserContext } from "../contexts/UserContext";
 
@@ -106,6 +106,11 @@ export const useLogout = () => {
 };
 
 export const useUser = () => {
+    const { username } = useContext(UserContext);
+    const [user, setUser] = useState(null);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
     const fetchUser = async (username) => {
         const accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
@@ -121,7 +126,32 @@ export const useUser = () => {
         return result;
     }
 
+    useEffect(() => {
+        if (!username) {
+            setUser(null);
+            return;
+        }
+
+        setLoading(true);
+        setError(null);
+        
+        fetchUser(username)
+            .then(result => {
+                setUser(result);
+            })
+            .catch(err => {
+                setError(err);
+                console.error('Failed to fetch user:', err);
+            })
+            .finally(() => {
+                setLoading(false);
+            });
+    }, [username]);
+
     return {
+        user,
+        loading,
+        error,
         fetchUser,
     }
 };
