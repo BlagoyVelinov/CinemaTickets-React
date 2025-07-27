@@ -109,13 +109,6 @@ export default function ProgramTab() {
                                             <small className="text-danger" v-show="errors.cityError" style={{display: "none"}}>City Name is required</small>
                                         </div>
                                     </form>
-                                    {/* <!-- Admin button for adding a movie --> */}
-                                    <div className="admin-controls mb-4">
-                                        <button className="btn admin-btn-add">
-                                            Add movie
-                                            {/* {{ showAddMovieForm ? 'Show movies' : 'Add movie' }} */}
-                                        </button>
-                                    </div>
                                 </div>
 
                                 {filteredMovies.length > 0 

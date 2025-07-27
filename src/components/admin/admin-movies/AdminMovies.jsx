@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useMovies } from "../../../contexts/MovieContext";
+import AddMovie from "./add-movie/AddMovie";
 import styles from './AdminMovies.module.css';
 
 export default function AdminMovies() {
@@ -15,6 +16,21 @@ export default function AdminMovies() {
         setShowAddMovieForm(!showAddMovieForm);
     };
 
+    const handleSubmitMovie = (movieData) => {
+        // Тук ще добавите логиката за изпращане на данните към API
+        console.log('New movie data:', movieData);
+        // TODO: Извикайте API за добавяне на филм
+        // await addMovie(movieData);
+        
+        // След успешно добавяне
+        setShowAddMovieForm(false);
+        loadAllMovies(); // Презаредете списъка с филми
+    };
+
+    const handleCancelAdd = () => {
+        setShowAddMovieForm(false);
+    };
+
     return (
         <div className={styles.adminContent}>
             <h2>Manage Movies</h2>
@@ -25,10 +41,10 @@ export default function AdminMovies() {
             </div>
 
             {showAddMovieForm ? (
-                <div className={styles.addMovieForm}>
-                    <h3>Add New Movie</h3>
-                    <p>Movie form will be implemented here...</p>
-                </div>
+                <AddMovie 
+                    onSubmit={handleSubmitMovie}
+                    onCancel={handleCancelAdd}
+                />
             ) : (
                 <div className={styles.moviesList}>
                     {allMovies && allMovies.length > 0 ? (
