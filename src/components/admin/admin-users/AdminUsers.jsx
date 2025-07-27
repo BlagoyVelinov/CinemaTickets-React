@@ -1,13 +1,15 @@
+import styles from './AdminUsers.module.css';
+
 export default function AdminUsers() {
     return (
-        <div className="admin-content">
+        <div className={styles.adminContent}>
             <h2>Manage Users</h2>
-            <div className="admin-controls">
-                <button className="btn admin-btn-add">
+            <div className={styles.adminControls}>
+                <button className={`${styles.btn} ${styles.adminBtnAdd}`}>
                     Add New User
                 </button>
             </div>
-            <div className="users-list">
+            <div className={styles.usersList}>
                 <p>Users management will be implemented here...</p>
             </div>
         </div>
