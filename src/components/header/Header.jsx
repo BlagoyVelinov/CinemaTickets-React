@@ -13,7 +13,7 @@ export default function Header() {
     const location = useLocation();
     const hideNav = location.pathname === '/users/login' || location.pathname === '/users/register';
     const isOrderModal = location.pathname === '/program/order';
-    const isAdminSection = location.pathname === '/admin-section';
+    const isAdminSection = location.pathname.startsWith('/admin-section');
     const isSettings = location.pathname === '/account/settings';
     const { username } = useUserContext();
 

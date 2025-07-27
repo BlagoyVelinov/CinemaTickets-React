@@ -19,6 +19,7 @@ import SignUp from './components/sign-up/SignUp';
 import GuestGuard from './components/guards/GuestGuard';
 import CreateOrder from './components/order/CreateOrder';
 import AuthGuard from './components/guards/AuthGuard';
+import AdminGuard from './components/guards/AdminGuard';
 import AccountSettings from './components/user-account/AccountSettings';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
@@ -26,6 +27,7 @@ const Admin = lazy(() => import('./components/admin/Admin'));
 function App() {
     const location = useLocation();
     const isOrderModal = location.pathname === '/program/order';
+    const isAdminSection = location.pathname.startsWith('/admin-section');
 
   return (
     <UserProvider>
@@ -51,15 +53,17 @@ function App() {
                                             <Route path="/users/login" element={<Login />} />
                                             <Route path="/users/register" element={<SignUp />} />
                                         </Route>
-                                        <Route path="/admin-section" element={(
-                                            <Suspense fallback={<p>Loading...</p>}>
-                                                <Admin />
-                                            </Suspense>
-                                        )} />
+                                        <Route element={<AdminGuard />}>
+                                            <Route path="/admin-section/*" element={(
+                                                <Suspense fallback={<p>Loading...</p>}>
+                                                    <Admin />
+                                                </Suspense>
+                                            )} />
+                                        </Route>
                                     </Routes>
                             </OrderModalProvider>
                         </MovieProvider>
-                        {!isOrderModal && <Footer />}
+                        {!isOrderModal && !isAdminSection && <Footer />}
                     </div>
                 </div>
             </div>
