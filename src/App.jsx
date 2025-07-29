@@ -41,6 +41,7 @@ function App() {
                                         <Route index element={<HomeTab />} />
                                         <Route path="/program" element={<ProgramTab />} />
                                         <Route element={<AuthGuard />} >
+                                            <Route path="/program/order?" element={null} />
                                             <Route path="/account/settings" element={<AccountSettings />} />
                                         </Route>
                                         <Route path="/4dx" element={<FourDxTab />} />
