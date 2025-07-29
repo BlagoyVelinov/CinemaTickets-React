@@ -7,7 +7,7 @@ export default function Footer() {
                 <div className="right">
                     <div className="footerlink">
                         <p className="lf">
-                            Copyright &copy; 2024 <Link to={"/about-us"} >Contact us</Link> - About Us
+                            Copyright &copy; 2024 <Link to={"/about-us"} >Cinema Tickets</Link> - About Us
                         </p>
                         <p className="rf">
                             <img src="/images/icon2.gif" alt="contact" />
