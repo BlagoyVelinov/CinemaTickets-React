@@ -1,12 +1,12 @@
 import request from "../api/request";
 
 
-const BASE_URL = "http://localhost:8080";
+const BASE_URL = "http://localhost:8081/api/movies";
 
 export default {
     async getAll() {
         try {
-            const result = await request.get(`${BASE_URL}/api/program`);
+            const result = await request.get(`${BASE_URL}`);
             const movies = Object.values(result);
             return movies;
         } catch (error) {
@@ -17,7 +17,7 @@ export default {
 
     async getUpcomingPremiers() {
         try {
-            const result = await request.get(`${BASE_URL}/movies/upcoming`);
+            const result = await request.get(`${BASE_URL}/upcoming`);
             const movies = Object.values(result);
             return movies;
         } catch (error) {
@@ -28,7 +28,7 @@ export default {
 
     async getMovieById(id) {
         try {
-            const result = await request.get(`${BASE_URL}/movies/${id}`);
+            const result = await request.get(`${BASE_URL}/movie/${id}`);
             return result;
         } catch (error) {
             console.error(`Error fetching movie with id ${id}:`, error);
