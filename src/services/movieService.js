@@ -34,5 +34,20 @@ export default {
             console.error(`Error fetching movie with id ${id}:`, error);
             throw error;
         }
-    }
+    },
+
+    async addMovie(movieData) {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.post(`${BASE_URL}/add-movie`, movieData, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            return result;
+        } catch (error) {
+            console.error('Error adding movie:', error);
+            throw error;
+        }
+    },
 }

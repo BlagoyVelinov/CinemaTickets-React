@@ -1,5 +1,6 @@
 import { useState } from "react";
 import styles from './AddMovie.module.css';
+import movieService from "../../../../services/movieService";
 
 export default function AddMovie({ onSubmit, onCancel }) {
 	const [formData, setFormData] = useState({
@@ -22,14 +23,12 @@ export default function AddMovie({ onSubmit, onCancel }) {
 		const { name, value, type, selectedOptions } = e.target;
 		
 		if (type === 'select-multiple') {
-			// За multiple select
 			const selectedValues = Array.from(selectedOptions).map(option => option.value);
 			setFormData(prev => ({
 				...prev,
 				[name]: selectedValues
 			}));
 		} else {
-			// За останалите полета
 			setFormData(prev => ({
 				...prev,
 				[name]: value
@@ -45,7 +44,7 @@ export default function AddMovie({ onSubmit, onCancel }) {
 		}
 	};
 
-	const handleSubmit = (e) => {
+	const handleSubmit = async (e) => {
 		e.preventDefault();
 
 		const newErrors = {};
@@ -56,13 +55,22 @@ export default function AddMovie({ onSubmit, onCancel }) {
 		if(!formData.audio) newErrors.audio = "Audio is required";
 		if(!formData.imageUrl) newErrors.imageUrl = "Image URL is required";
 		if(!formData.trailerUrl) newErrors.trailerUrl = "Trailer URL is required";
+		if(!formData.projectionFormat) newErrors.projectionFormat = "Projection format is required";
+		if(!formData.hallNumber) newErrors.hallNumber = "Hall number is required";
+		if(formData.genreCategories.length === 0) newErrors.genreCategories = "Genre of movie is required";
 
 		setErrors(newErrors);
 		if(Object.keys(newErrors).length === 0) {
-			onSubmit(formData);
+			try {
+				const result = await movieService.addMovie(formData);
+				console.log('Movie added successfully:', result);
+				onSubmit(result);
+			} catch (error) {
+				console.error('Error adding movie:', error);
+			}
 		}
 	};
-    
+
     return (
 		<form className={styles.addMovieForm} onSubmit={handleSubmit}>
 			<div className={styles.formGroup}>
