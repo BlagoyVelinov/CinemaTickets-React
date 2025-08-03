@@ -1,6 +1,5 @@
 import { useState } from "react";
 import styles from './AddMovie.module.css';
-import movieService from "../../../../services/movieService";
 
 export default function AddMovie({ onSubmit, onCancel }) {
 	const [formData, setFormData] = useState({
@@ -61,13 +60,6 @@ export default function AddMovie({ onSubmit, onCancel }) {
 
 		setErrors(newErrors);
 		if(Object.keys(newErrors).length === 0) {
-			// try {
-			// 	const result = await movieService.addMovie(formData);
-			// 	console.log('Movie added successfully:', result);
-			// 	onSubmit(result);
-			// } catch (error) {
-			// 	console.error('Error adding movie:', error);
-			// }
 			onSubmit(formData);
 		}
 	};
