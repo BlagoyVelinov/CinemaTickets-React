@@ -21,9 +21,10 @@ export default function AdminMovies() {
     };
 
     const handleEditMovie = (movieId) => {
-        setSelectedMovie(movieId);
-        setShowEditMovieForm(true);
-        setShowAddMovieForm(false);
+            setSelectedMovie(movieId);
+            setShowEditMovieForm(true);
+            setShowAddMovieForm(false);
+            
     };
 
     const handleDeleteMovie = async (movieId) => {
@@ -50,6 +51,22 @@ export default function AdminMovies() {
       }  
     };
 
+    const handleSubmitEditMovie = async (movieId, movieData) => {
+        try {
+            await movieService.editMovie(movieId, movieData);
+            
+            setShowEditMovieForm(false);
+            setSelectedMovie(null);
+            
+            await refreshAllMovies();
+
+            console.log('Movie updated successfully!');
+        } catch (error) {
+            console.error('Error editing movie: ', error);
+            
+        }
+    };
+
     const handleCancelAdd = () => {
         setShowAddMovieForm(false);
     };
@@ -61,18 +78,29 @@ export default function AdminMovies() {
 
     return (
         <div className={styles.adminContent}>
-            <h2>Manage Movies</h2>
-            <div className={styles.adminControls}>
-                <button className={`${styles.btn} ${styles.adminBtnAdd}`} 
-                onClick={handleAddMovie}
-                >
-                    {showAddMovieForm ? 'Show Movies' : 'Add Movie'}
-                </button>
-            </div>
+            {showEditMovieForm ? (
+                <h2>Edit Movie</h2>
+                ) : showAddMovieForm ? (
+                <h2>Add Movie</h2>
+                ) : (
+                <h2>Manage Movies</h2>
+                )}
+            
+            
+            {!showEditMovieForm && 
+                <div className={styles.adminControls}>
+                    <button className={`${styles.btn} ${styles.adminBtnAdd}`} 
+                    onClick={handleAddMovie}
+                    >
+                        {showAddMovieForm ? 'Show Movies' : 'Add Movie'}
+                    </button>
+                </div>
+            }
 
             {showEditMovieForm ? (
                 <EditMovie
                     movieId={selectedMovie}
+                    onSubmit={handleSubmitEditMovie}
                     onCancel={handleCancelEdit}
                 />
             ) : showAddMovieForm ? (
