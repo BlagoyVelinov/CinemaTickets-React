@@ -61,13 +61,14 @@ export default function AddMovie({ onSubmit, onCancel }) {
 
 		setErrors(newErrors);
 		if(Object.keys(newErrors).length === 0) {
-			try {
-				const result = await movieService.addMovie(formData);
-				console.log('Movie added successfully:', result);
-				onSubmit(result);
-			} catch (error) {
-				console.error('Error adding movie:', error);
-			}
+			// try {
+			// 	const result = await movieService.addMovie(formData);
+			// 	console.log('Movie added successfully:', result);
+			// 	onSubmit(result);
+			// } catch (error) {
+			// 	console.error('Error adding movie:', error);
+			// }
+			onSubmit(formData);
 		}
 	};
 

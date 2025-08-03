@@ -50,4 +50,19 @@ export default {
             throw error;
         }
     },
+
+    async deleteMovie(movieId) {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.delete(`${BASE_URL}/delete-movie/${movieId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            return result;
+        } catch (error) {
+            console.error('Error deleting movie:', error);
+            throw error;
+        }
+    },
 }
