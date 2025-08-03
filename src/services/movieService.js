@@ -65,4 +65,19 @@ export default {
             throw error;
         }
     },
+
+    async editMovie(movieId, movieData) {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.put(`${BASE_URL}/update-movie/${movieId}`, movieData, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            return result;
+        } catch (error) {
+            console.error('Error editing the movie:', error);
+            throw error;
+        }
+    }
 }
