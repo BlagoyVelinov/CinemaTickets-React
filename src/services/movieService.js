@@ -79,5 +79,15 @@ export default {
             console.error('Error editing the movie:', error);
             throw error;
         }
-    }
+    },
+
+    async getBookingTimeByValue(value) {
+        try {
+            const result = await request.get(`${BASE_URL}/bookingTime/${value}`);
+            return result;
+        } catch (error) {
+            console.error(`Error fetching booking time ${value}:`, error);
+            throw error;
+        }
+    },
 }

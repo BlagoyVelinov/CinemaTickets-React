@@ -16,17 +16,17 @@ export function OrderModalProvider({ children }) {
     const params = new URLSearchParams(location.search);
     const shouldShowOrderModal = params.get("movieId") && params.get("bookingTimeId");
 
-    const openOrderModal = useCallback((id, name, time, selectedDate, selectedCity) => {
-        sessionStorage.setItem('bookingTimeData', JSON.stringify(time));
+    const openOrderModal = useCallback((id, name, bookingTimeObj, selectedDate, selectedCity) => {
+        sessionStorage.setItem('bookingTimeData', JSON.stringify(bookingTimeObj));
         const params = new URLSearchParams({
             movieId: id,
-            bookingTimeId: time.id,
+            bookingTimeId: bookingTimeObj.id,
             movieName: name,
             date: selectedDate,
             location: selectedCity
         });
         navigate(`/program/order?${params.toString()}`, { replace: true });
-        setOrderModalData({ id, name, time, selectedDate, selectedCity });
+        setOrderModalData({ id, name, bookingTime: bookingTimeObj, selectedDate, selectedCity });
     }, [navigate]);
     
     const closeOrderModal = useCallback(() => {
@@ -55,6 +55,7 @@ export function OrderModalProvider({ children }) {
                         >
                         <CreateOrder 
                             onClose={closeOrderModal} 
+                            bookingTime={orderModalData?.bookingTime}
                         />
                     </div>
                 </div>

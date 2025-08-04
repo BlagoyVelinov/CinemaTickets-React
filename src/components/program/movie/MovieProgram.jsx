@@ -1,7 +1,9 @@
 import { Link } from "react-router";
 import { useState } from "react";
+
 import { formatBookingTime } from "../../../utils/formatBookingTimes";
 import styles from './MovieProgram.module.css'
+import movieService from "../../../services/movieService";
 
 export default function Movie({
   id,
@@ -21,7 +23,7 @@ export default function Movie({
 }) {
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleBookingClick = (time) => {
+  const handleBookingClick = async (time) => {
     const authDataRaw = localStorage.getItem("authData");
     let accessToken = null;
     if (authDataRaw) {
@@ -37,7 +39,12 @@ export default function Movie({
       return;
     }
     setErrorMsg("");
-    onBookingClick(id, name, time, selectedDate, selectedCity);
+    try {
+      const bookingTimeObj = await movieService.getBookingTimeByValue(time);
+      onBookingClick(id, name, bookingTimeObj, selectedDate, selectedCity);
+    } catch (error) {
+      setErrorMsg("Error fetching booking time info.", error);
+    }
   };
 
   useState(() => {
