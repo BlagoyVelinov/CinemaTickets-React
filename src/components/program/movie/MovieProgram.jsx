@@ -40,6 +40,11 @@ export default function Movie({
     onBookingClick(id, name, time, selectedDate, selectedCity);
   };
 
+  useState(() => {
+    console.log(bookingTimes);
+    
+  })
+
   return (
     <li className="movieList">
       <Link to={`/program/?trailer=${id}`} onClick={() => onSeeTrailer(id)}>
@@ -69,10 +74,10 @@ export default function Movie({
                     {bookingTimes?.length > 0 ? (
                         bookingTimes.map((time) => (
                             <button className={styles.bookingTimeBtn}
-                                key={time.id} 
+                                key={time} 
                                 onClick={() => handleBookingClick(time)}
                                 >
-                                {formatBookingTime(time.bookingTime)}
+                                {time}
                             </button>
                         ))
                     ) : (
