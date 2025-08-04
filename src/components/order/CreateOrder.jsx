@@ -240,7 +240,6 @@ export default function CreateOrder({ onClose, bookingTime }) {
         user: userInfo,
         isFinished: false
       });
-        console.log("order.city:", order.city);
       try {
         const result = await orderService.createOrder(orderDto.toJSON());
   

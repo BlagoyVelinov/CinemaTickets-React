@@ -47,11 +47,6 @@ export default function Movie({
     }
   };
 
-  useState(() => {
-    console.log(bookingTimes);
-    
-  })
-
   return (
     <li className="movieList">
       <Link to={`/program/?trailer=${id}`} onClick={() => onSeeTrailer(id)}>

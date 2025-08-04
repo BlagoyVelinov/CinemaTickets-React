@@ -6,7 +6,7 @@ import movieService from "../../../services/movieService";
 import EditMovie from "./edit-movie/EditMovie";
 
 export default function AdminMovies() {
-    const { allMovies, loadAllMovies, refreshAllMovies } = useMovies();
+    const { allMovies, loadAllMovies, refreshAllMovies, refreshPremieres } = useMovies();
     const [showAddMovieForm, setShowAddMovieForm] = useState(false);
     const [showEditMovieForm, setShowEditMovieForm] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
@@ -59,6 +59,7 @@ export default function AdminMovies() {
             setSelectedMovie(null);
             
             await refreshAllMovies();
+            await refreshPremieres();
 
             console.log('Movie updated successfully!');
         } catch (error) {

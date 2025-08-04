@@ -2,11 +2,13 @@ import { Link } from 'react-router';
 import { useMovies } from "../../contexts/MovieContext";
 import TrailerModal from "../trailer/TrailerModal";
 import MovieHome from './movie/MovieHome';
-import { useEffect } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import useTrailerModal from '../../hooks/useTrailerModal';
+import { isChangeMovie } from '../../utils/checkIsChangeMovie';
 
 export default function HomeTab() {
-    const { premieres, loadPremieres } = useMovies();
+    const { premieres, loadPremieres, refreshPremieres } = useMovies();
+    const prevPremieres = useRef([]);
     
     const {
         showTrailer,
@@ -18,6 +20,18 @@ export default function HomeTab() {
     useEffect(() => {
         loadPremieres();
     }, [loadPremieres]);
+
+    useEffect(() => {
+        if (isChangeMovie(prevPremieres.current, premieres)) {
+            refreshPremieres();
+        }
+        prevPremieres.current = premieres;
+    }, [premieres, refreshPremieres]);
+
+    useState(() => {
+        console.log("Check for unlimited loop"); 
+    });
+
     return (
         <div id="content-home" className="content-section">
             <div id="slogan">
