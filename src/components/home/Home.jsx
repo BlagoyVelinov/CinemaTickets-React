@@ -28,10 +28,6 @@ export default function HomeTab() {
         prevPremieres.current = premieres;
     }, [premieres, refreshPremieres]);
 
-    useState(() => {
-        console.log("Check for unlimited loop"); 
-    });
-
     return (
         <div id="content-home" className="content-section">
             <div id="slogan">

@@ -28,6 +28,9 @@ export default function AdminMovies() {
     };
 
     const handleDeleteMovie = async (movieId) => {
+        const confirmDelete = window.confirm("Are you sure you want to delete this movie?");
+        if(!confirmDelete) return;
+        
         try {
             await movieService.deleteMovie(movieId);
 
