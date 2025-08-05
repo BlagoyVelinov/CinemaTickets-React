@@ -2,12 +2,14 @@ import { useActionState, useState } from "react";
 import { Link, useNavigate } from "react-router";
 import { useLogin } from "../../api/authApi";
 import { useUserContext } from "../../contexts/UserContext";
+import RegistrationSuccessModal from "../common/RegistrationSuccessModal";
 
 export default function Login() {
     const navigate = useNavigate();
     const { userLoginHandler } = useUserContext();
     const { login } = useLogin();
     const [errors, setErrors] = useState([]);
+    const [showModal, setShowModal] = useState(false);
 
     const loginHandler = async (_, formData) => {
         try {
@@ -43,8 +45,16 @@ export default function Login() {
 
     const [_, loginAction, isPending] = useActionState(loginHandler, {username: '', password: ''});
 
+    useState(() => {
+        const params = new URLSearchParams(location.search);
+        if(params.get("registered") === "1") {
+            setShowModal(true);
+            navigate("/users/login", { replace: true });
+        }
+    }, [location, navigate]);
     return (
         <>
+        <RegistrationSuccessModal open={showModal} onClose={() => setShowModal(false)} />
             <div className="centered-form-container">
                 <div className="wrapper wrapper-login">
                     <h2>Login</h2>

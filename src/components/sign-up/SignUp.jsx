@@ -25,7 +25,8 @@ export default function SignUp() {
 
             await register(userData);
             
-            navigate('/users/login');
+            // navigate('/users/login');
+            navigate("/users/login?registered=1");
             
         } catch (error) {
             console.error('Registration error:', error);
