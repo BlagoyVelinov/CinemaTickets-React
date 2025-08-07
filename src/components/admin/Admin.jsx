@@ -1,4 +1,4 @@
-import { Routes, Route } from 'react-router';
+import { Routes, Route, Navigate } from 'react-router';
 import AdminNav from './admin-nav-links/AdminNav';
 import AdminMovies from './admin-movies/AdminMovies';
 import AdminOffers from './admin-offers/AdminOffers';
@@ -14,7 +14,7 @@ export default function Admin() {
             
             <div className={styles.adminContent}>
                 <Routes>
-                    <Route path="/" element={<AdminMovies />} />
+                    <Route path="/" element={<Navigate to="movies" replace />} />
                     <Route path="/movies" element={<AdminMovies />} />
                     <Route path="/offers" element={<AdminOffers />} />
                     <Route path="/users" element={<AdminUsers />} />

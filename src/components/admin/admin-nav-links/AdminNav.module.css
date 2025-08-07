@@ -27,6 +27,6 @@
     background-color: #555;
 }
 
-.adminNavItem a.active {
-    background-color: #007bff;
+.active {
+    background-color: #555;
 }
