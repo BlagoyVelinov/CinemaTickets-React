@@ -1,17 +1,58 @@
+import { useAllUsers } from '../../../api/authApi';
 import styles from './AdminUsers.module.css';
 
 export default function AdminUsers() {
+    const { users, loading } = useAllUsers();
+
+
+
+    if (loading) return <div>Loading...</div>;
+
     return (
         <div className={styles.adminContent}>
-            <h2>Manage Users</h2>
-            <div className={styles.adminControls}>
-                <button className={`${styles.btn} ${styles.adminBtnAdd}`}>
-                    Add New User
-                </button>
-            </div>
-            <div className={styles.usersList}>
-                <p>Users management will be implemented here...</p>
-            </div>
+            {/* {showEditUserForm ? (
+                <h2>Edit User</h2>
+                ) : ( */}
+                <h2>Manage Users</h2>
+                {/* )} */}
+            
+
+            {
+            // showEditUserForm ? (
+            //     <EditUser
+            //         userId={selectedUser}
+            //         onSubmit={handleSubmitEditUser}
+            //         onCancel={handleCancelEdit}
+            //     />
+            // ) : 
+            (
+                <div className={styles.usersList}>
+                    {users && users.length > 0 ? (
+                        <div className={styles.usersGrid}>
+                            {users.map(user => (
+                                <div key={user.id} className={styles.userItem}>
+                                    <h4>{user.name}</h4>
+                                    <p>{user.email}</p>
+                                    <div className={styles.userActions}>
+                                        <button className={`${styles.btn} ${styles.btnEdit}`} 
+                                        // onClick={() => handleEditMovie(movie.id)}
+                                        >
+                                            Edit
+                                        </button>
+                                        <button className={`${styles.btn} ${styles.btnDelete}`} 
+                                        // onClick={() => handleDeleteMovie(movie.id)}
+                                        >
+                                            Delete
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    ) : (
+                        <h3 className={styles.noArticles}>No users yet</h3>
+                    )}
+                </div>
+            )}
         </div>
     );
 } 
