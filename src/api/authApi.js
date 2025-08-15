@@ -172,3 +172,47 @@ export const useAuthStatus = () => {
         return false;
     }
 };
+
+export const useAllUsers = () => {
+    const [users, setUsers] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [error, setError] = useState(null);
+
+    const fetchAllUsers = async () => {
+        setLoading(true);
+        setError(null);
+        try {
+            const accessToken = localStorage.getItem('accessToken');
+            if (!accessToken) {
+                setUsers([]);
+                setLoading(false);
+                return;
+            }
+
+            const options = {
+                headers: { 
+                    Authorization: `Bearer ${accessToken}`
+                }
+            }
+        
+            const result = await request.get(`${baseUrl}/all-users`, null, options);
+            setUsers(result);
+        } catch (error) {
+            setError(error);
+            setUsers([]);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    useEffect(() => {
+        fetchAllUsers();
+    }, []);
+
+    return{
+        users,
+        loading,
+        error,
+        refetch: fetchAllUsers
+    };
+};
