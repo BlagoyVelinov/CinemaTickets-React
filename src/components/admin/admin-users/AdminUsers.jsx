@@ -35,12 +35,12 @@ export default function AdminUsers() {
                                     <p>{user.email}</p>
                                     <div className={styles.userActions}>
                                         <button className={`${styles.btn} ${styles.btnEdit}`} 
-                                        // onClick={() => handleEditMovie(movie.id)}
+                                        // onClick={() => handleEditUser(user.id)}
                                         >
                                             Edit
                                         </button>
                                         <button className={`${styles.btn} ${styles.btnDelete}`} 
-                                        // onClick={() => handleDeleteMovie(movie.id)}
+                                        // onClick={() => handleDeleteUser(user.id)}
                                         >
                                             Delete
                                         </button>
