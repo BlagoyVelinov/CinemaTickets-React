@@ -105,9 +105,11 @@
     width: 2em;
     height: 2em;
     border-radius: 50%;
+    overflow: hidden;
 }
 
 .avatarImage {
     display: block;
     width: 100%;
+    height: 100%;
 }
