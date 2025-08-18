@@ -1,6 +1,7 @@
-import { useContext, useEffect, useRef, useState } from "react";
+import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import request from "./request";
 import { UserContext } from "../contexts/UserContext";
+import usePersistedState from "../hooks/usePersistedState";
 
 const baseUrl = 'http://localhost:8080/api/users';
 
@@ -174,17 +175,16 @@ export const useAuthStatus = () => {
 };
 
 export const useAllUsers = () => {
-    const [users, setUsers] = useState([]);
+    const [users, setUsers] = usePersistedState('allUsers', []);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchAllUsers = async () => {
+    const fetchAllUsers = useCallback(async () => {
         setLoading(true);
         setError(null);
         try {
             const accessToken = localStorage.getItem('accessToken');
             if (!accessToken) {
-                setUsers([]);
                 setLoading(false);
                 return;
             }
@@ -199,15 +199,16 @@ export const useAllUsers = () => {
             setUsers(result);
         } catch (error) {
             setError(error);
-            setUsers([]);
         } finally {
             setLoading(false);
         }
-    };
+    }, [setUsers]);
 
     useEffect(() => {
-        fetchAllUsers();
-    }, []);
+        if (!users || users.length === 0) {
+            fetchAllUsers();
+        }
+    }, [users, fetchAllUsers]);
 
     return{
         users,

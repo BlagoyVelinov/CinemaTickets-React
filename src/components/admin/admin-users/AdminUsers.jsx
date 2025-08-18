@@ -3,8 +3,7 @@ import styles from './AdminUsers.module.css';
 
 export default function AdminUsers() {
     const { users, loading } = useAllUsers();
-
-
+    
 
     if (loading) return <div>Loading...</div>;
 
@@ -39,11 +38,11 @@ export default function AdminUsers() {
                                         >
                                             Edit
                                         </button>
-                                        <button className={`${styles.btn} ${styles.btnDelete}`} 
+                                        {user.admin || <button className={`${styles.btn} ${styles.btnDelete}`} 
                                         // onClick={() => handleDeleteUser(user.id)}
                                         >
                                             Delete
-                                        </button>
+                                        </button>}
                                     </div>
                                 </div>
                             ))}
