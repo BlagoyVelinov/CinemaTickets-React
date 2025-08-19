@@ -117,7 +117,16 @@ input {
 }
 
 .addImageBtn {background-image: linear-gradient(to right, #2C3E50 0%, #4CA1AF  51%, #2C3E50  100%)}
-.btnAdd {background-image: linear-gradient(to right, #56ab2f 0%, #a8e063  51%, #56ab2f  100%)}
+.btnEdit {
+    padding: 0.5em 1.5em;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #2C3E50 0%, #4CA1AF  51%, #2C3E50  100%);
+}
+.btnSave {
+    letter-spacing: 2px;
+    padding: 0.5em 1.4em;
+    background-image: linear-gradient(to right, #56ab2f 0%, #a8e063  51%, #56ab2f  100%);
+}
 .btnCancel {background-image: linear-gradient(to right, #ff4b1f 0%, #ff9068  51%, #ff4b1f  100%)}
 .changePassBtn {background-image: linear-gradient(to right, #2C3E50 0%, #4CA1AF  51%, #2C3E50  100%)}
 .deleteBtn {background-image: linear-gradient(to right, #5f3f3f 0%, #e74c3c  51%, #5f3f3f  100%)}

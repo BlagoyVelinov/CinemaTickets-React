@@ -21,7 +21,7 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                 setInitialProfile(user);
             }
         }
-    }, [user, isEditing]);
+    }, [user]);
 
     const handleEdit = () => {
         setInitialProfile(profile);
@@ -66,15 +66,24 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
 
 		setErrors(newErrors);
 		if(Object.keys(newErrors).length === 0) {
-            if (onSubmit) {
-                await onSubmit(userId, profile);
-            } else {
-                await editUserData(user.id, profile);
-            }
-            
-            setInitialProfile(profile);
-            setIsEditing(false);
-            setIsDirty(false);
+			try {
+				let updated;
+				if (onSubmit) {
+					updated = await onSubmit(userId, profile);
+				} else {
+					updated = await editUserData(user.id, profile);
+				}
+				if (updated) {
+					setProfile(updated);
+					setInitialProfile(updated);
+				} else {
+					setInitialProfile(profile);
+				}
+				setIsEditing(false);
+				setIsDirty(false);
+			} catch (submitError) {
+				console.error(submitError);
+			}
 		}
 	};
     
@@ -93,7 +102,7 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                         </div>
 
                         <button className={`${styles.btn} ${styles.addImageBtn}`}>
-                            Upload a photo
+                            Upload photo
                         </button>
 
                     </article>
@@ -174,7 +183,7 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                             {!isEditing ? (
                                 <button 
                                     type="button" 
-                                    className={`${styles.btn} ${styles.btnAdd}`}
+                                    className={`${styles.btn} ${styles.btnEdit}`}
                                     onClick={handleEdit}
                                 >
                                     Edit
@@ -184,7 +193,7 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                                 <>
                                     <button 
                                         type="submit" 
-                                        className={`${styles.btn} ${styles.btnAdd}`}
+                                        className={`${styles.btn} ${styles.btnSave}`}
                                         disabled={!isDirty}
                                     >
                                         Save

@@ -242,9 +242,16 @@ export const useEditUser = () => {
                 return;
             }
 
+            if (abortRef.current) {
+                abortRef.current.abort();
+            }
+
+            const controller = new AbortController();
+            abortRef.current = controller;
+
             const options = {
                 headers: { Authorization: `Bearer ${accessToken}`},
-                signal: abortRef.current.signal,
+                signal: controller.signal,
             }
             
             const result = await request.put(
@@ -252,15 +259,21 @@ export const useEditUser = () => {
             
             return result;
         } catch (error) {
+            if (error && (error.name === 'AbortError' || error.code === 'ERR_CANCELED')) {
+                return;
+            }
             console.error('Edit failed:', error);
             throw error;
         }
     }
     
     useEffect(() => {
-        const abortController = abortRef.current;
-
-        return () => abortController.abort();
+        return () => {
+            const currentController = abortRef.current;
+            if (currentController && !currentController.signal.aborted) {
+                currentController.abort();
+            }
+        };
     }, []);
     
     return {
