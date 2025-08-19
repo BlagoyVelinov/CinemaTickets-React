@@ -40,7 +40,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 
   const { username } = useContext(UserContext) || {};
   const accessToken = localStorage.getItem('accessToken');
-  const { fetchUser } = useUser();
+  const { fetchUserByUsername } = useUser();
   const locationHook = useLocation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -103,7 +103,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 
       if (username) {
         try {
-          const userData = await fetchUser(username);
+          const userData = await fetchUserByUsername(username);
           
           setUserInfo(userData); 
         } catch (e) {

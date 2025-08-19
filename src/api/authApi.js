@@ -107,12 +107,24 @@ export const useLogout = () => {
 };
 
 export const useUser = () => {
-    const { username } = useContext(UserContext);
+    const { id,username } = useContext(UserContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
 
-    const fetchUser = async (username) => {
+    const fetchUserById = async (userId) => {
+        const accessToken = localStorage.getItem('accessToken');
+        if (!accessToken) {
+            return;
+        }
+
+        const options = { headers: { Authorization: `Bearer ${accessToken}` } };
+
+        const result = await request.get(`${baseUrl}/user/${userId}`, null, options);
+        return result;
+      };
+
+    const fetchUserByUsername = async (username) => {
         const accessToken = localStorage.getItem('accessToken');
         if (!accessToken) {
             return;
@@ -128,15 +140,18 @@ export const useUser = () => {
     }
 
     useEffect(() => {
-        if (!username) {
-            setUser(null);
-            return;
+        const identifier = id || username;
+        if (!identifier) {
+            setUser(null); 
+            return; 
         }
 
         setLoading(true);
         setError(null);
         
-        fetchUser(username)
+        const fetcher = id ? fetchUserById : fetchUserByUsername;
+        fetchUserByUsername(username)
+        fetcher(identifier)
             .then(result => {
                 setUser(result);
             })
@@ -147,13 +162,12 @@ export const useUser = () => {
             .finally(() => {
                 setLoading(false);
             });
-    }, [username]);
+    }, [id, username]);
 
     return {
         user,
         loading,
         error,
-        fetchUser,
     }
 };
 
@@ -216,4 +230,40 @@ export const useAllUsers = () => {
         error,
         refetch: fetchAllUsers
     };
+};
+
+export const useEditUser = () => {
+    const abortRef = useRef(new AbortController());
+    
+    const editUserData = async ( id, userData ) => {
+        const accessToken = localStorage.getItem('accessToken');
+        try {
+            if (!accessToken) {
+                return;
+            }
+
+            const options = {
+                headers: { Authorization: `Bearer ${accessToken}`},
+                signal: abortRef.current.signal,
+            }
+            
+            const result = await request.put(
+                `${baseUrl}/user/${id}`, userData, options);
+            
+            return result;
+        } catch (error) {
+            console.error('Edit failed:', error);
+            throw error;
+        }
+    }
+    
+    useEffect(() => {
+        const abortController = abortRef.current;
+
+        return () => abortController.abort();
+    }, []);
+    
+    return {
+        editUserData,
+    }
 };
