@@ -1,22 +1,52 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styles from './AccountSettings.module.css';
+import { useEditUser, useUser } from '../../api/authApi';
+import { formatBirthdate } from '../../utils/formatDate';
 
-export default function AccountSettings({ onSubmit, onCancel }) {
-    const [formData, setFormData] = useState({
-		name: "",
-        username: "",
-        email: "",
-        birthdate: "19.08.2003",
-	});
+export default function AccountSettings({ userId, onSubmit, onCancel }) {
+    const { user } = useUser();
+    const [profile, setProfile] = useState(null);
+    const { editUserData } = useEditUser();
+    const [isEditing, setIsEditing] = useState(false);
+    const [isDirty, setIsDirty] = useState(false);
+    const [initialProfile, setInitialProfile] = useState(null);
+
+    const fieldsToCompare = ['username', 'name', 'email'];
+    const isEqual = (a, b) => fieldsToCompare.every(field => (a?.[field] || '') === (b?.[field] || ''));
+
+    useEffect(() => {
+        if (user) {
+            setProfile(user);
+            if (!isEditing) {
+                setInitialProfile(user);
+            }
+        }
+    }, [user, isEditing]);
+
+    const handleEdit = () => {
+        setInitialProfile(profile);
+        setIsEditing(true);
+        setIsDirty(false);
+    };
+    
+    const handleCancel = () => {
+        setProfile(initialProfile);
+        setIsEditing(false);
+        setIsDirty(false);
+        onCancel?.();
+    };
 
     const [errors, setErrors] = useState({});
+
     const handleChange = (e) => {
 		const { name, value } = e.target;
 		
-        setFormData(prev => ({
-            ...prev,
-            [name]: value
-        }));
+        setProfile(prev => {
+            const next = { ...prev, [name]: value };
+            setIsDirty(!isEqual(next, initialProfile));
+            
+            return next;
+        });
 		
 		if (errors[name]) {
 			setErrors(prev => ({
@@ -30,13 +60,21 @@ export default function AccountSettings({ onSubmit, onCancel }) {
 		e.preventDefault();
 
 		const newErrors = {};
-		if(!formData.name) newErrors.name = "Name is required";
-		if(!formData.username) newErrors.username = "Username is required";
-		if(!formData.email) newErrors.email = "Email address is required";
+		if(!profile.name) newErrors.name = "Name is required";
+		if(!profile.username) newErrors.username = "Username is required";
+		if(!profile.email) newErrors.email = "Email address is required";
 
 		setErrors(newErrors);
 		if(Object.keys(newErrors).length === 0) {
-			onSubmit(formData);
+            if (onSubmit) {
+                await onSubmit(userId, profile);
+            } else {
+                await editUserData(user.id, profile);
+            }
+            
+            setInitialProfile(profile);
+            setIsEditing(false);
+            setIsDirty(false);
 		}
 	};
     
@@ -50,7 +88,8 @@ export default function AccountSettings({ onSubmit, onCancel }) {
                     <article className={styles.userImageSettings}>
 
                         <div className={styles.imageContainer}>
-                            <img src="/images/avatar.png" alt="Profile Image" />
+                            <img src={profile?.imageUrl || "/images/avatar.png"} 
+                             alt="Profile Image" />
                         </div>
 
                         <button className={`${styles.btn} ${styles.addImageBtn}`}>
@@ -78,8 +117,9 @@ export default function AccountSettings({ onSubmit, onCancel }) {
                                 className={styles.formControl}
                                 id="username"
                                 name="username"
-                                value={formData.username}
+                                value={profile?.username || ''}
                                 onChange={handleChange}
+                                disabled={!isEditing}
                             />
                             {errors.username && <small className={styles.errorText}>{errors.username}</small>}
                         </div>
@@ -93,8 +133,9 @@ export default function AccountSettings({ onSubmit, onCancel }) {
                                 className={styles.formControl}
                                 id="name"
                                 name="name"
-                                value={formData.name}
+                                value={profile?.name || ''}
                                 onChange={handleChange}
+                                disabled={!isEditing}
                             />
                             {errors.name && <small className={styles.errorText}>{errors.name}</small>}
                         </div>
@@ -108,8 +149,9 @@ export default function AccountSettings({ onSubmit, onCancel }) {
                                 className={styles.formControl}
                                 id="email"
                                 name="email"
-                                value={formData.email}
+                                value={profile?.email || ''}
                                 onChange={handleChange}
+                                disabled={!isEditing}
                             />
                             {errors.email && <small className={styles.errorText}>{errors.email}</small>}
                         </div>
@@ -118,18 +160,45 @@ export default function AccountSettings({ onSubmit, onCancel }) {
                             <div className={styles.labelHolder}>
                                 <label htmlFor="birthdate" className={styles.label}>Birthdate</label>
                             </div>
-                            <input disabled
-                                type="birthdate"
+                            <input
+                                type="text"
                                 className={styles.formControl}
                                 id="birthdate"
                                 name="birthdate"
-                                value={formData.birthdate}
+                                value={formatBirthdate(profile?.birthdate) || ''}
+                                disabled
                             />
                         </div>
 
                         <div className={styles.buttonHolder}>
-                            <button type="submit" className={`${styles.btn} ${styles.btnAdd}`}>Save</button>
-                            <button type="button" onClick={onCancel} className={`${styles.btn} ${styles.btnCancel}`}>Cancel</button>
+                            {!isEditing ? (
+                                <button 
+                                    type="button" 
+                                    className={`${styles.btn} ${styles.btnAdd}`}
+                                    onClick={handleEdit}
+                                >
+                                    Edit
+                                </button>
+                                
+                            ) : (
+                                <>
+                                    <button 
+                                        type="submit" 
+                                        className={`${styles.btn} ${styles.btnAdd}`}
+                                        disabled={!isDirty}
+                                    >
+                                        Save
+                                    </button>
+
+                                    <button 
+                                        type="button" 
+                                        className={`${styles.btn} ${styles.btnCancel}`}
+                                        onClick={handleCancel} 
+                                    >
+                                        Cancel
+                                    </button>
+                                </>
+                            )}
                         </div>
                     </form>
                 </section>
