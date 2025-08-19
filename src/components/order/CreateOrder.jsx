@@ -1,7 +1,6 @@
-import React, { useState, useEffect, useContext } from "react";
+import React, { useState, useEffect } from "react";
 import orderService from "../../services/orderService";
-import { UserContext } from "../../contexts/UserContext";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 import { useMovies } from "../../contexts/MovieContext";
 import { useUser } from "../../api/authApi";
 import OrderDto from "../../models/orderDto";
@@ -38,9 +37,8 @@ export default function CreateOrder({ onClose, bookingTime }) {
   const [order, setOrder] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
 
-  const { username } = useContext(UserContext) || {};
   const accessToken = localStorage.getItem('accessToken');
-  const { fetchUserByUsername } = useUser();
+  const { user: authUser } = useUser();
   const locationHook = useLocation();
   const navigate = useNavigate();
   const location = useLocation();
@@ -99,25 +97,10 @@ export default function CreateOrder({ onClose, bookingTime }) {
   
 
   useEffect(() => {
-    const getUser = async () => {
-
-      if (username) {
-        try {
-          const userData = await fetchUserByUsername(username);
-          
-          setUserInfo(userData); 
-        } catch (e) {
-          setUserInfo({
-            firstName: "Ivan",
-            lastName: "Ivanov",
-            email: "ivan@example.com"
-          });
-        }
-      }
-    };
-    getUser();
-
-  }, [username]);
+    if (authUser) {
+      setUserInfo(authUser);
+    }
+  }, [authUser]);
 
   const onSeatClick = (row, col) => {
     if (
@@ -416,7 +399,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 					<p className="total-price">{getTotalPrice()} lv.</p>
 					</article>
 					<p className="price-info">This amount includes an administration fee.</p>
-					<p className="learn-more">Read more in <a href="/">Terms of online sales</a></p>
+					<p className="learn-more">Read more in <Link to="">Terms of online sales</Link></p>
 				</section>
 				<section className="user-contacts">
 					<h2 className="title-summary">Your contacts</h2>

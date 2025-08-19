@@ -118,7 +118,11 @@ export const useUser = () => {
             return;
         }
 
-        const options = { headers: { Authorization: `Bearer ${accessToken}` } };
+        const options = { 
+            headers: { 
+                Authorization: `Bearer ${accessToken}` 
+            } 
+        };
 
         const result = await request.get(`${baseUrl}/user/${userId}`, null, options);
         return result;
@@ -133,7 +137,7 @@ export const useUser = () => {
             headers: { 
                 Authorization: `Bearer ${accessToken}`
             }
-        }
+        };
     
         const result = await request.get(`${baseUrl}/${username}`, null, options);
         return result;
@@ -150,7 +154,6 @@ export const useUser = () => {
         setError(null);
         
         const fetcher = id ? fetchUserById : fetchUserByUsername;
-        fetchUserByUsername(username)
         fetcher(identifier)
             .then(result => {
                 setUser(result);
