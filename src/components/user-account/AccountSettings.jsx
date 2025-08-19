@@ -1,5 +1,4 @@
 import { useState } from 'react';
-import { Link } from 'react-router';
 import styles from './AccountSettings.module.css';
 
 export default function AccountSettings({ onSubmit, onCancel }) {
@@ -7,7 +6,7 @@ export default function AccountSettings({ onSubmit, onCancel }) {
 		name: "",
         username: "",
         email: "",
-        birthdate,
+        birthdate: "19.08.2003",
 	});
 
     const [errors, setErrors] = useState({});
@@ -54,11 +53,17 @@ export default function AccountSettings({ onSubmit, onCancel }) {
                             <img src="/images/avatar.png" alt="Profile Image" />
                         </div>
 
-                        <button className={styles.addImageBtn}>
+                        <button className={`${styles.btn} ${styles.addImageBtn}`}>
                             Upload a photo
                         </button>
 
                     </article>
+                    <button className={`${styles.btn} ${styles.changePassBtn}`}>
+                        Change password
+                    </button>
+                    <button className={`${styles.btn} ${styles.deleteBtn}`}>
+                        Delete account
+                    </button>
 
                 </section>
 
@@ -81,7 +86,7 @@ export default function AccountSettings({ onSubmit, onCancel }) {
 
                         <div className={styles.formGroup}>
                             <div className={styles.labelHolder}>
-                                <label htmlFor="name" className={styles.label}>Your Names</label>
+                                <label htmlFor="name" className={styles.label}>Full Name</label>
                             </div>
                             <input
                                 type="text"

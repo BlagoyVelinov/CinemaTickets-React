@@ -18,7 +18,15 @@
 }
 
 .leftPart {
+    display: flex;
+    flex-direction: column;
     padding: 2em;
+}
+
+.userImageSettings {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .imageContainer {
@@ -30,32 +38,12 @@
     box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
     rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
     rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+
 }
 
 .imageContainer img {
     display: block;
     width: 100%;
-}
-.addImageBtn {background-image: linear-gradient(to right, #5f3f3f 0%, #e74c3c  51%, #5f3f3f  100%)}
-.addImageBtn {
-    margin: 1em 0;
-    padding: 0.5em 1em;
-    text-align: center;
-    font-size: 1.2em;
-    transition: 0.5s;
-    background-size: 200% auto;
-    color: white;            
-    box-shadow: 0 0 20px #eee;
-    border-radius: 0.4em;
-    border: none;
-    
-}
-
-.addImageBtn:hover {
-    background-position: center right;
-    color: #fff;
-    text-decoration: none;
-    cursor: pointer;
 }
 
 .immutableData ul {
@@ -108,8 +96,6 @@ input {
     justify-content: space-around;
 }
 
-.btnAdd {background-image: linear-gradient(to right, #56ab2f 0%, #a8e063  51%, #56ab2f  100%)}
-.btnCancel {background-image: linear-gradient(to right, #ff4b1f 0%, #ff9068  51%, #ff4b1f  100%)}
 .btn {
     display: block;
     padding: 0.5em 1em;
@@ -130,3 +116,18 @@ input {
     cursor: pointer;
 }
 
+.addImageBtn {background-image: linear-gradient(to right, #2C3E50 0%, #4CA1AF  51%, #2C3E50  100%)}
+.btnAdd {background-image: linear-gradient(to right, #56ab2f 0%, #a8e063  51%, #56ab2f  100%)}
+.btnCancel {background-image: linear-gradient(to right, #ff4b1f 0%, #ff9068  51%, #ff4b1f  100%)}
+.changePassBtn {background-image: linear-gradient(to right, #2C3E50 0%, #4CA1AF  51%, #2C3E50  100%)}
+.deleteBtn {background-image: linear-gradient(to right, #5f3f3f 0%, #e74c3c  51%, #5f3f3f  100%)}
+
+.btn.addImageBtn {
+    margin: 1em 0;
+    padding: 0.5em 1.8em;
+    letter-spacing: 1px;
+}
+
+.btn.deleteBtn {
+    margin-top: 7.3em;
+}
