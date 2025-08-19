@@ -81,34 +81,33 @@
 .buttonHolder {
     display: flex;
     justify-content: center;
-    gap: 15px;
-    margin-top: 30px;
+    gap: 7em;
+    margin-top: 3em;
 }
 
 .btn {
-    padding: 12px 24px;
+    display: block;
+    padding: 0.5em 1em;
+    text-align: center;
+    font-size: 1.2em;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 0.3em;
     border: none;
-    border-radius: 4px;
-    font-size: 14px;
-    font-weight: 600;
+}
+
+.btn:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
     cursor: pointer;
-    transition: background-color 0.3s;
 }
 
-.btnEdit {
-    background-color: #28a745;
-    color: white;
+.btnSave {
+    letter-spacing: 2px;
+    padding: 0.5em 1.2em;
+    background-image: linear-gradient(to right, #56ab2f 0%, #a8e063  51%, #56ab2f  100%);
 }
-
-.btnEdit:hover {
-    background-color: #1e7e34;
-}
-
-.btnCancel {
-    background-color: #6c757d;
-    color: white;
-}
-
-.btnCancel:hover {
-    background-color: #545b62;
-} 
+.btnCancel {background-image: linear-gradient(to right, #ff4b1f 0%, #ff9068  51%, #ff4b1f  100%)}

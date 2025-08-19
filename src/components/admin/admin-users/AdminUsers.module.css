@@ -16,51 +16,33 @@
 }
 
 .btn {
-    background-color: #007bff;
-    color: white;
+    padding: 0.5em 1em;
+    text-align: center;
+    font-size: 1.2em;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 0.3em;
     border: none;
-    padding: 10px 20px;
-    border-radius: 3px;
-    cursor: pointer;
-    margin: 5px;
 }
 
 .btn:hover {
-    background-color: #0056b3;
-}
-
-.adminBtnAdd {
-    background-color: #28a745;
-}
-
-.adminBtnAdd:hover {
-    background-color: #1e7e34;
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .btnEdit {
-    background-color: #28a745;
-}
-
-.btnEdit:hover {
-    background-color: #1e7e34;
+    padding: 0.5em 1.5em;
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #2C3E50 0%, #4CA1AF  51%, #2C3E50  100%);
 }
 
 .btnDelete {
-    background-color: #dc3545;
-    
+    background-image: linear-gradient(to right, #5f3f3f 0%, #e74c3c  51%, #5f3f3f  100%);
 }
-
-.btnDelete:hover {
-    background-color: #c82333;
-}
-
-.usersList {
-    margin-top: 20px;
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-} 
 
 .usersGrid {
     display: grid;
@@ -70,6 +52,9 @@
 }
 
 .userItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
     background: white;
     padding: 15px;
     border-radius: 5px;
@@ -88,7 +73,7 @@
 
 .userActions {
     display: flex;
-    gap: 10px;
+    gap: 3em;
     justify-content: center;
 }
 

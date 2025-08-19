@@ -329,7 +329,7 @@ export default function EditMovie({ movieId, onSubmit, onCancel  }) {
                 <div className={styles.buttonHolder}>
                     <button 
                         type="submit" 
-                        className={`${styles.btn} ${styles.btnEdit}`} 
+                        className={`${styles.btn} ${styles.btnSave}`} 
                     >
                         Save
                         </button>
