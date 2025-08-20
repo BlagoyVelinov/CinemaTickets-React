@@ -14,8 +14,12 @@ export function UserProvider({
         setAuthData({});
     };
 
+    const userPatchAuthData = (partial) => {
+        setAuthData(prev => ({ ...prev, ...partial }));
+    };
+
     return(
-        <UserContext.Provider value={{...authData, userLoginHandler, userLogoutHandler}}>
+        <UserContext.Provider value={{...authData, userLoginHandler, userLogoutHandler, userPatchAuthData}}>
             {children}
         </UserContext.Provider>
     );

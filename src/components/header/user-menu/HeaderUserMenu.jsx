@@ -6,7 +6,7 @@ import { useUser } from "../../../api/authApi";
 import styles from './HeaderUserMenu.module.css';
 
 export default function HeaderUserMenu() {
-    const { username, userLogoutHandler, admin } = useUserContext();
+    const { username, userLogoutHandler, admin, imageUrl } = useUserContext();
     const [showDropdown, setShowDropdown] = useState(false);
     const dropdownRef = useRef(null);
     const { user } = useUser();
@@ -51,7 +51,7 @@ export default function HeaderUserMenu() {
                     <div className={styles.imageContainer}>
                         <img 
                             className={styles.avatarImage} 
-                            src={user?.imageUrl || "/images/avatar.png"} 
+                            src={imageUrl || user?.imageUrl || "/images/avatar.png"} 
                             alt="User avatar" 
                         />
                     </div>
