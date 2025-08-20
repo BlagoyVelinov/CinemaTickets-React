@@ -107,7 +107,7 @@ export const useLogout = () => {
 };
 
 export const useUser = () => {
-    const { id,username } = useContext(UserContext);
+    const { id, username, imageUrl: imageUrlFromContext } = useContext(UserContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
@@ -156,7 +156,8 @@ export const useUser = () => {
         const fetcher = id ? fetchUserById : fetchUserByUsername;
         fetcher(identifier)
             .then(result => {
-                setUser(result);
+                // Ensure imageUrl reflects the latest from context if available
+                setUser(prev => ({ ...(result || {}), imageUrl: imageUrlFromContext ?? result?.imageUrl }));
             })
             .catch(err => {
                 setError(err);
@@ -166,6 +167,13 @@ export const useUser = () => {
                 setLoading(false);
             });
     }, [id, username]);
+
+    // Update imageUrl reactively when context changes without refetch
+    useEffect(() => {
+        if (imageUrlFromContext) {
+            setUser(prev => (prev ? { ...prev, imageUrl: imageUrlFromContext } : prev));
+        }
+    }, [imageUrlFromContext]);
 
     return {
         user,

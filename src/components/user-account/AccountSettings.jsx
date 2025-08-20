@@ -2,14 +2,19 @@ import { useEffect, useState } from 'react';
 import styles from './AccountSettings.module.css';
 import { useEditUser, useUser } from '../../api/authApi';
 import { formatBirthdate } from '../../utils/formatDate';
+import ProfileImagePickerModal from './ProfileImagePickerModal';
+import ImageService from '../../services/imageService';
+import { useUserContext } from '../../contexts/UserContext';
 
 export default function AccountSettings({ userId, onSubmit, onCancel }) {
     const { user } = useUser();
+    const { userPatchAuthData } = useUserContext();
     const [profile, setProfile] = useState(null);
     const { editUserData } = useEditUser();
     const [isEditing, setIsEditing] = useState(false);
     const [isDirty, setIsDirty] = useState(false);
     const [initialProfile, setInitialProfile] = useState(null);
+    const [isImageModalOpen, setIsImageModalOpen] = useState(false);
 
     const fieldsToCompare = ['username', 'name', 'email'];
     const isEqual = (a, b) => fieldsToCompare.every(field => (a?.[field] || '') === (b?.[field] || ''));
@@ -56,6 +61,30 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
 		}
 	};
 
+    const handleOpenImageModal = () => setIsImageModalOpen(true);
+    const handleCloseImageModal = () => setIsImageModalOpen(false);
+
+    const handleConfirmImageSelection = async ({ type, value }) => {
+        if (!user?.id) return;
+        if (type === 'preset') {
+            const result = await ImageService.setProfilePhotoFromPreset(user.id, value, profile?.deleteHash);
+            if (result?.url !== undefined) {
+                setProfile(prev => ({ ...prev, imageUrl: result.url, deleteHash: result.deleteHash || null }));
+                setInitialProfile(prev => ({ ...prev, imageUrl: result.url, deleteHash: result.deleteHash || null }));
+                userPatchAuthData?.({ imageUrl: result.url });
+                setIsImageModalOpen(false);
+            }
+        } else if (type === 'file') {
+            const result = await ImageService.updateProfilePhoto(value, user.id, profile?.deleteHash);
+            if (result?.url !== undefined) {
+                setProfile(prev => ({ ...prev, imageUrl: result.url, deleteHash: result.deleteHash || null }));
+                setInitialProfile(prev => ({ ...prev, imageUrl: result.url, deleteHash: result.deleteHash || null }));
+                userPatchAuthData?.({ imageUrl: result.url });
+                setIsImageModalOpen(false);
+            }
+        }
+    };
+
     const handleSubmit = async (e) => {
 		e.preventDefault();
 
@@ -101,7 +130,7 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                              alt="Profile Image" />
                         </div>
 
-                        <button className={`${styles.btn} ${styles.addImageBtn}`}>
+                        <button className={`${styles.btn} ${styles.addImageBtn}`} onClick={handleOpenImageModal} type="button">
                             Upload photo
                         </button>
 
@@ -212,6 +241,12 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                     </form>
                 </section>
             </div>
+            <ProfileImagePickerModal
+                isOpen={isImageModalOpen}
+                onClose={handleCloseImageModal}
+                onConfirm={handleConfirmImageSelection}
+                currentImageUrl={profile?.imageUrl}
+            />
         </div>
     );
 }
