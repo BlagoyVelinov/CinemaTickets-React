@@ -4,7 +4,7 @@ import offerService from '../services/offerService';
 const OfferContext = createContext();
 
 export function OfferProvider({ children }) {
-    const [allOffers, setAllOffers] = useState([]);
+    const [allOffers, setAllOffers] = useState({});
     const [loadedAll, setLoadedAll] = useState(false);
     const [loadedCurrentOffer, setLoadedCurrentOffer] = useState(false);
     const [currentOffer, setCurrentOffer] = useState(null);
@@ -22,7 +22,7 @@ export function OfferProvider({ children }) {
             } catch (err) {
                 console.error('Failed to load offers:', err);
                 setError(err.message);
-                setAllOffers([]);
+                setAllOffers({});
             } finally {
                 setLoading(false);
             }

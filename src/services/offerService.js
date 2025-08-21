@@ -52,8 +52,7 @@ export default {
     async getAllOffers() {
         try {
             const result = await request.get(`${BASE_URL}`);
-            const offers = Object.values(result);
-            return offers;
+            return result;
         } catch (error) {
             console.error('Error fetching all offers:', error);
             throw error;

@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import styles from './AdminOffers.module.css';
 import { useOffers } from '../../../providers/OfferProvider';
 
+const categoryNames = {
+    businessOffers: "For Business",
+    schoolOffers: "For School",
+    cinemaOffers: "Cinema Offers"
+  };
+
 export default function AdminOffers() {
     const { allOffers, loadAllOffers, refreshAllOffers } = useOffers();
     const [showAddOfferForm, setShowAddOfferForm] = useState(false);
@@ -109,11 +115,11 @@ export default function AdminOffers() {
                 />
             ) : (
                 <div className={styles.offersList}>
-                    {allOffers && allOffers.length > 0 ? (
+                    {allOffers && Object.keys(allOffers).length > 0 ? (
                         <div className={styles.offersGrid}>
                             {Object.entries(allOffers).map(([category, items]) => (
                                 <div key={category}>
-                                    {/* <div>{category}</div> */}
+                                    <h3>{categoryNames[category]}</h3>
                                     {items.map((offer) => (
                                     <div key={offer.id} className={styles.offerItem}>
                                         <h4>{offer.title}</h4>
