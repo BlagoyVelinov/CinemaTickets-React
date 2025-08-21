@@ -56,7 +56,7 @@ export default function EditMovie({ movieId, onSubmit, onCancel  }) {
 		if(!movie.name) newErrors.name = "Name is required";
 		if(!movie.movieLength) newErrors.movieLength = "Movie length is required";
 		if(!movie.subtitles) newErrors.subtitles = "Subtitles are required";
-		if(!movie.movieClass) newErrors.movieClass = "Class of movie is required";
+		if(!movie.movieClassName) newErrors.movieClassName = "Class of movie is required";
 		if(!movie.audio) newErrors.audio = "Audio is required";
 		if(!movie.imageUrl) newErrors.imageUrl = "Image URL is required";
 		if(!movie.trailerUrl) newErrors.trailerUrl = "Trailer URL is required";
@@ -214,13 +214,13 @@ export default function EditMovie({ movieId, onSubmit, onCancel  }) {
 
                 <div className={styles.formGroup}>
                     <div className={styles.labelHolder}>
-                        <label htmlFor="movieClass" className={styles.label}>Class Of Movie</label>
+                        <label htmlFor="movieClassName" className={styles.label}>Class Of Movie</label>
                     </div>
                     <select
                         className={styles.formControl}
-                        name="movieClass"
-                        id="movieClass"
-                        value={movie.movieClass}
+                        name="movieClassName"
+                        id="movieClassName"
+                        value={movie.movieClassName}
                         onChange={handleChange}
                     >
                         <option value="">Select Class Movie</option>
@@ -231,7 +231,7 @@ export default function EditMovie({ movieId, onSubmit, onCancel  }) {
                         <option value="X_">X</option>
                         <option value="TBC">?</option>
                     </select>
-                    {errors.movieClass && <small className={styles.errorText}>{errors.movieClass}</small>}
+                    {errors.movieClassName && <small className={styles.errorText}>{errors.movieClassName}</small>}
                 </div>
 
                 <div className={styles.formGroup}>
