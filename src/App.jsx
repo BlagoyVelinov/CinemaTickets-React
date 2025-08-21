@@ -17,10 +17,10 @@ import Footer from './components/footer/Footer';
 import Login from './components/login/Login';
 import SignUp from './components/sign-up/SignUp';
 import GuestGuard from './components/guards/GuestGuard';
-import CreateOrder from './components/order/CreateOrder';
 import AuthGuard from './components/guards/AuthGuard';
 import AdminGuard from './components/guards/AdminGuard';
 import AccountSettings from './components/user-account/AccountSettings';
+import { OfferProvider } from './providers/OfferProvider';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
 
@@ -36,7 +36,8 @@ function App() {
                     <div id="main">
                         <MovieProvider>
                             <OrderModalProvider>
-                                <Header />
+                                <OfferProvider>
+                                    <Header />
                                     <Routes>
                                         <Route index element={<HomeTab />} />
                                         <Route path="/program" element={<ProgramTab />} />
@@ -61,6 +62,7 @@ function App() {
                                             )} />
                                         </Route>
                                     </Routes>
+                                </OfferProvider>
                             </OrderModalProvider>
                         </MovieProvider>
                         {!isOrderModal && !isAdminSection && <Footer />}
