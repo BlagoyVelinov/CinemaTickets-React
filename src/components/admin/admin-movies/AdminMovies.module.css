@@ -76,8 +76,13 @@
 }
 
 .movieItem p {
-    color: #666;
-    margin-bottom: 15px;
+    color: #668;
+    margin-bottom: 1em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .movieActions {

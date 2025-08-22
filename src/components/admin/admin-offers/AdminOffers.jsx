@@ -122,26 +122,28 @@ export default function AdminOffers() {
                             {Object.entries(allOffers).map(([category, items]) => (
                                 <div key={category}>
                                     <h3>{categoryNames[category]}</h3>
-                                    {items.map((offer) => (
-                                    <div key={offer.id} className={styles.offerItem}>
-                                        <h4>{offer.title}</h4>
-                                        <p>{offer.description}</p>
-                                        <div className={styles.offerActions}>
-                                        <button
-                                            className={`${styles.btn} ${styles.btnEdit}`}
-                                            onClick={() => handleEditOffer(offer.id)}
-                                        >
-                                            Edit
-                                        </button>
-                                        <button
-                                            className={`${styles.btn} ${styles.btnDelete}`}
-                                            onClick={() => handleDeleteOffer(offer.id)}
-                                        >
-                                            Delete
-                                        </button>
+                                    <div className={styles.offersFlex}>
+                                        {items.map((offer) => (
+                                        <div key={offer.id} className={styles.offerItem}>
+                                            <h4>{offer.title}</h4>
+                                            <p>{offer.description}</p>
+                                            <div className={styles.offerActions}>
+                                            <button
+                                                className={`${styles.btn} ${styles.btnEdit}`}
+                                                onClick={() => handleEditOffer(offer.id)}
+                                            >
+                                                Edit
+                                            </button>
+                                            <button
+                                                className={`${styles.btn} ${styles.btnDelete}`}
+                                                onClick={() => handleDeleteOffer(offer.id)}
+                                            >
+                                                Delete
+                                            </button>
+                                            </div>
                                         </div>
+                                        ))}
                                     </div>
-                                    ))}
                                 </div>
                             ))}
                         </div>

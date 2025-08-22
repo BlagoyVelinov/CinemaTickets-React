@@ -54,10 +54,16 @@
 }
 
 .offersGrid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 20px;
-    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 2em;
+}
+
+.offersFlex {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 1em;
 }
 
 .offerItem {
@@ -68,6 +74,7 @@
     padding: 15px;
     border-radius: 5px;
     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    flex: 1 1 28%;
 }
 
 .offerItem h4 {
@@ -76,30 +83,19 @@
 }
 
 .offerItem p {
-    color: #666;
-    margin-bottom: 15px;
+    color: #668;
+    margin-bottom: 1em;
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .offerActions {
     display: flex;
     gap: 3em;
     justify-content: center;
-}
-
-.addMovieForm {
-    background: white;
-    padding: 20px;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-}
-
-.addMovieForm h3 {
-    color: #333;
-    margin-bottom: 15px;
-}
-
-.offersList {
-    margin-top: 20px;
 }
 
 .noArticles {
