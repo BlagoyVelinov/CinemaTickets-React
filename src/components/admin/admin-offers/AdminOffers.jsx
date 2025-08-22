@@ -85,6 +85,7 @@ export default function AdminOffers() {
         setShowEditOfferForm(false);
         setSelectedOffer(null);
     }
+    
     return (
         <div className={styles.adminContent}>
             {showEditOfferForm ? (

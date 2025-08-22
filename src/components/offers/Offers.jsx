@@ -3,10 +3,10 @@ import { Link } from "react-router";
 
 import { useOffers } from "../../providers/OfferProvider";
 import styles from "./Offers.module.css";
+import ShowOffer from "./offer/ShowOffer";
 
 export default function OffersTab() {
-    const { allOffers, loadAllOffers, refreshAllOffers } = useOffers();
-    const [selectedOffer, setSelectedOffer] = useState(null);
+    const { allOffers, loadAllOffers } = useOffers();
 
     useEffect(() => {
         loadAllOffers();
@@ -23,14 +23,18 @@ export default function OffersTab() {
                 <div className="border-right">
                     <div className="border-left">
                         <div className="inner">
-                        
                             <div className="container-fluid static">
+
                                 <div className="row mb-md">
                                     <div className="col-md-12">
                                         <h3>Cinema <span>Offers</span></h3>
                                         <div className={styles.offerContainer}>
                                             {cinemaOffers.map(offer => (
-                                                <Link key={offer.id} className={styles.offerItem}>
+                                                <Link 
+                                                    to={`/offers/offer/${offer.id}`}
+                                                    key={offer.id} 
+                                                    className={styles.offerItem}
+                                                >
                                                     <img src={offer.imageUrl} className={styles.offerImg} alt="offer-img"/>
                                                     <h4 className={styles.offerTitle}>{offer.title}</h4>
                                                     {/* <div className={styles.offerDescription}>{offer.description}</div> */}
@@ -48,7 +52,11 @@ export default function OffersTab() {
                                         <h3>For the <span>Schools</span></h3>
                                         <div className={styles.offerContainer}>
                                             {schoolOffers.map(offer => (
-                                                <Link key={offer.id} className={styles.offerItem}>
+                                                <Link 
+                                                    to={`/offers/offer/${offer.id}`}
+                                                    key={offer.id} 
+                                                    className={styles.offerItem}
+                                                >
                                                     <img src={offer.imageUrl} className={styles.offerImg} alt="offer-img"/>
                                                     <h4 className={styles.offerTitle}>{offer.title}</h4>
                                                     {/* <div className="offerDescription">{offer.description}</div> */}
@@ -65,7 +73,11 @@ export default function OffersTab() {
                                         <h3>For the <span>Business</span></h3>
                                         <div className={styles.offerContainer}>
                                             {businessOffers.map(offer => (
-                                                <Link key={offer.id} className={styles.offerItem}>
+                                                <Link 
+                                                    to={`/offers/offer/${offer.id}`}
+                                                    key={offer.id} 
+                                                    className={styles.offerItem}
+                                                >
                                                     <img src={offer.imageUrl} className={styles.offerImg} alt="offer-img"/>
                                                     <h4 className={styles.offerTitle}>{offer.title}</h4>
                                                     {/* <div className="offerDescription">{offer.description}</div> */}

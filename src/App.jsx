@@ -21,6 +21,7 @@ import AuthGuard from './components/guards/AuthGuard';
 import AdminGuard from './components/guards/AdminGuard';
 import AccountSettings from './components/user-account/AccountSettings';
 import { OfferProvider } from './providers/OfferProvider';
+import ShowOffer from './components/offers/offer/ShowOffer';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
 
@@ -48,6 +49,7 @@ function App() {
                                         <Route path="/4dx" element={<FourDxTab />} />
                                         <Route path="/imax" element={<ImaxTab />} />
                                         <Route path="/offers" element={<OffersTab />} />
+                                        <Route path="/offers/offer/:offerId" element={<ShowOffer />} />
                                         <Route path="/about-us" element={<AboutUs />} />
                                         <Route path="/contact-us" element={<ContactUs />} />
                                         <Route element={<GuestGuard />}>
