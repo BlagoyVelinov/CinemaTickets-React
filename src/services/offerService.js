@@ -37,7 +37,7 @@ export default {
     async editOffer(offerId, offerData) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.put(`${BASE_URL}/update-offer/${offerId}`, offerData, {
+            const result = await request.put(`${BASE_URL}/edit-offer/${offerId}`, offerData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

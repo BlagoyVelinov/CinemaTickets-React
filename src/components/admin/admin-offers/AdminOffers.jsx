@@ -4,6 +4,7 @@ import styles from './AdminOffers.module.css';
 import { useOffers } from '../../../providers/OfferProvider';
 import AddOffer from './add-offer/AddOffer';
 import offerService from '../../../services/offerService';
+import EditOffer from './edit-offer/EditOffer';
 
 const categoryNames = {
     businessOffers: "For Business",
