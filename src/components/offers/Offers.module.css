@@ -1,0 +1,55 @@
+a {
+    text-decoration: none;
+}
+
+.offerContainer {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2em;
+}
+
+.offerItem {
+    display: flex; 
+    flex-direction: column;
+    flex: 0 1 29%;
+    border: solid 1px #323232;
+    border-radius: 1em;
+    overflow: hidden;
+    height: 18em;
+    transition: background-color 0.3s ease, border-color 0.3s ease;
+    
+}
+
+.offerTitle {
+    font-size: 1.4em;
+    margin: 1em 0;
+    text-align: center;
+    color: #ffad7a;
+}
+
+.offerItem:hover .offerTitle {
+    color: #db7e43;
+}
+
+.offerImg {
+    display: block;
+    width: 100%;
+    height: 12em;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.offerItem:hover .offerImg {
+    filter: brightness(0.8);
+}
+
+.offerDescription {
+    display: -webkit-box;
+    -webkit-line-clamp: 3;
+    line-clamp: 3;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
