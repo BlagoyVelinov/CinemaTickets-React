@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import styles from './AdminOffers.module.css';
 import { useOffers } from '../../../providers/OfferProvider';
+import AddOffer from './add-offer/AddOffer';
+import offerService from '../../../services/offerService';
 
 const categoryNames = {
     businessOffers: "For Business",
@@ -47,7 +49,7 @@ export default function AdminOffers() {
 
     const handleSubmitOffer = async (offerData) => {
       try {
-        await offerService.addOffer(offerData);
+        await offerService.createOffer(offerData);
 
         setShowAddOfferForm(false);
 

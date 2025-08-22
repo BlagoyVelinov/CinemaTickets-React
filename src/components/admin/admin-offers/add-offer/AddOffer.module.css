@@ -1,0 +1,102 @@
+.addOfferForm {
+    background: white;
+    padding: 30px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.formGroup {
+    margin-bottom: 20px;
+}
+
+.labelHolder {
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.label {
+    color: #333;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 0;
+}
+
+.formControl {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+}
+
+.formControl:focus {
+    outline: none;
+    border-color: #007bff;
+    box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
+}
+
+.formControl[type="number"] {
+    width: 100%;
+}
+
+.formControl[multiple] {
+    height: 120px;
+    min-height: 120px;
+}
+
+.formControl[multiple] option {
+    padding: 8px;
+    margin: 2px 0;
+}
+
+.formControl[multiple] option:checked {
+    background-color: #007bff;
+    color: white;
+}
+
+
+.errorText {
+    color: #dc3545;
+    font-size: 12px;
+    margin-top: 5px;
+    display: block;
+}
+
+.buttonHolder {
+    display: flex;
+    justify-content: center;
+    gap: 7em;
+    margin-top: 3em;
+}
+
+.btn {
+    display: block;
+    padding: 0.5em 1em;
+    text-align: center;
+    font-size: 1.2em;
+    transition: 0.5s;
+    background-size: 200% auto;
+    color: white;            
+    box-shadow: 0 0 20px #eee;
+    border-radius: 0.3em;
+    border: none;
+}
+
+.btn:hover {
+    background-position: right center;
+    color: #fff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.btnAdd {
+    background-image: linear-gradient(to right, #56ab2f 0%, #a8e063  51%, #56ab2f  100%);
+}
+
+.btnCancel {
+    letter-spacing: 2px;
+    background-image: linear-gradient(to right, #ff4b1f 0%, #ff9068  51%, #ff4b1f  100%);
+}
