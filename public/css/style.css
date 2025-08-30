@@ -1799,7 +1799,7 @@ div.modal-overlay {
     color: #fff;
   }
 
-  .movie-info {
+  /* .movie-info {
     display: flex;
     gap: 2rem;
     margin-bottom: 2rem;
@@ -1826,9 +1826,7 @@ div.modal-overlay {
     display: flex;
     align-items: center;
     gap: 1.2rem;
-  }
-
-  .movie-details .info-row i { margin-right: 0.3rem;}
+  } */
 
   .hall-scheme {
     margin: 0 auto;
@@ -1895,12 +1893,12 @@ div.modal-overlay {
   }
 
   .legend {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2rem;
     margin: 1rem 0;
     color: #fff;
-    display: flex;
-    gap: 2rem;
-    justify-content: center;
-    align-items: center;
     font-size: 0.95rem;
   }
 
@@ -1965,12 +1963,6 @@ div.modal-overlay {
   .btn-confirm { background: #4caf50; color: #fff; }
 
   .btn-confirm:disabled { background: #888; }
-
-  .max-seats-msg {
-    color: #ff9800;
-    margin-bottom: 0.5rem;
-    font-size: 1rem;
-  }
 
   /* Order - second tab */
   .section {

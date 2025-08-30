@@ -5,6 +5,9 @@ import { useMovies } from "../../contexts/MovieContext";
 import { useUser } from "../../api/authApi";
 import OrderDto from "../../models/orderDto";
 
+import styles from "./CreateOrder.module.css"
+import { formatProjectionDate } from "../../utils/formatDate";
+
 const TICKET_TYPES = {
   CHILDREN_UNDER_16: { value: "Children under 16", price: 10.5 },
   PUPILS_AND_STUDENTS: { value: "Pupils and Students", price: 12.5 },
@@ -249,26 +252,39 @@ export default function CreateOrder({ onClose, bookingTime }) {
 				<span className={step === "order" ? "active" : ""}>ORDER</span>
 			</div>
 			{/* Movie Info */}
-			<div className="movie-info">
-				<img src={order.imageUrl} className="movie-poster" alt="Plakat" />
-				<div className="movie-details">
-				<h2 className="movie-title">{currentMovie.name}</h2>
-				<div className="info-row">{order.city.replace("_", " ")}</div>
-				<div className="info-row">
-					<span>Projection in {order.time} on {order.date} {order.dayOfWeek}</span>
-				</div>
-				<div className="info-row">
-					<span>{currentMovie.movieLength} min.</span>
-					<span>{currentMovie.audio} / {currentMovie.subtitles}</span>
-					<span>{order.premiere}</span>
-				</div>
+			<div className={styles.movieInfo}>
+				<img src={order.imageUrl} className={styles.moviePoster} alt="Plakat" />
+				<div className={styles.movieDetails}>
+					<div className={styles.titleContainer}>
+						<h2 className="movie-title">{currentMovie.name}</h2>
+						<img src={currentMovie.movieClass.icon} alt="Rating" height="25" className="rating-icon mr-sm" />
+					</div>
+					<div className={styles.infoRow}>Cinema Tickets - {order.city.replace("_", " ")}</div>
+					<div className={styles.infoRow}>
+						<img src="/images/order-calendar.svg" alt="order-calendar" />
+						<span>Projection in {order.time} on  {order.dayOfWeek} {formatProjectionDate(order.date)}</span>
+					</div>
+					<div className={styles.infoRow}> 
+						<p className={`${styles.infoData} ${styles.infoClock}`}>
+							<img src="/images/order-clock.svg" alt="" />
+							<span>{currentMovie.movieLength} min.</span>
+						</p>
+						<p className={styles.infoData}>Audio:
+							<span>{currentMovie.audio}</span>
+						</p>
+						<p className={styles.infoData}>Subtitles:
+							<span>{currentMovie.subtitles}</span>
+						</p>
+					</div>
 				</div>
 			</div>
 			{/* Seat Selection */}
 			{step === "seats" && (
 				<div>
-				<div className="max-seats-msg">You can choose a maximum of 10 seats.</div>
-				<div className="screen-label">IMAX</div>
+				<div className={styles.maxSeatsMsg}>You can choose a maximum of 10 seats.</div>
+				<div className={styles.screenLabel}>
+          <img src="/images/screenSVG.svg" alt="screen-image" />
+        </div>
 				<div className="hall-scheme">
 					<div className="seats">
 					{[...Array(ROWS)].map((_, rowIdx) => (
@@ -296,10 +312,18 @@ export default function CreateOrder({ onClose, bookingTime }) {
 					))}
 					</div>
 					<div className="legend">
-						<span className="legend-item legend-free"></span> free seats
-						<span className="legend-item legend-selected"></span> your choice
-						<span className="legend-item legend-occupied"></span> occupied seats
-						<span className="legend-item legend-wheelchair"></span> wheelchair spaces
+						<p>
+							<span className="legend-item legend-free"></span> free seats
+						</p>
+						<p>
+							<span className="legend-item legend-selected"></span> your choice
+						</p>
+						<p>
+							<span className="legend-item legend-occupied"></span> occupied seats
+						</p>
+						<p>
+							<span className="legend-item legend-wheelchair"></span> wheelchair spaces
+						</p>
 					</div>
 					<div className="seat-counter">
 						<article className="seats-info">
@@ -418,10 +442,11 @@ export default function CreateOrder({ onClose, bookingTime }) {
 				</article>
 				<section className="payment-method">
 					<h2 className="title-payment">Choose a payment method</h2>
-					<button className="text-and-icon">
-					<span>Payment with credit card</span>
+					<button className={`${styles.textAndIcon} text-and-icon`}>
+						<img src="/images/arrow-down.svg" alt="" />
+						<span>Payment with credit card</span>
 					</button>
-					<button className="payment-button" onClick={confirmSelection}>Pay Now</button>
+					<button className={styles.paymentButton} onClick={confirmSelection}>Pay Now</button>
 				</section>
 				<div className="actions">
 					<button className="btn-cancel" onClick={goBack}>Back</button>

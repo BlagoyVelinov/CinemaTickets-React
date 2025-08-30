@@ -79,7 +79,7 @@ export default function Movie({
                                 onClick={() => handleBookingClick(time)}
                                 >
                                 {time}
-                            </button>
+                            </button>                                         
                         ))
                     ) : (
                         <span className="no-times">Coming Soon</span>

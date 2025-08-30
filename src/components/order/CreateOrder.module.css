@@ -1,0 +1,108 @@
+
+.movieInfo {
+    display: flex;
+    gap: 2rem;
+    margin-bottom: 2rem;
+    margin-right: 12em;
+    align-items: center;
+}
+
+.moviePoster {
+    width: 140px;
+    height: 200px;
+    border-radius: 8px;
+    background: #333;
+    object-fit: cover;
+}
+
+.movieDetails h2 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    text-transform: none;
+}
+
+.titleContainer {
+    display: flex;
+    gap: 0.8em;
+}
+
+
+.screenLabel {
+    display: flex;
+    justify-content: center;
+}
+
+.maxSeatsMsg {
+    color: #ff9800;
+    margin-bottom: 1.5em;
+    font-size: 1rem;
+    text-align: center;
+    letter-spacing: 1.2px;
+}
+
+.movieDetails .infoRow {
+    margin: 1em 0;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    gap: 1.2rem;
+}
+
+.infoRow .infoData {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border: 1px solid #b7b7b7;
+    border-radius: 0.5em;
+    padding: 0.1em 0.8em;
+    font-size: 0.7em;
+    color: #b7b7b7;
+}
+
+.infoData.infoClock {
+    display: flex;
+    flex-direction: row;
+    height: 4em;
+}
+
+.infoClock img {
+    width: 1.5em;
+    padding-right: 0.5em;
+}
+
+.infoData span {
+    font-size: 1.2em;
+    color: #fff;
+}
+
+.textAndIcon {
+    display: flex;
+    flex-direction: row-reverse;
+    justify-content: space-between;
+    padding-left: 2em;
+    padding-right: 2em;
+}
+
+.textAndIcon img {
+    width: 3%;
+}
+
+.paymentButton {
+    width: 100%;
+    border: 0.15em solid #fff;
+    border-radius: 0.5em;
+    padding: 0.8em 0.5em;
+    background-color: transparent;
+    margin-top: 1.2em;
+    color: #fff;
+    font-size: 1.24em;
+    transition: 0.3s;
+}
+
+.paymentButton:hover {
+    background-color: #262525;
+    transition: 0.3s;
+    cursor: pointer;
+    color: #b7b7b7;
+    border: 2px #b7b7b7 solid;
+}
