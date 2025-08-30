@@ -1,0 +1,22 @@
+.offerContainer {
+    display: flex;
+    align-items: stretch;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 2em;
+}
+
+.offerImg {
+    display: block;
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+    transition: filter 0.3s ease;
+}
+
+.offerDescription {
+    margin-top: 2em;
+    color: #fff;
+    font-size: 1.2em;
+    line-height: 1.24em;
+}

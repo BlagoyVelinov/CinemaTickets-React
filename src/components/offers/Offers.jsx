@@ -1,9 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router";
 
 import { useOffers } from "../../providers/OfferProvider";
 import styles from "./Offers.module.css";
-import ShowOffer from "./offer/ShowOffer";
 
 export default function OffersTab() {
     const { allOffers, loadAllOffers } = useOffers();
@@ -37,7 +36,6 @@ export default function OffersTab() {
                                                 >
                                                     <img src={offer.imageUrl} className={styles.offerImg} alt="offer-img"/>
                                                     <h4 className={styles.offerTitle}>{offer.title}</h4>
-                                                    {/* <div className={styles.offerDescription}>{offer.description}</div> */}
                                                 </Link>
                                             ))}
                                         </div>
@@ -59,7 +57,6 @@ export default function OffersTab() {
                                                 >
                                                     <img src={offer.imageUrl} className={styles.offerImg} alt="offer-img"/>
                                                     <h4 className={styles.offerTitle}>{offer.title}</h4>
-                                                    {/* <div className="offerDescription">{offer.description}</div> */}
                                                 </Link>
                                             ))}
                                         </div>
@@ -80,7 +77,6 @@ export default function OffersTab() {
                                                 >
                                                     <img src={offer.imageUrl} className={styles.offerImg} alt="offer-img"/>
                                                     <h4 className={styles.offerTitle}>{offer.title}</h4>
-                                                    {/* <div className="offerDescription">{offer.description}</div> */}
                                                 </Link>
                                             ))}
                                         </div>

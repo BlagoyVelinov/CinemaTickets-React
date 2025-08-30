@@ -1,7 +1,6 @@
 import { Link } from "react-router";
 import { useState } from "react";
 
-import { formatBookingTime } from "../../../utils/formatBookingTimes";
 import styles from './MovieProgram.module.css'
 import movieService from "../../../services/movieService";
 
