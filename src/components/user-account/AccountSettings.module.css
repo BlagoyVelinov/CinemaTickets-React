@@ -9,7 +9,8 @@
     margin-bottom: 1.5em;
 }
 
-.userDetailsContainer{
+.userDetailsContainer {
+    position: relative;
     display: flex;
     justify-content: center;
     background: linear-gradient(#ffffff, #d4d7db, #ffffff);
@@ -139,4 +140,18 @@ input {
 
 .btn.deleteBtn {
     margin-top: 7.3em;
+}
+
+.xBtn {
+    position: absolute;
+    left: 0;
+    top: 0;
+    margin: 1em 0 0 1em;
+    padding: 0.05em 0.24em;
+    border: none;
+    background-color: transparent;
+}
+
+.xBtn:hover {
+    cursor: pointer;
 }

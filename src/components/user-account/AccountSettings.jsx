@@ -1,4 +1,6 @@
 import { useEffect, useState } from 'react';
+import { useNavigate } from "react-router";
+
 import styles from './AccountSettings.module.css';
 import { useDeleteUser, useEditUser, useUser } from '../../api/authApi';
 import { formatBirthdate } from '../../utils/formatDate';
@@ -16,6 +18,7 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
     const [isDirty, setIsDirty] = useState(false);
     const [initialProfile, setInitialProfile] = useState(null);
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const navigate = useNavigate();
 
     const fieldsToCompare = ['username', 'name', 'email'];
     const isEqual = (a, b) => fieldsToCompare.every(field => (a?.[field] || '') === (b?.[field] || ''));
@@ -41,6 +44,8 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
         setIsDirty(false);
         onCancel?.();
     };
+
+    const handleBack = () => navigate(-1);
 
     const [errors, setErrors] = useState({});
 
@@ -138,6 +143,9 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
             <h1>Account Settings</h1>
 
             <div className={styles.userDetailsContainer}>
+                <button className={styles.xBtn} onClick={handleBack}>
+                    <img src="/images/icons/arrow-ios-back.svg" alt="arrow-back" />
+                </button>
                 <section className={styles.leftPart}>
 
                     <article className={styles.userImageSettings}>
