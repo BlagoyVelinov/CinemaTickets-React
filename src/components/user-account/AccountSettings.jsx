@@ -1,16 +1,17 @@
 import { useEffect, useState } from 'react';
 import styles from './AccountSettings.module.css';
-import { useEditUser, useUser } from '../../api/authApi';
+import { useDeleteUser, useEditUser, useUser } from '../../api/authApi';
 import { formatBirthdate } from '../../utils/formatDate';
 import ProfileImagePickerModal from './ProfileImagePickerModal';
 import ImageService from '../../services/imageService';
 import { useUserContext } from '../../contexts/UserContext';
 
-export default function AccountSettings({ userId, onSubmit, onCancel }) {
-    const { user } = useUser();
+export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin }) {
+    const { user } = useUser(userId);
     const { userPatchAuthData } = useUserContext();
     const [profile, setProfile] = useState(null);
     const { editUserData } = useEditUser();
+    const { deleteUser } = useDeleteUser();
     const [isEditing, setIsEditing] = useState(false);
     const [isDirty, setIsDirty] = useState(false);
     const [initialProfile, setInitialProfile] = useState(null);
@@ -115,6 +116,22 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
 			}
 		}
 	};
+
+    const handleDeleteUser = async (userId) => {
+        const confirmDelete = window.confirm(`Are you sure you want to delete account on ${profile?.username}?`);
+        if(!confirmDelete) return;
+        
+        try {
+            await deleteUser(userId);
+
+            setSelectedUserId(null);
+
+            await fetchAllUsers();
+            console.log('Deleted account successfully');
+        } catch (error) {
+            console.error('Error deleting account:', error);
+        }
+    };
     
     return (
         <div className={styles.mainScreen}>
@@ -135,12 +152,21 @@ export default function AccountSettings({ userId, onSubmit, onCancel }) {
                         </button>
 
                     </article>
-                    <button className={`${styles.btn} ${styles.changePassBtn}`}>
-                        Change password
-                    </button>
-                    <button className={`${styles.btn} ${styles.deleteBtn}`}>
-                        Delete account
-                    </button>
+                    {!onAdmin 
+                    ?   <button className={`${styles.btn} ${styles.changePassBtn}`}>
+                            Change password
+                        </button> 
+                    : null }
+                    
+                    {!onAdmin 
+                    ?   <button 
+                            className={`${styles.btn} ${styles.deleteBtn}`}
+                            onClick={() => handleDeleteUser(profile?.id)}
+                        >
+                            Delete account
+                        </button>
+                    : null}
+                    
 
                 </section>
 

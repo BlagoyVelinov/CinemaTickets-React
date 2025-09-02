@@ -106,7 +106,7 @@ export const useLogout = () => {
     
 };
 
-export const useUser = () => {
+export const useUser = (targetUserId) => {
     const { id, username, imageUrl: imageUrlFromContext } = useContext(UserContext);
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(false);
@@ -144,7 +144,7 @@ export const useUser = () => {
     }
 
     useEffect(() => {
-        const identifier = id || username;
+        const identifier = targetUserId || id || username;
         if (!identifier) {
             setUser(null); 
             return; 
@@ -153,7 +153,7 @@ export const useUser = () => {
         setLoading(true);
         setError(null);
         
-        const fetcher = id ? fetchUserById : fetchUserByUsername;
+        const fetcher = targetUserId || id ? fetchUserById : fetchUserByUsername;
         fetcher(identifier)
             .then(result => {
                 // Ensure imageUrl reflects the latest from context if available
@@ -166,7 +166,7 @@ export const useUser = () => {
             .finally(() => {
                 setLoading(false);
             });
-    }, [id, username]);
+    }, [targetUserId, id, username]);
 
     // Update imageUrl reactively when context changes without refetch
     useEffect(() => {
@@ -239,7 +239,7 @@ export const useAllUsers = () => {
         users,
         loading,
         error,
-        refetch: fetchAllUsers
+        fetchAllUsers
     };
 };
 
@@ -289,5 +289,30 @@ export const useEditUser = () => {
     
     return {
         editUserData,
+    }
+};
+
+export const useDeleteUser = () => {
+
+    const deleteUser = async ( userId ) => {
+
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.delete(`${baseUrl}/delete-user/${userId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                },
+            });
+            console.log(result);
+            return result;
+            
+        } catch (error) {
+            console.error('Error deleting user:', error);
+            throw error;
+        }
+    }
+
+    return {
+        deleteUser,
     }
 };
