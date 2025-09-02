@@ -27,11 +27,15 @@ const request = async (method, url, data, options = {}) => {
     }
 
     const resContentType = response.headers.get('Content-Type');
-    if (!resContentType) {
-        return;
+    let result = null;
+    if (resContentType && resContentType.includes('application/json')) {
+        result = await response.json();
+    }
+
+    if (!response.ok) {
+        throw new Error(result?.error || `Request failed with status ${response.status}`);
     }
     
-    const result = await response.json();
     
     return result;
 };
