@@ -199,7 +199,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
       }
       if (showPaymentForm && !isPaymentFormValid) {
         alert("Please fill in valid payment card details.");
-        setTriggerPaymentFormValidation(true); // Trigger validation on PaymentForm
+        setTriggerPaymentFormValidation(true);
         return;
       }
       goToStep("order");
@@ -219,7 +219,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 
       if (showPaymentForm && !isPaymentFormValid) {
         alert("Please fill in valid payment card details.");
-        setTriggerPaymentFormValidation(true); // Re-trigger validation on PaymentForm
+        setTriggerPaymentFormValidation(true);
         return;
       }
 
@@ -263,7 +263,6 @@ export default function CreateOrder({ onClose, bookingTime }) {
 
   useEffect(() => {
     if (triggerPaymentFormValidation) {
-      // Reset the trigger after it has been used
       setTriggerPaymentFormValidation(false);
     }
   }, [triggerPaymentFormValidation]);

@@ -26,8 +26,8 @@ export default function PaymentForm({ onValidationChange, forceValidation }) {
   };
 
   const handleCardNumberChange = (e) => {
-    let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-    setCardNumberError(''); // Clear error message when user starts typing
+    let value = e.target.value.replace(/\D/g, '');
+    setCardNumberError('');
     if (value.length > 16) {
       value = value.substring(0, 16);
     }
@@ -59,8 +59,8 @@ export default function PaymentForm({ onValidationChange, forceValidation }) {
   };
 
   const handleExpiryDateChange = (e) => {
-    let value = e.target.value.replace(/\D/g, ''); // Remove non-digits
-    setExpiryDateError(''); // Clear error message when user starts typing
+    let value = e.target.value.replace(/\D/g, '');
+    setExpiryDateError('');
     if (value.length > 4) {
       value = value.substring(0, 4);
     }
@@ -75,9 +75,9 @@ export default function PaymentForm({ onValidationChange, forceValidation }) {
     const cleanedExpiryDate = expiryDate.replace(/\//g, '');
     if (cleanedExpiryDate.length === 4) {
       const month = parseInt(cleanedExpiryDate.substring(0, 2), 10);
-      const year = parseInt(cleanedExpiryDate.substring(2, 4), 10) + 2000; // Assuming 20xx years
+      const year = parseInt(cleanedExpiryDate.substring(2, 4), 10) + 2000;
       const currentYear = new Date().getFullYear();
-      const currentMonth = new Date().getMonth() + 1; // getMonth() is 0-indexed
+      const currentMonth = new Date().getMonth() + 1;
 
       if (month < 1 || month > 12) {
         setExpiryDateError('Invalid month.');
