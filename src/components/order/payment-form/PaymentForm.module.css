@@ -1,0 +1,62 @@
+.paymentFormContainer {
+  margin-top: 1.5em;
+  padding: 1.5em;
+  border: 1px solid #444;
+  border-radius: 8px;
+  background-color: #1a1a1a;
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+.inputGroup label {
+  margin-bottom: 0.5em;
+  color: #b7b7b7;
+  font-size: 0.9em;
+}
+
+.inputGroup input {
+  padding: 0.8em;
+  border: 1px solid #555;
+  border-radius: 4px;
+  background-color: #333;
+  color: #fff;
+  font-size: 1em;
+}
+
+.inputGroup input::placeholder {
+  color: #888;
+}
+
+.cardIcon {
+  position: absolute;
+  right: 10px;
+  top: 66%;
+  transform: translateY(-50%);
+  width: 6%;
+  height: auto;
+  background-color: #fff;
+  object-fit: contain;
+}
+
+.cardDetailsGroup {
+  display: flex;
+  gap: 1em;
+}
+
+.cardDetailsGroup .inputGroup {
+  flex: 1;
+}
+
+.errorText {
+  color: #ff3860;
+  font-size: 0.85em;
+  margin-top: 0.5em;
+}
+  

@@ -4,6 +4,7 @@ import { Link, useLocation, useNavigate } from "react-router";
 import { useMovies } from "../../contexts/MovieContext";
 import { useUser } from "../../api/authApi";
 import OrderDto from "../../models/orderDto";
+import PaymentForm from "./payment-form/PaymentForm";
 
 import styles from "./CreateOrder.module.css"
 import { formatProjectionDate } from "../../utils/formatDate";
@@ -39,6 +40,9 @@ export default function CreateOrder({ onClose, bookingTime }) {
   const [debugInfo, setDebugInfo] = useState("Loading...");
   const [order, setOrder] = useState(null);
   const [userInfo, setUserInfo] = useState(null);
+  const [showPaymentForm, setShowPaymentForm] = useState(false);
+  const [isPaymentFormValid, setIsPaymentFormValid] = useState(false);
+  const [triggerPaymentFormValidation, setTriggerPaymentFormValidation] = useState(false);
 
   const accessToken = localStorage.getItem('accessToken');
   const { user: authUser } = useUser();
@@ -193,6 +197,11 @@ export default function CreateOrder({ onClose, bookingTime }) {
         window.location.href = "/auth";
         return;
       }
+      if (showPaymentForm && !isPaymentFormValid) {
+        alert("Please fill in valid payment card details.");
+        setTriggerPaymentFormValidation(true); // Trigger validation on PaymentForm
+        return;
+      }
       goToStep("order");
       return;
     }
@@ -201,6 +210,19 @@ export default function CreateOrder({ onClose, bookingTime }) {
         alert("Please accept the terms and conditions");
         return;
       }
+
+      if (!showPaymentForm) {
+        setShowPaymentForm(true);
+        setTriggerPaymentFormValidation(true);
+        return;
+      }
+
+      if (showPaymentForm && !isPaymentFormValid) {
+        alert("Please fill in valid payment card details.");
+        setTriggerPaymentFormValidation(true); // Re-trigger validation on PaymentForm
+        return;
+      }
+
       const orderDto = new OrderDto({
         movieId: order.id,
         movieViewName: order.name,
@@ -238,6 +260,13 @@ export default function CreateOrder({ onClose, bookingTime }) {
       }
     }
   };
+
+  useEffect(() => {
+    if (triggerPaymentFormValidation) {
+      // Reset the trigger after it has been used
+      setTriggerPaymentFormValidation(false);
+    }
+  }, [triggerPaymentFormValidation]);
 
   if (isLoading) return <div>Loading...</div>;
   if (hasError) return <div>Error: {debugInfo}</div>;
@@ -442,10 +471,11 @@ export default function CreateOrder({ onClose, bookingTime }) {
 				</article>
 				<section className="payment-method">
 					<h2 className="title-payment">Choose a payment method</h2>
-					<button className={`${styles.textAndIcon} text-and-icon`}>
-						<img src="/images/arrow-down.svg" alt="" />
+					<button className={`${styles.textAndIcon} text-and-icon`} onClick={() => setShowPaymentForm(!showPaymentForm)}>
+						<img src="/images/arrow-down.svg" alt="arrow-down" />
 						<span>Payment with credit card</span>
 					</button>
+					{showPaymentForm && <PaymentForm onValidationChange={setIsPaymentFormValid} forceValidation={triggerPaymentFormValidation} />}
 					<button className={styles.paymentButton} onClick={confirmSelection}>Pay Now</button>
 				</section>
 				<div className="actions">
