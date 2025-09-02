@@ -50,7 +50,7 @@ export default function Movie({
     <li className="movieList">
       <Link to={`/program/?trailer=${id}`} onClick={() => onSeeTrailer(id)}>
         <article className={styles.movieImage}>
-          <img src={imageUrl} 
+          <img src={imageUrl ?? '/images/no-image.jpg'} 
               alt={name} width="204" height="219" />
         </article>
       </Link>

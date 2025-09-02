@@ -14,7 +14,7 @@ export default function MovieHome({
             <h4>{name || ''}</h4>
             <img
                 className="movie-1-pic"
-                src={imageUrl}
+                src={imageUrl ?? '/images/no-image.jpg'}
                 alt={name}
                 width="224"
                 height="269"
