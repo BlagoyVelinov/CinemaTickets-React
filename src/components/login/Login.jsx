@@ -26,7 +26,8 @@ export default function Login() {
             
             userLoginHandler(authData);
             localStorage.setItem("accessToken", authData.accessToken);
-            navigate(-1);
+            // navigate(-1);
+            navigate("/");
             
         } catch (error) {
             console.error('Login error:', error);
