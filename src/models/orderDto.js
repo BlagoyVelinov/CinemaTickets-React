@@ -3,6 +3,7 @@ export class OrderDto {
       id = null,
       movieId = null,
       bookingTimeId = null,
+      hallNumber = null,
       movieViewName = '',
       orderNumber = '',
       childQuantity = 0,
@@ -20,6 +21,7 @@ export class OrderDto {
       this.id = id;
       this.movieId = movieId;
       this.bookingTimeId = bookingTimeId;
+      this.hallNumber = hallNumber;
       this.movieViewName = movieViewName;
       this.orderNumber = orderNumber;
       this.childQuantity = childQuantity;
@@ -36,11 +38,11 @@ export class OrderDto {
     }
   
     toJSON() {
-      // Format date to YYYY-MM-DD
+
       const formatDate = (date) => {
         if (!date) return null;
         const d = new Date(date);
-        return d.toISOString().split('T')[0]; // Returns YYYY-MM-DD
+        return d.toISOString().split('T')[0];
       };
   
       return {
@@ -57,15 +59,16 @@ export class OrderDto {
         bookingTime: this.bookingTime,
         tickets: this.tickets.map(ticket => ({
           movieName: this.movieViewName,
-          hallNumber: null,
+          hallNumber: this.hallNumber,
           numberOfSeat: ticket.col,
           numberOfRow: ticket.row,
           price: ticket.price || 0,
           projectionDate: formatDate(this.projectionDate),
-          movieClassDescription: null,
+          movieClassDescription: ticket.movieClassDescription || null,
           bookingTime: this.bookingTime,
           ticketType: ticket.type,
-          city: { location: this.location },
+          location: ticket.location || null,
+          userId: this.user.id,
           isFinished: false
         })),
         projectionDate: formatDate(this.projectionDate),

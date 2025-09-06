@@ -230,6 +230,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
         projectionDate: order.date,
         location: order.city?.toUpperCase().replace(/ /g, "_"),
         bookingTime: order.time,
+        hallNumber: currentMovie.hallNumber,
         childQuantity: getTicketCount("CHILDREN_UNDER_16"),
         overSixtyQuantity: getTicketCount("PERSONS_OVER_60"),
         regularQuantity: getTicketCount("REGULAR"),
@@ -243,7 +244,10 @@ export default function CreateOrder({ onClose, bookingTime }) {
           movieName: order.name,
           projectionDate: order.date,
           bookingTime: order.time,
-          city: { location: order.cinema?.toUpperCase() }
+          hallNumber: currentMovie.hallNumber,
+          userId: userInfo.id,
+          movieClassDescription: currentMovie.movieClass.description,
+          location: order.city?.toUpperCase().replace(/ /g, "_")
         })),
         user: userInfo,
         isFinished: false
