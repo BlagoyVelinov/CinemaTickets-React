@@ -2,11 +2,11 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 
 import styles from './AccountSettings.module.css';
-import { useDeleteUser, useEditUser, useUser } from '../../api/authApi';
-import { formatBirthdate } from '../../utils/formatDate';
-import ProfileImagePickerModal from './ProfileImagePickerModal';
-import ImageService from '../../services/imageService';
-import { useUserContext } from '../../contexts/UserContext';
+import { useDeleteUser, useEditUser, useUser } from '../../../api/authApi';
+import { formatBirthdate } from '../../../utils/formatDate';
+import ProfileImagePickerModal from '../image-picker/ProfileImagePickerModal';
+import ImageService from '../../../services/imageService';
+import { useUserContext } from '../../../contexts/UserContext';
 
 export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin }) {
     const { user } = useUser(userId);
