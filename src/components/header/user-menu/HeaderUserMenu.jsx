@@ -64,6 +64,9 @@ export default function HeaderUserMenu() {
                             <span className={styles.dropdownItemContent}>Admin Panel</span>
                         </Link>
                     )}
+                    <Link to="/account/tickets" className={styles.dropdownItem} onClick={handleClickMenu}>
+                        <span className={styles.dropdownItemContent}>My Tickets</span>
+                    </Link>
                     <Link to="/account/settings" className={styles.dropdownItem} onClick={handleClickMenu}>
                         <span className={styles.dropdownItemContent}>Account Settings</span>
                     </Link>

@@ -19,7 +19,8 @@ import SignUp from './components/sign-up/SignUp';
 import GuestGuard from './components/guards/GuestGuard';
 import AuthGuard from './components/guards/AuthGuard';
 import AdminGuard from './components/guards/AdminGuard';
-import AccountSettings from './components/user-account/AccountSettings';
+import AccountSettings from './components/user/account/AccountSettings';
+import MyTickets from './components/user/tickets/MyTickets';
 import { OfferProvider } from './providers/OfferProvider';
 import ShowOffer from './components/offers/offer/ShowOffer';
 const Admin = lazy(() => import('./components/admin/Admin'));
@@ -45,6 +46,7 @@ function App() {
                                         <Route element={<AuthGuard />} >
                                             <Route path="/program/order?" element={null} />
                                             <Route path="/account/settings" element={<AccountSettings />} />
+                                            <Route path="/account/tickets" element={<MyTickets />} />
                                         </Route>
                                         <Route path="/4dx" element={<FourDxTab />} />
                                         <Route path="/imax" element={<ImaxTab />} />

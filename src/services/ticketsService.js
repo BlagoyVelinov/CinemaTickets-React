@@ -4,20 +4,30 @@ import request from "../api/request";
 const BASE_URL = "http://localhost:8080/api/tickets";
 
 export default {
-    async getUpcomingTickets() {
+    async getUpcomingTickets(userId) {
         try {
-            const result = await request.get(`${BASE_URL}/upcoming-tickets/user/${id}`);
-            const movies = Object.values(result);
-            return movies;
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.get(`${BASE_URL}/upcoming-tickets/user/${userId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+            });
+            const tickets = Object.values(result);
+            return tickets;
         } catch (error) {
             console.error('Error fetching upcoming tickets:', error);
             throw error;
         }
     },
 
-    async getExpiredTickets() {
+    async getExpiredTickets(userId) {
         try {
-            const result = await request.get(`${BASE_URL}/expired-tickets/user/${id}`);
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.get(`${BASE_URL}/expired-tickets/user/${userId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+            });
             const tickets = Object.values(result);
             return tickets;
         } catch (error) {
@@ -26,12 +36,17 @@ export default {
         }
     },
 
-    async getTicketById(id) {
+    async getTicketById(ticketId) {
         try {
-            const result = await request.get(`${BASE_URL}/ticket/${id}`);
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.get(`${BASE_URL}/ticket/${ticketId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+            });
             return result;
         } catch (error) {
-            console.error(`Error fetching ticket with id ${id}:`, error);
+            console.error(`Error fetching ticket with id ${ticketId}:`, error);
             throw error;
         }
     },

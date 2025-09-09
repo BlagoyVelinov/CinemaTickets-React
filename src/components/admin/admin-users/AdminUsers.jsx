@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useAllUsers, useDeleteUser, useEditUser } from '../../../api/authApi';
-import AccountSettings from '../../user-account/AccountSettings';
+import AccountSettings from '../../user/account/AccountSettings';
 import styles from './AdminUsers.module.css';
 
 export default function AdminUsers() {

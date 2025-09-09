@@ -1,0 +1,75 @@
+.container {
+    height: 100vh;
+}
+
+.container h1 {
+    text-align: center;
+    margin: 0 0 2em 0;
+    color: #fff;
+}
+
+.navTickets {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+.btn {
+    width: 18em;
+    border: none;
+    padding: 0.6em 2em;
+    font-size: 1.28em;
+    background-color: #777;
+    color: #fff;
+}
+
+.btn:hover {
+    cursor: pointer;
+    background-color: #b8b7b7;
+    color: #333;
+}
+
+.btnUp {
+    border-bottom-left-radius: 0.3em;
+    border-top-left-radius: 0.3em;
+}
+
+.btnEx {
+    border-bottom-right-radius: 0.3em;
+    border-top-right-radius: 0.3em;
+}
+
+.ticketsList {
+    margin-top: 1em;
+}
+
+.navTickets .btn.active {
+    background-color: #fff;
+    color: #000;
+}
+
+.ticketsContent {
+    position: relative;
+    overflow: hidden;
+    margin-top: 2em;
+    min-height: 300px;
+}
+
+.ticketsList {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    transition: transform 0.5s ease-in-out;
+}
+
+.ticketsList.activeList {
+    transform: translateX(0%);
+}
+
+.ticketsList.hiddenList {
+    transform: translateX(100%);
+}
+
+.ticketsList.hiddenList:nth-child(1) {
+    transform: translateX(-100%); 
+}
