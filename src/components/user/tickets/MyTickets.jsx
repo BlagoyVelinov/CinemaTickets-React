@@ -115,10 +115,8 @@ export default function MyTickets() {
                 <ul className={`${styles.ticketsList} ${activeTab === 'expired' ? styles.activeList : styles.hiddenList}`}>
                     {currentExpiredTickets.length > 0 
                         ? currentExpiredTickets.map((exTicket) => (
-                            <li key={exTicket.id} onClick={() => openTicketModal(exTicket)}>
-                                <Link>
+                            <li key={exTicket.id}>
                                     <Ticket ticket={exTicket} isExpired={true}/>
-                                </Link>
                             </li>
                     )) : <h1>No expired tickets yet</h1>
                 }
