@@ -1,13 +1,13 @@
 import request from "../api/request";
 
 
-const BASE_URL = "http://localhost:8080/api/offers";
+const BASE_URL = import.meta.env.VITE_CINEMA_BASE_URL;
 
 export default {
     async createOffer(offerData) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.post(`${BASE_URL}/add-offer`, offerData, {
+            const result = await request.post(`${BASE_URL}/offers/add-offer`, offerData, {
                 headers: {
                   Authorization: `Bearer ${accessToken}`,
                 },
@@ -22,7 +22,7 @@ export default {
     async deleteOffer(offerId) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.delete(`${BASE_URL}/delete-offer/${offerId}`, null, {
+            const result = await request.delete(`${BASE_URL}/offers/delete-offer/${offerId}`, null, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -37,7 +37,7 @@ export default {
     async editOffer(offerId, offerData) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.put(`${BASE_URL}/edit-offer/${offerId}`, offerData, {
+            const result = await request.put(`${BASE_URL}/offers/edit-offer/${offerId}`, offerData, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },
@@ -51,7 +51,7 @@ export default {
 
     async getAllOffers() {
         try {
-            const result = await request.get(`${BASE_URL}`);
+            const result = await request.get(`${BASE_URL}/offers`);
             return result;
         } catch (error) {
             console.error('Error fetching all offers:', error);
@@ -61,7 +61,7 @@ export default {
 
     async getOfferById(id) {
         try {
-            const result = await request.get(`${BASE_URL}/offer/${id}`);
+            const result = await request.get(`${BASE_URL}/offers/offer/${id}`);
             return result;
         } catch (error) {
             console.error(`Error fetching offer with id ${id}:`, error);

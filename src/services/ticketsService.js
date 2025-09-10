@@ -1,13 +1,13 @@
 import request from "../api/request";
 
 
-const BASE_URL = "http://localhost:8080/api/tickets";
+const BASE_URL = import.meta.env.VITE_CINEMA_BASE_URL;
 
 export default {
     async getUpcomingTickets(userId) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.get(`${BASE_URL}/upcoming-tickets/user/${userId}`, null, {
+            const result = await request.get(`${BASE_URL}/tickets/upcoming-tickets/user/${userId}`, null, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
@@ -23,7 +23,7 @@ export default {
     async getExpiredTickets(userId) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.get(`${BASE_URL}/expired-tickets/user/${userId}`, null, {
+            const result = await request.get(`${BASE_URL}/tickets/expired-tickets/user/${userId}`, null, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },
@@ -39,7 +39,7 @@ export default {
     async getTicketById(ticketId) {
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.get(`${BASE_URL}/ticket/${ticketId}`, null, {
+            const result = await request.get(`${BASE_URL}/tickets/ticket/${ticketId}`, null, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                   },

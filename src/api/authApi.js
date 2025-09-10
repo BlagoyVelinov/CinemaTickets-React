@@ -3,7 +3,7 @@ import request from "./request";
 import { UserContext } from "../contexts/UserContext";
 import usePersistedState from "../hooks/usePersistedState";
 
-const baseUrl = 'http://localhost:8080/api/users';
+const BASE_URL = import.meta.env.VITE_CINEMA_BASE_URL;
 
 export const useLogin = () => {
     const abortRef = useRef(new AbortController());
@@ -23,7 +23,7 @@ export const useLogin = () => {
             }
 
             const result = await request.post(
-                `${baseUrl}/login`,
+                `${BASE_URL}/users/login`,
                 {username, password},
                 { signal: abortRef.current.signal}
             );
@@ -57,7 +57,7 @@ export const useRegister = () => {
             }
 
             const result = await request.post(
-                `${baseUrl}/register`,
+                `${BASE_URL}/users/register`,
                 userData.toJSON(),
                 { signal: abortRef.current.signal }
             );
@@ -94,7 +94,7 @@ export const useLogout = () => {
             }
         }
     
-        request.post(`${baseUrl}/logout`, null, options).then(()=> {
+        request.post(`${BASE_URL}/users/logout`, null, options).then(()=> {
             userLogoutHandler();
         });
     
@@ -124,7 +124,7 @@ export const useUser = (targetUserId) => {
             } 
         };
 
-        const result = await request.get(`${baseUrl}/user/${userId}`, null, options);
+        const result = await request.get(`${BASE_URL}/users/user/${userId}`, null, options);
         return result;
       };
 
@@ -139,7 +139,7 @@ export const useUser = (targetUserId) => {
             }
         };
     
-        const result = await request.get(`${baseUrl}/${username}`, null, options);
+        const result = await request.get(`${BASE_URL}/users/${username}`, null, options);
         return result;
     }
 
@@ -220,7 +220,7 @@ export const useAllUsers = () => {
                 }
             }
         
-            const result = await request.get(`${baseUrl}/all-users`, null, options);
+            const result = await request.get(`${BASE_URL}/users/all-users`, null, options);
             setUsers(result);
         } catch (error) {
             setError(error);
@@ -266,7 +266,7 @@ export const useEditUser = () => {
             }
             
             const result = await request.put(
-                `${baseUrl}/user/${id}`, userData, options);
+                `${BASE_URL}/users/user/${id}`, userData, options);
             
             return result;
         } catch (error) {
@@ -298,7 +298,7 @@ export const useDeleteUser = () => {
 
         try {
             const accessToken = localStorage.getItem("accessToken");
-            const result = await request.delete(`${baseUrl}/delete-user/${userId}`, null, {
+            const result = await request.delete(`${BASE_URL}/users/delete-user/${userId}`, null, {
                 headers: {
                     Authorization: `Bearer ${accessToken}`,
                 },

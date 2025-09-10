@@ -1,7 +1,7 @@
 export default class ImageService {
     static imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
     static imgbbBaseUrl = import.meta.env.VITE_IMGBB_BASE_URL;
-    static backendBaseUrl = 'http://localhost:8080/api/users';
+    static backendBaseUrl = import.meta.env.VITE_CINEMA_BASE_URL;
 
     static async uploadImageToImgBB(file) {
         try {
@@ -59,7 +59,7 @@ export default class ImageService {
     static async saveImageDataToBackend(userId, imageUrl) {
         const accessToken = localStorage.getItem('accessToken');
         try {
-            const response = await fetch(`${this.backendBaseUrl}/user/${userId}/profile-image`, {
+            const response = await fetch(`${this.backendBaseUrl}/users/user/${userId}/profile-image`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "text/plain",
