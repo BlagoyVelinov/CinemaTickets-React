@@ -9,3 +9,8 @@ export function formatProjectionDate(date) {
     if (!date) return;
     return dateFormat(date, "dd mmmm");
 }
+
+export function formatDateOnTicket(date) {
+    if (!date) return;
+    return dateFormat(date, "mmm, dd yyyy");
+}

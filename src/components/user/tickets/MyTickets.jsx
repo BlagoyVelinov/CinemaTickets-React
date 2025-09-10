@@ -9,6 +9,9 @@ export default function MyTickets() {
     const [upcomingTickets, setUpcomingTickets] = useState([]);
     const [expiredTickets, setExpiredTickets] = useState([]);
     const [activeTab, setActiveTab] = useState('upcoming');
+    const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1);
+    const [currentPageExpired, setCurrentPageExpired] = useState(1);
+    const ticketsPerPage = 3;
 
     useEffect(() => {
         const fetchUpcomingTickets = async () => {
@@ -17,6 +20,7 @@ export default function MyTickets() {
                 const ticketsList = await ticketsService.getUpcomingTickets(user.id);
                 setUpcomingTickets(ticketsList);
                 console.log("Upcoming Tickets Length: " + ticketsList.length);
+                console.log("Total Upcoming Pages: " + Math.ceil(ticketsList.length / ticketsPerPage));
             }
         }
         fetchUpcomingTickets();
@@ -29,6 +33,7 @@ export default function MyTickets() {
                 const ticketsList = await ticketsService.getExpiredTickets(user.id);
                 setExpiredTickets(ticketsList);
                 console.log("Expired Tickets Length: " + ticketsList.length);
+                console.log("Total Expired Pages: " + Math.ceil(ticketsList.length / ticketsPerPage));
             }
         }
         fetchExpiredTickets();
@@ -36,6 +41,40 @@ export default function MyTickets() {
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
+    };
+
+    const indexOfLastUpcomingTicket = currentPageUpcoming * ticketsPerPage;
+    const indexOfFirstUpcomingTicket = indexOfLastUpcomingTicket - ticketsPerPage;
+    const currentUpcomingTickets = upcomingTickets.slice(indexOfFirstUpcomingTicket, indexOfLastUpcomingTicket);
+
+    const indexOfLastExpiredTicket = currentPageExpired * ticketsPerPage;
+    const indexOfFirstExpiredTicket = indexOfLastExpiredTicket - ticketsPerPage;
+    const currentExpiredTickets = expiredTickets.slice(indexOfFirstExpiredTicket, indexOfLastExpiredTicket);
+
+    const paginateUpcoming = (pageNumber) => setCurrentPageUpcoming(pageNumber);
+    const paginateExpired = (pageNumber) => setCurrentPageExpired(pageNumber);
+
+    const totalUpcomingPages = Math.ceil(upcomingTickets.length / ticketsPerPage);
+    const totalExpiredPages = Math.ceil(expiredTickets.length / ticketsPerPage);
+
+    const renderPaginationButtons = (totalPages, currentPage, paginate) => {
+        const pageNumbers = [];
+        for (let i = 1; i <= totalPages; i++) {
+            pageNumbers.push(i);
+        }
+        return (
+            <div className={styles.pagination}>
+                {pageNumbers.map(number => (
+                    <button 
+                        key={number} 
+                        onClick={() => paginate(number)} 
+                        className={`${styles.pageButton} ${currentPage === number ? styles.activePage : ''}`}
+                    >
+                        {number}
+                    </button>
+                ))}
+            </div>
+        );
     };
 
     return(
@@ -59,8 +98,8 @@ export default function MyTickets() {
 
             <div className={styles.ticketsContent}>
                 <ul className={`${styles.ticketsList} ${activeTab === 'upcoming' ? styles.activeList : styles.hiddenList}`}>
-                    {upcomingTickets.length > 0 
-                        ? upcomingTickets.map((upTicket) => (
+                    {currentUpcomingTickets.length > 0 
+                        ? currentUpcomingTickets.map((upTicket) => (
                             <li key={upTicket.id}>
                                 <Ticket ticket={upTicket}/>
                             </li>
@@ -68,8 +107,8 @@ export default function MyTickets() {
                 }
                 </ul>
                 <ul className={`${styles.ticketsList} ${activeTab === 'expired' ? styles.activeList : styles.hiddenList}`}>
-                    {expiredTickets.length > 0 
-                        ? expiredTickets.map((exTicket) => (
+                    {currentExpiredTickets.length > 0 
+                        ? currentExpiredTickets.map((exTicket) => (
                             <li key={exTicket.id}>
                                 <Ticket ticket={exTicket}/>
                             </li>
@@ -77,6 +116,8 @@ export default function MyTickets() {
                 }
                 </ul>
             </div>
+            {activeTab === 'upcoming' && renderPaginationButtons(totalUpcomingPages, currentPageUpcoming, paginateUpcoming)}
+            {activeTab === 'expired' && renderPaginationButtons(totalExpiredPages, currentPageExpired, paginateExpired)}
         </div>
     );
 }

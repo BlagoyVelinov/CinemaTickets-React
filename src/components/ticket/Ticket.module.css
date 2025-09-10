@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Montserrat:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+
+.ticketContainer {
+    position: relative;
+    display: flex;
+    width: 700px;
+    height: 250px;
+    border-radius: 10px;
+    box-shadow: 0px 0px 210px rgba(238, 236, 236, 0.8);
+    font-family: Arial, sans-serif;
+    overflow: hidden;
+    mask: radial-gradient(20px at 20px 20px,#0000 98%,#000) -20px -20px;
+    font-family: Lato, sans-serif;
+}
+
+.ticketMain {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #fff; 
+    mask: radial-gradient(20px at 20px 20px,#0000 98%,#000) -20px -20px;
+}
+
+.ticketHeader {
+    position: relative;
+    background-color: #00bcd4;
+    color: #fff;
+    padding: 0.87em;
+    font-size: 24px;
+    font-weight: bold;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.infoContainer {
+    padding: 0.5em 1.5em 0.8em 2.5em;
+}
+
+.ticketTitle {
+  font-size: 2em;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.ticketDetails {
+  display: grid;
+  grid-template-columns: 1.8fr 1fr 1fr;
+  gap: 12px;
+  margin-top: 0.8em;
+}
+
+
+.detailItem p {
+  margin: 0;
+  font-size: 0.8em;
+  color: #888;
+}
+
+.detailItem span {
+    font-size: 24px;
+    font-weight: bold;
+    color: #00bcd4;
+}
+
+.ticketBarcode {
+    display: flex;
+    align-items: center;
+    margin-top: 0.5em;
+}
+
+.ticketBarcode img {
+    width: 10em;
+    height: 3em;
+    background-color: #ccc;
+}
+
+.ticketBarcode p {
+    font-size: 12px;
+    margin-top: 5px;
+    color: #888;
+}
+
+.ticketSeparator {
+    position: relative;
+    mask: radial-gradient(20px at 20px 20px,#0000 98%,#000) -20px -20px;
+}
+
+.ticketStub {
+    flex: 1;
+    background-color: #f8f8f8;
+    border-left: 2px dashed #ccc;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    position: relative;
+    mask: radial-gradient(20px at 20px 20px,#0000 98%,#000) -20px -20px;
+}
+
+.stubHeader {
+    padding: 1.28em;
+    text-align: center;
+    background-color: #00bcd4;
+}
+.stubHeader span {
+    font-size: 2.1em;
+    font-weight: bold;
+    color: #fff;
+}
+.stubDetails {
+    padding: 0 20px 20px 20px;
+}
+.stubDetails > .ticketTitle {
+    margin: 0.5em 0;
+    text-align: center;
+}
+
+.stubDetails p {
+    margin: 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.stubDetails span {
+    font-weight: bold;
+    color: #00bcd4;
+}
+
+.admitOne {
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    color: #00bcd4;
+    margin-top: 20px;
+}
+
+.ticketNumber {
+    text-align: center;
+}

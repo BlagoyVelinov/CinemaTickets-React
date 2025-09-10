@@ -1,5 +1,5 @@
 .container {
-    height: 100vh;
+    min-height: 100vh;
 }
 
 .container h1 {
@@ -41,6 +41,8 @@
 
 .ticketsList {
     margin-top: 1em;
+    list-style: none;
+    padding: 0;
 }
 
 .navTickets .btn.active {
@@ -52,7 +54,7 @@
     position: relative;
     overflow: hidden;
     margin-top: 2em;
-    min-height: 300px;
+    min-height: 60em;
 }
 
 .ticketsList {
@@ -60,6 +62,12 @@
     top: 0;
     width: 100%;
     transition: transform 0.5s ease-in-out;
+    list-style: none;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
 }
 
 .ticketsList.activeList {
@@ -71,5 +79,32 @@
 }
 
 .ticketsList.hiddenList:nth-child(1) {
-    transform: translateX(-100%); 
+    transform: translateX(-100%);
+}
+
+.pagination {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.pageButton {
+    background-color: #777;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    margin: 0 5px;
+    cursor: pointer;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.pageButton:hover {
+    background-color: #b8b7b7;
+    color: #333;
+}
+
+.pageButton.activePage {
+    background-color: #00bcd4;
+    color: #fff;
 }
