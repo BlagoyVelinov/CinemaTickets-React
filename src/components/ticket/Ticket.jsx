@@ -39,9 +39,15 @@ export default function Ticket({ ticket }) {
                         
                         
                     </div>
-                    <div className={styles.ticketBarcode}>
-                        <img src="/images/barcode.png" alt="barcode" />
-                        <p>NO. {ticket.id}</p>
+                    <div className={styles.barcodeContainer}>
+                        <div className={styles.ticketBarcode}>
+                            <img src="/images/barcode.png" alt="barcode" />
+                            <p>NO. {ticket.id}</p>
+                        </div>
+                        <div className={styles.admitOne}>Admit One</div>
+                    </div>
+                    <div className={styles.filmStripImg}>
+                        <img src="/images/film-strip.png" alt="film strip" />
                     </div>
                 </div>
             </div>
@@ -62,7 +68,6 @@ export default function Ticket({ ticket }) {
                         <p>NO. {ticket.id}</p>
                     </div>
                 </div>
-                <div className={styles.admitOne}>ADMIT ONE</div>
             </div>
         </div>
     );
