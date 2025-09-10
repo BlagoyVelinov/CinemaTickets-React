@@ -3,6 +3,8 @@ import Ticket from "../../ticket/Ticket";
 import styles from "./MyTickets.module.css"
 import ticketsService from "../../../services/ticketsService";
 import { useUser } from "../../../api/authApi";
+import { Link } from "react-router";
+import { useTicketModal } from "../../../contexts/TicketModalContext";
 
 export default function MyTickets() {
     const { user } = useUser();
@@ -12,6 +14,8 @@ export default function MyTickets() {
     const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1);
     const [currentPageExpired, setCurrentPageExpired] = useState(1);
     const ticketsPerPage = 3;
+
+    const { openTicketModal } = useTicketModal();
 
     useEffect(() => {
         const fetchUpcomingTickets = async () => {
@@ -100,8 +104,10 @@ export default function MyTickets() {
                 <ul className={`${styles.ticketsList} ${activeTab === 'upcoming' ? styles.activeList : styles.hiddenList}`}>
                     {currentUpcomingTickets.length > 0 
                         ? currentUpcomingTickets.map((upTicket) => (
-                            <li key={upTicket.id}>
-                                <Ticket ticket={upTicket}/>
+                            <li key={upTicket.id} onClick={() => openTicketModal(upTicket)}>
+                                <Link>
+                                    <Ticket ticket={upTicket}/>
+                                </Link>
                             </li>
                     )) : <h1>No upcoming tickets yet</h1>
                 }
@@ -109,8 +115,10 @@ export default function MyTickets() {
                 <ul className={`${styles.ticketsList} ${activeTab === 'expired' ? styles.activeList : styles.hiddenList}`}>
                     {currentExpiredTickets.length > 0 
                         ? currentExpiredTickets.map((exTicket) => (
-                            <li key={exTicket.id}>
-                                <Ticket ticket={exTicket}/>
+                            <li key={exTicket.id} onClick={() => openTicketModal(exTicket)}>
+                                <Link>
+                                    <Ticket ticket={exTicket}/>
+                                </Link>
                             </li>
                     )) : <h1>No expired tickets yet</h1>
                 }

@@ -4,6 +4,7 @@ import { Routes, Route, useLocation } from 'react-router';
 import { UserProvider } from './providers/UserProvider';
 import { MovieProvider } from './contexts/MovieContext';
 import { OrderModalProvider } from './contexts/OrderModalContext';
+import { TicketModalProvider } from './contexts/TicketModalContext';
 
 import HomeTab from './components/home/Home';
 import ProgramTab from './components/program/Program';
@@ -23,6 +24,7 @@ import AccountSettings from './components/user/account/AccountSettings';
 import MyTickets from './components/user/tickets/MyTickets';
 import { OfferProvider } from './providers/OfferProvider';
 import ShowOffer from './components/offers/offer/ShowOffer';
+import TicketModal from './components/ticket/ticket-modal/TicketModal';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
 
@@ -39,6 +41,7 @@ function App() {
                         <MovieProvider>
                             <OrderModalProvider>
                                 <OfferProvider>
+                                  <TicketModalProvider>
                                     <Header />
                                     <Routes>
                                         <Route index element={<HomeTab />} />
@@ -66,6 +69,8 @@ function App() {
                                             )} />
                                         </Route>
                                     </Routes>
+                                    <TicketModal />
+                                  </TicketModalProvider>
                                 </OfferProvider>
                             </OrderModalProvider>
                         </MovieProvider>
