@@ -117,7 +117,7 @@ export default function MyTickets() {
                         ? currentExpiredTickets.map((exTicket) => (
                             <li key={exTicket.id} onClick={() => openTicketModal(exTicket)}>
                                 <Link>
-                                    <Ticket ticket={exTicket}/>
+                                    <Ticket ticket={exTicket} isExpired={true}/>
                                 </Link>
                             </li>
                     )) : <h1>No expired tickets yet</h1>

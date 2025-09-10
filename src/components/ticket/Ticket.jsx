@@ -1,7 +1,7 @@
 import { formatDateOnTicket } from '../../utils/formatDate';
 import styles from './Ticket.module.css';
 
-export default function Ticket({ ticket }) {
+export default function Ticket({ ticket, isExpired }) {
     
     return(
         <div className={styles.ticketContainer}>
@@ -69,6 +69,7 @@ export default function Ticket({ ticket }) {
                     </div>
                 </div>
             </div>
+            {isExpired && <div className={styles.expiredStamp}>EXPIRED</div>}
         </div>
     );
 }
