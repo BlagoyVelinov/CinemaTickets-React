@@ -384,8 +384,12 @@ export default function CreateOrder({ onClose, bookingTime }) {
 						</article>
 					</div>
 					<div className="actions">
-						<button className="btn-cancel" onClick={onClose}>Cancel</button>
-						<button className="btn-confirm" disabled={selectedSeats.length === 0} onClick={confirmSelection}>Confirm</button>
+						<button className={`${styles.btnCancel} ${styles.btn}`} onClick={onClose}>Cancel</button>
+						<button className={`${styles.btnConfirm} ${styles.btn}`} 
+							disabled={selectedSeats.length === 0} 
+							onClick={confirmSelection}>
+								Confirm
+            			</button>
 					</div>
 				</div>
 				</div>
@@ -400,33 +404,33 @@ export default function CreateOrder({ onClose, bookingTime }) {
 				<hr />
 				{selectedSeats.map(seat => (
 					<section key={`${seat.row}-${seat.col}`} className="section ticket-section">
-					<section className="seats-info">
-						<article className="icon-and-title">
-						<span>{getTicketTypeLabel(seat)}</span>
-						</article>
-						<article className="row-and-coll">
-						<span className="row">Row: {seat.row}</span>
-						<span className="coll">Place: {seat.col}</span>
-						</article>
-					</section>
-					<section className="button-and-price">
-						<button className="change-type-ticket" onClick={() => openTicketTypeDialog(seat)}>CHANGE</button>
-						<span className="price-ticket">€ {getTicketPrice(seat)}</span>
-						<button className="delete-ticket" onClick={() => deleteTicket(seat)}>x</button>
-					</section>
+						<section className="seats-info">
+							<article className="icon-and-title">
+							<span>{getTicketTypeLabel(seat)}</span>
+							</article>
+							<article className="row-and-coll">
+							<span className="row">Row: {seat.row}</span>
+							<span className="coll">Place: {seat.col}</span>
+							</article>
+						</section>
+						<section className="button-and-price">
+							<button className="change-type-ticket" onClick={() => openTicketTypeDialog(seat)}>CHANGE</button>
+							<span className="price-ticket">€ {getTicketPrice(seat)}</span>
+							<button className="delete-ticket" onClick={() => deleteTicket(seat)}>x</button>
+						</section>
 					</section>
 				))}
 				<hr />
 				<section className="section price-section">
 					<article className="price-text">
-					<p className="price-description">Total (including all taxes and fees)</p>
-					<p className="price-fee">Includes administrative fee (€ 1.01)</p>
+						<p className="price-description">Total (including all taxes and fees)</p>
+						<p className="price-fee">Includes administrative fee (€ 1.01)</p>
 					</article>
 					<p className="total-price">€ {getTotalPrice()}</p>
 				</section>
 				<div className="actions">
-					<button className="btn-cancel" onClick={goBack}>Back</button>
-					<button className="btn-confirm" onClick={confirmSelection}>Next</button>
+					<button className={`${styles.btnBack} ${styles.btn}`} onClick={goBack}>Back</button>
+					<button className={`${styles.btnConfirm} ${styles.btn}`} onClick={confirmSelection}>Next</button>
 				</div>
 				</section>
 			)}
@@ -482,7 +486,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 					<button className={styles.paymentButton} onClick={confirmSelection}>Pay Now</button>
 				</section>
 				<div className="actions">
-					<button className="btn-cancel" onClick={goBack}>Back</button>
+					<button className={`${styles.btnBack} ${styles.btn}`} onClick={goBack}>Back</button>
 				</div>
 				</section>
 			)}
@@ -498,7 +502,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 						</button>
 					))}
 					</div>
-					<button className="btn-cancel" onClick={() => setShowTicketTypeDialog(false)}>Cancel</button>
+					<button className={`${styles.btnCancelOverlay} ${styles.btn}`} onClick={() => setShowTicketTypeDialog(false)}>Cancel</button>
 				</div>
 				</div>
 			)}
