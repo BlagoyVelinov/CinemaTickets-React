@@ -1,0 +1,25 @@
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-height: 72vh;
+    padding: 20px;
+    color: #fff;
+    gap: 1em;
+}
+
+.container h2 {
+    text-transform: capitalize;
+}
+
+.ticketsList {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.ticketItem {
+    margin-bottom: 20px;
+}

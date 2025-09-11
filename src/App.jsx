@@ -25,6 +25,7 @@ import MyTickets from './components/user/tickets/MyTickets';
 import { OfferProvider } from './providers/OfferProvider';
 import ShowOffer from './components/offers/offer/ShowOffer';
 import TicketModal from './components/ticket/ticket-modal/TicketModal';
+import OrderSuccessTickets from './components/order/order-success/OrderSuccessTickets';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
 
@@ -51,6 +52,7 @@ function App() {
                                             <Route path="/account/settings" element={<AccountSettings />} />
                                             <Route path="/account/tickets" element={<MyTickets />} />
                                         </Route>
+                                        <Route path="/order-success" element={<OrderSuccessTickets />} />
                                         <Route path="/4dx" element={<FourDxTab />} />
                                         <Route path="/imax" element={<ImaxTab />} />
                                         <Route path="/offers" element={<OffersTab />} />

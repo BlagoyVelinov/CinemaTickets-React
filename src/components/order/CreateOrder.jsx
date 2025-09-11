@@ -257,7 +257,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
   
         if (result) {
           alert("Order created successfully!");
-          window.location.href = "/program";
+          navigate('/order-success', { state: { orderedTickets: orderDto.tickets } });
         }
       } catch (error) {
         alert("Error creating order: " + error.message);

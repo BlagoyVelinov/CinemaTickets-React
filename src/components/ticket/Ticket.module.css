@@ -157,6 +157,13 @@
     color: #00bcd4;
 }
 
+.stubTitle {
+    font-size: 1.5em;
+    font-weight: bold;
+    margin: 10px 0;
+    color: #777;
+  }
+
 .ticketNumber {
     text-align: center;
 }

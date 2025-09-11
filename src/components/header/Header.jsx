@@ -16,6 +16,7 @@ export default function Header() {
     const isAdminSection = location.pathname.startsWith('/admin-section');
     const isSettings = location.pathname === '/account/settings';
     const isTickets = location.pathname === '/account/tickets';
+    const isOrderSuccess = location.pathname === '/order-success';
     const { username } = useUserContext();
 
     return (
@@ -28,7 +29,7 @@ export default function Header() {
                         <HeaderLanguageSelector />
                     </ul>
                 </div>
-                {!hideNav && !isOrderModal && !isAdminSection && !isSettings && !isTickets && <HeaderNav />}
+                {!hideNav && !isOrderModal && !isAdminSection && !isSettings && !isTickets && !isOrderSuccess && <HeaderNav />}
             </nav>
         </header>
     );

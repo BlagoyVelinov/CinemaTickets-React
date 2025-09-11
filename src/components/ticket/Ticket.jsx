@@ -58,7 +58,7 @@ export default function Ticket({ ticket, isExpired }) {
                     <span>TICKET</span>
                 </div>
                 <div className={styles.stubDetails}>
-                    <div className={styles.ticketTitle}>{ticket.movieName}</div>
+                    <div className={styles.stubTitle}>{ticket.movieName}</div>
                     <p>Theater <span>{ticket.cityName}</span></p>
                     <p>Seat <span>{ticket.numberOfSeat}</span></p>
                     <p>Price <span>€{ticket.price / 2}</span></p>
