@@ -1,7 +1,6 @@
 import request from "../api/request";
 
 
-// const BASE_URL = "http://localhost:8081/api/movies";
 const BASE_URL = import.meta.env.VITE_MOVIES_BASE_URL;
 
 export default {

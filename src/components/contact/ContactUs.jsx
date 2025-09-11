@@ -1,4 +1,36 @@
+import React, { useState } from "react";
+import request from "../../api/request";
+
+const BASE_URL = import.meta.env.VITE_CINEMA_BASE_URL;
+
 export default function ContactUs() {
+    const [name, setName] = useState("");
+    const [email, setEmail] = useState("");
+    const [message, setMessage] = useState("");
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        try {
+            const response = await request.post(`${BASE_URL}/contact`, {
+                from: email,
+                subject: `New message from ${name}`,
+                message: message,
+            });
+
+            if (response) {
+                alert("Message sent successfully!");
+                setName("");
+                setEmail("");
+                setMessage("");
+            } else {
+                alert(`Failed to send message.`);
+            }
+        } catch (error) {
+            alert("Error sending message: " + error.message);
+        }
+    };
+
     return (
         <div id="content-contact-us" className="content-section">
             <div className="line-hor"></div>
@@ -38,22 +70,22 @@ export default function ContactUs() {
                     </div>
                     <div className="content">
                         <h3>Contact <span>Form</span></h3>
-                        <form id="contacts-form" action="#">
+                        <form id="contacts-form" action="#" onSubmit={handleSubmit}>
                         <fieldset>
                             <div className="field">
                             <label>Your Name:</label>
-                            <input type="text" name="name" value=""/>
+                            <input type="text" name="name" value={name} onChange={(e) => setName(e.target.value)} />
                             </div>
                             <div className="field">
                             <label>Your E-mail:</label>
-                            <input type="email" name="email" value=""/>
+                            <input type="email" name="email" value={email} onChange={(e) => setEmail(e.target.value)} />
                             </div>
                             <div className="field">
                             <label>Your Message:</label>
-                            <textarea name="message" cols="30" rows="5"></textarea>
+                            <textarea name="message" cols="30" rows="5" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                             </div>
                             <div className="button-about-us">
-                            <button type="submit" class="link2">
+                            <button type="submit" className="link2">
                                 <span>Send Message</span>
                             </button>
                             </div>
