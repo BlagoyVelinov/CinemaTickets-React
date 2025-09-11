@@ -14,7 +14,7 @@ export default function Ticket({ ticket, isExpired }) {
                     <div className={styles.ticketDetails}>
                         <div className={styles.detailItem}>
                             <p>Theater</p>
-                            <span>{ticket.cityName}</span>
+                            <span>{ticket.cityName.replace("_", " ")}</span>
                         </div>
                         <div className={styles.detailItem}>
                             <p>Seat</p>
