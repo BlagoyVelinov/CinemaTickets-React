@@ -10,10 +10,10 @@ import styles from "./CreateOrder.module.css"
 import { formatProjectionDate } from "../../utils/formatDate";
 
 const TICKET_TYPES = {
-  CHILDREN_UNDER_16: { value: "Children under 16", price: 10.5 },
-  PUPILS_AND_STUDENTS: { value: "Pupils and Students", price: 12.5 },
-  PERSONS_OVER_60: { value: "People Over 60", price: 11.5 },
-  REGULAR: { value: "Regular", price: 15.5 },
+  CHILDREN_UNDER_16: { value: "Children under 16", price: 5.37 },
+  PUPILS_AND_STUDENTS: { value: "Pupils and Students", price: 6.39 },
+  PERSONS_OVER_60: { value: "People Over 60", price: 5.88 },
+  REGULAR: { value: "Regular", price: 7.92 },
 };
 
 const MAX_SELECT = 10;
@@ -411,7 +411,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 					</section>
 					<section className="button-and-price">
 						<button className="change-type-ticket" onClick={() => openTicketTypeDialog(seat)}>CHANGE</button>
-						<span className="price-ticket">{getTicketPrice(seat)} lv.</span>
+						<span className="price-ticket">€ {getTicketPrice(seat)}</span>
 						<button className="delete-ticket" onClick={() => deleteTicket(seat)}>x</button>
 					</section>
 					</section>
@@ -420,9 +420,9 @@ export default function CreateOrder({ onClose, bookingTime }) {
 				<section className="section price-section">
 					<article className="price-text">
 					<p className="price-description">Total (including all taxes and fees)</p>
-					<p className="price-fee">Includes administrative fee (1.98 lv)</p>
+					<p className="price-fee">Includes administrative fee (€ 1.01)</p>
 					</article>
-					<p className="total-price">{getTotalPrice()} lv.</p>
+					<p className="total-price">€ {getTotalPrice()}</p>
 				</section>
 				<div className="actions">
 					<button className="btn-cancel" onClick={goBack}>Back</button>
@@ -441,18 +441,18 @@ export default function CreateOrder({ onClose, bookingTime }) {
 					{getOrderSummary().map(item => (
 					<article key={item.type} className="count-tickets-summary">
 						<p>{item.count} x {item.type}</p>
-						<p>{item.price} lv.</p>
+						<p>€ {item.price}</p>
 					</article>
 					))}
 					<article className="admin-fee">
-					<p className="price-fee">Includes administrative fee 1.98 lv</p>
+					<p className="price-fee">Includes administrative fee € 1.01</p>
 					</article>
 				</section>
 				<hr />
 				<section className="section price-section-summary">
 					<article className="price-text">
 					<p className="price-description">Total (including all taxes and fees)</p>
-					<p className="total-price">{getTotalPrice()} lv.</p>
+					<p className="total-price">€ {getTotalPrice()}</p>
 					</article>
 					<p className="price-info">This amount includes an administration fee.</p>
 					<p className="learn-more">Read more in <Link to="">Terms of online sales</Link></p>
@@ -494,7 +494,7 @@ export default function CreateOrder({ onClose, bookingTime }) {
 					<div className="ticket-type-options">
 					{Object.entries(TICKET_TYPES).map(([key, type]) => (
 						<button key={key} onClick={() => selectTicketType(key)} className="ticket-type-option">
-						{type.value} - {type.price.toFixed(2)} lv.
+						{type.value} - € {type.price.toFixed(2)}
 						</button>
 					))}
 					</div>
