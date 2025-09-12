@@ -140,7 +140,10 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
     
     return (
         <div className={styles.mainScreen}>
-            <h1>Account Settings</h1>
+            {!onAdmin 
+                ? <h1>Account Settings</h1>
+                : null }
+            
 
             <div className={styles.userDetailsContainer}>
                 <button className={styles.xBtn} onClick={handleBack}>
