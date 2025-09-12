@@ -1,7 +1,7 @@
 export default class ImageService {
     static imgbbApiKey = import.meta.env.VITE_IMGBB_API_KEY;
     static imgbbBaseUrl = import.meta.env.VITE_IMGBB_BASE_URL;
-    static backendBaseUrl = import.meta.env.VITE_CINEMA_BASE_URL;
+    static backendBaseUrl = import.meta.env.VITE_CINEMA_AZURE_BASE_URL || import.meta.env.VITE_CINEMA_BASE_URL;
 
     static async uploadImageToImgBB(file) {
         try {

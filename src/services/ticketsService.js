@@ -1,7 +1,7 @@
 import request from "../api/request";
 
 
-const BASE_URL = import.meta.env.VITE_CINEMA_BASE_URL;
+const BASE_URL = import.meta.env.VITE_CINEMA_AZURE_BASE_URL || import.meta.env.VITE_CINEMA_BASE_URL;
 
 export default {
     async getUpcomingTickets(userId) {

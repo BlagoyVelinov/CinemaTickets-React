@@ -3,7 +3,7 @@ import request from "./request";
 import { UserContext } from "../contexts/UserContext";
 import usePersistedState from "../hooks/usePersistedState";
 
-const BASE_URL = import.meta.env.VITE_CINEMA_BASE_URL;
+const BASE_URL = import.meta.env.VITE_CINEMA_AZURE_BASE_URL || import.meta.env.VITE_CINEMA_BASE_URL;
 
 export const useLogin = () => {
     const abortRef = useRef(new AbortController());
