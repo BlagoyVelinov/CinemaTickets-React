@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { useAllUsers, useDeleteUser, useEditUser } from '../../../api/authApi';
+import { useDeleteUser, useEditUser } from '../../../api/authApi';
 import AccountSettings from '../../user/account/AccountSettings';
 import styles from './AdminUsers.module.css';
 
-export default function AdminUsers() {
-    const { users, loading, fetchAllUsers } = useAllUsers();
+export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
     const { deleteUser } = useDeleteUser();
     const { editUserData } = useEditUser();
     const [showEditUserForm, setShowEditUserForm] = useState(false);

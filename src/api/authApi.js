@@ -1,7 +1,6 @@
 import { useCallback, useContext, useEffect, useRef, useState } from "react";
 import request from "./request";
 import { UserContext } from "../contexts/UserContext";
-import usePersistedState from "../hooks/usePersistedState";
 
 const BASE_URL = import.meta.env.VITE_CINEMA_AZURE_BASE_URL || import.meta.env.VITE_CINEMA_BASE_URL;
 
@@ -200,9 +199,10 @@ export const useAuthStatus = () => {
 };
 
 export const useAllUsers = () => {
-    const [users, setUsers] = usePersistedState('allUsers', []);
+    const [users, setUsers] = useState([]);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
+    const { userLogoutHandler } = useContext(UserContext);
 
     const fetchAllUsers = useCallback(async () => {
         setLoading(true);
@@ -224,16 +224,19 @@ export const useAllUsers = () => {
             setUsers(result);
         } catch (error) {
             setError(error);
+            if (error.message === 'Unauthorized or Forbidden') {
+                userLogoutHandler();
+            }
         } finally {
             setLoading(false);
         }
-    }, [setUsers]);
+    }, [userLogoutHandler, setUsers]);
 
     useEffect(() => {
-        if (!users || users.length === 0) {
+        if (users.length === 0 && !loading) {
             fetchAllUsers();
         }
-    }, [users, fetchAllUsers]);
+    }, [users, loading, fetchAllUsers]);
 
     return{
         users,
