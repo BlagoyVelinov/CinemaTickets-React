@@ -3,7 +3,7 @@ import movieService from "../../../../services/movieService";
 import styles from './EditMovie.module.css';
 import { formatBookingTime } from "../../../../utils/formatBookingTimes";
 
-export default function EditMovie({ movieId, onSubmit, onCancel  }) {
+export default function EditMovie({ movieId, onSubmit, onCancel, isLoading }) {
     const [movie, setMovie] = useState(null);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({});
@@ -330,13 +330,15 @@ export default function EditMovie({ movieId, onSubmit, onCancel  }) {
                     <button 
                         type="submit" 
                         className={`${styles.btn} ${styles.btnSave}`} 
+                        disabled={isLoading}
                     >
-                        Save
+                        {isLoading ? "Saving movie..." : "Save"}
                         </button>
                     <button 
                         type="button" 
                         onClick={onCancel} 
                         className={`${styles.btn} ${styles.btnCancel}`}
+                        disabled={isLoading}
                     >
                         Cancel
                         </button>

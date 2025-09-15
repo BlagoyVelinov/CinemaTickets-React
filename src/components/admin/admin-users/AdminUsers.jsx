@@ -9,6 +9,8 @@ export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
     const [showEditUserForm, setShowEditUserForm] = useState(false);
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [isAdminOpen, setIsAdminOpen] = useState(false);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [isEditing, setIsEditing] = useState(false);
 
     const handleEditUser = (userId) => {
             setSelectedUserId(userId);
@@ -20,6 +22,7 @@ export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
         if(!confirmDelete) return;
         
         try {
+            setIsDeleting(true);
             await deleteUser(userId);
 
             setSelectedUserId(null);
@@ -28,11 +31,14 @@ export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
             console.log('Deleted user successfully');
         } catch (error) {
             console.error('Error deleting user:', error);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
     const handleSubmitEditUser = async (userId, userData) => {
         try {
+            setIsEditing(true);
             await editUserData(userId, userData);
 
             setShowEditUserForm(false);
@@ -44,6 +50,8 @@ export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
         } catch (error) {
             console.error('Error editing user: ', error);
             
+        } finally {
+            setIsEditing(false);
         }
     };
 
@@ -69,6 +77,7 @@ export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
                     userId={selectedUserId}
                     onSubmit={handleSubmitEditUser}
                     onAdmin={adminOpen}
+                    isLoading={isEditing}
                 />
             ) : 
             (
@@ -87,8 +96,9 @@ export default function AdminUsers({ users, loading, error, fetchAllUsers }) {
                                         </button>
                                             {user.admin || <button className={`${styles.btn} ${styles.btnDelete}`} 
                                             onClick={() => handleDeleteUser(user.id)}
+                                            disabled={isDeleting}
                                         >
-                                            Delete
+                                            {isDeleting ? "Deleting..." : "Delete"}
                                         </button>
                                         }
                                     </div>

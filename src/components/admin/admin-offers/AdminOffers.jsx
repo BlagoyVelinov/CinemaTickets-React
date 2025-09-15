@@ -17,6 +17,7 @@ export default function AdminOffers() {
     const [showAddOfferForm, setShowAddOfferForm] = useState(false);
     const [showEditOfferForm, setShowEditOfferForm] = useState(false);
     const [selectedOffer, setSelectedOffer] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         loadAllOffers();
@@ -50,6 +51,7 @@ export default function AdminOffers() {
 
     const handleSubmitOffer = async (offerData) => {
       try {
+        setIsLoading(true);
         await offerService.createOffer(offerData);
 
         setShowAddOfferForm(false);
@@ -58,11 +60,14 @@ export default function AdminOffers() {
         console.log('Offer added successfully');
       } catch (error) {
         console.error('Error adding offer:', error);
+      } finally {
+        setIsLoading(false);
       }  
     };
 
     const handleSubmitEditOffer = async (offerId, offerData) => {
         try {
+            setIsLoading(true);
             await offerService.editOffer(offerId, offerData);
             
             setShowEditOfferForm(false);
@@ -74,6 +79,8 @@ export default function AdminOffers() {
         } catch (error) {
             console.error('Error editing Offer: ', error);
             
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -111,11 +118,13 @@ export default function AdminOffers() {
                     offerId={selectedOffer}
                     onSubmit={handleSubmitEditOffer}
                     onCancel={handleCancelEdit}
+                    isLoading={isLoading}
                 />
             ) : showAddOfferForm ? (
                 <AddOffer 
                     onSubmit={handleSubmitOffer}
                     onCancel={handleCancelAdd}
+                    isLoading={isLoading}
                 />
             ) : (
                 <div className={styles.offersList}>

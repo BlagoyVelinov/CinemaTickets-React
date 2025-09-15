@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './AddOffer.module.css';
 
-export default function AddOffer({ onSubmit, onCancel }) {
+export default function AddOffer({ onSubmit, onCancel, isLoading }) {
 	const [formData, setFormData] = useState({
 		title: "",
 		description: "",
@@ -32,9 +32,15 @@ export default function AddOffer({ onSubmit, onCancel }) {
 
 		const newErrors = {};
 		if(!formData.title) newErrors.title = "Offer Title is required";
+		if(!formData.title) newErrors.title = "Offer title length must be between 5 and 100 characters!";
 		if(!formData.description) newErrors.description = "Offer description is required";
+		if(!formData.description) newErrors.description = "Description length must be between 5 and 2000 characters!";
 		if(!formData.imageUrl) newErrors.imageUrl = "Image URL for offer is required";
+		if(!formData.imageUrl) newErrors.imageUrl = "The URL length should be between 5 and 200 symbols!";
 		if(!formData.offerCategory) newErrors.offerCategory = "Offer Category is required";
+
+		console.log(formData.offerCategory);
+		
 
 		setErrors(newErrors);
 		if(Object.keys(newErrors).length === 0) {
@@ -53,6 +59,8 @@ export default function AddOffer({ onSubmit, onCancel }) {
 					className={styles.formControl}
 					id="title"
 					name="title"
+					minLength="5" 
+					maxLength="100"
 					value={formData.title}
 					onChange={handleChange}
 				/>
@@ -85,7 +93,7 @@ export default function AddOffer({ onSubmit, onCancel }) {
 					className={styles.formControl}
 					id="imageUrl"
 					name="imageUrl"
-					minLength="10"
+					minLength="5"
                     maxLength="200"
 					value={formData.imageUrl}
 					onChange={handleChange}
@@ -113,8 +121,8 @@ export default function AddOffer({ onSubmit, onCancel }) {
 			</div>
 
 			<div className={styles.buttonHolder}>
-				<button type="submit" className={`${styles.btn} ${styles.btnAdd}`}>Add offer</button>
-				<button type="button" onClick={onCancel} className={`${styles.btn} ${styles.btnCancel}`}>Cancel</button>
+				<button type="submit" className={`${styles.btn} ${styles.btnAdd}`} disabled={isLoading}>{isLoading ? "Adding offer..." : "Add offer"}</button>
+				<button type="button" onClick={onCancel} className={`${styles.btn} ${styles.btnCancel}`} disabled={isLoading}>Cancel</button>
 			</div>
 		</form>
     );

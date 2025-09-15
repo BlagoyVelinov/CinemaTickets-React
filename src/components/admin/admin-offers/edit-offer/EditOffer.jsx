@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import styles from './EditOffer.module.css';
 import offerService from "../../../../services/offerService";
 
-export default function EditOffer({ offerId, onSubmit, onCancel  }) {
+export default function EditOffer({ offerId, onSubmit, onCancel, isLoading  }) {
     const [offer, setOffer] = useState(null);
     const [loading, setLoading] = useState(true);
     const [errors, setErrors] = useState({});
@@ -112,13 +112,15 @@ export default function EditOffer({ offerId, onSubmit, onCancel  }) {
                     <button 
                         type="submit" 
                         className={`${styles.btn} ${styles.btnSave}`} 
+                        disabled={isLoading}
                     >
-                        Save
+                        {isLoading ? "Saving offer..." : "Save"}
                         </button>
                     <button 
                         type="button" 
                         onClick={onCancel} 
                         className={`${styles.btn} ${styles.btnCancel}`}
+                        disabled={isLoading}
                     >
                         Cancel
                         </button>

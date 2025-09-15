@@ -1,7 +1,7 @@
 import { useState } from "react";
 import styles from './AddMovie.module.css';
 
-export default function AddMovie({ onSubmit, onCancel }) {
+export default function AddMovie({ onSubmit, onCancel, isLoading }) {
 	const [formData, setFormData] = useState({
 		name: "",
 		movieLength: "",
@@ -279,8 +279,8 @@ export default function AddMovie({ onSubmit, onCancel }) {
 			</div>
 
 			<div className={styles.buttonHolder}>
-				<button type="submit" className={`${styles.btn} ${styles.btnAdd}`}>Add movie</button>
-				<button type="button" onClick={onCancel} className={`${styles.btn} ${styles.btnCancel}`}>Cancel</button>
+				<button type="submit" className={`${styles.btn} ${styles.btnAdd}`} disabled={isLoading}>{isLoading ? "Adding movie..." : "Add movie"}</button>
+				<button type="button" onClick={onCancel} className={`${styles.btn} ${styles.btnCancel}`} disabled={isLoading}>Cancel</button>
 			</div>
 		</form>
     );

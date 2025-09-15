@@ -10,6 +10,7 @@ export default function AdminMovies() {
     const [showAddMovieForm, setShowAddMovieForm] = useState(false);
     const [showEditMovieForm, setShowEditMovieForm] = useState(false);
     const [selectedMovie, setSelectedMovie] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     useEffect(() => {
         loadAllMovies();
@@ -43,6 +44,7 @@ export default function AdminMovies() {
 
     const handleSubmitMovie = async (movieData) => {
       try {
+        setIsLoading(true);
         await movieService.addMovie(movieData);
 
         setShowAddMovieForm(false);
@@ -51,11 +53,14 @@ export default function AdminMovies() {
         console.log('Movie added successfully');
       } catch (error) {
         console.error('Error adding movie:', error);
+      } finally {
+        setIsLoading(false);
       }  
     };
 
     const handleSubmitEditMovie = async (movieId, movieData) => {
         try {
+            setIsLoading(true);
             await movieService.editMovie(movieId, movieData);
             
             setShowEditMovieForm(false);
@@ -68,6 +73,8 @@ export default function AdminMovies() {
         } catch (error) {
             console.error('Error editing movie: ', error);
             
+        } finally {
+            setIsLoading(false);
         }
     };
 
@@ -106,11 +113,13 @@ export default function AdminMovies() {
                     movieId={selectedMovie}
                     onSubmit={handleSubmitEditMovie}
                     onCancel={handleCancelEdit}
+                    isLoading={isLoading}
                 />
             ) : showAddMovieForm ? (
                 <AddMovie 
                     onSubmit={handleSubmitMovie}
                     onCancel={handleCancelAdd}
+                    isLoading={isLoading}
                 />
             ) : (
                 <div className={styles.moviesList}>
