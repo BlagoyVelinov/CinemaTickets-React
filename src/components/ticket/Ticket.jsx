@@ -40,7 +40,7 @@ export default function Ticket({ ticket, isExpired, onDelete, isHovered }) {
                         </div>
                         <div className={styles.detailItem}>
                             <p>Price</p>
-                            <span>€{ticket.price / 2}</span>
+                            <span>€{(ticket.price).toFixed(2)}</span>
                         </div>
                         
                         
@@ -70,7 +70,7 @@ export default function Ticket({ ticket, isExpired, onDelete, isHovered }) {
                     <div className={styles.stubTitle}>{ticket.movieName}</div>
                     <p>Theater <span>{ticket.cityName}</span></p>
                     <p>Seat <span>{ticket.numberOfSeat}</span></p>
-                    <p>Price <span>€{ticket.price}</span></p>
+                    <p>Price <span>€{ticket.price.toFixed(2)}</span></p>
                     <p>Time <span>{ticket.bookingTime}</span></p>
                     <p>Date <span>{formatDateOnTicket(ticket.projectionDate)}</span></p>
                     <div className={styles.ticketNumber}>
