@@ -1,10 +1,16 @@
 import { formatDateOnTicket } from '../../utils/formatDate';
 import styles from './Ticket.module.css';
 
-export default function Ticket({ ticket, isExpired }) {
+export default function Ticket({ ticket, isExpired, onDelete, isHovered }) {
     
+    const handleDeleteClick = (e) => {
+        e.stopPropagation();
+        onDelete(ticket.id);
+    };
+
     return(
         <div className={styles.ticketContainer}>
+            <div className={`${styles.hoverOverlay} ${isHovered ? styles.activeOverlay : ''}`}></div>
             <div className={styles.ticketMain}>
                 <div className={styles.ticketHeader}>
                     <span>CINEMA TICKET</span>
@@ -51,6 +57,9 @@ export default function Ticket({ ticket, isExpired }) {
                     </div>
                 </div>
             </div>
+            {isExpired && (
+                <button className={`${styles.deleteButton} ${isHovered ? styles.activeButton : ''}`} onClick={handleDeleteClick}>Delete Ticket</button>
+            )}
             <div className={styles.ticketSeparator}></div>
             <div className={styles.ticketStub}>
 

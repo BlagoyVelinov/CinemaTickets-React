@@ -14,6 +14,7 @@ export default function MyTickets() {
     const [currentPageUpcoming, setCurrentPageUpcoming] = useState(1);
     const [currentPageExpired, setCurrentPageExpired] = useState(1);
     const ticketsPerPage = 3;
+    const [hoveredTicketId, setHoveredTicketId] = useState(null);
 
     const { openTicketModal } = useTicketModal();
 
@@ -45,6 +46,15 @@ export default function MyTickets() {
 
     const handleTabChange = (tab) => {
         setActiveTab(tab);
+    };
+
+    const handleDeleteTicket = async (ticketId) => {
+        try {
+            await ticketsService.deleteExpiredTicketById(ticketId);
+            setExpiredTickets(prevTickets => prevTickets.filter(ticket => ticket.id !== ticketId));
+        } catch (error) {
+            console.error("Error deleting ticket:", error);
+        }
     };
 
     const indexOfLastUpcomingTicket = currentPageUpcoming * ticketsPerPage;
@@ -115,8 +125,17 @@ export default function MyTickets() {
                 <ul className={`${styles.ticketsList} ${activeTab === 'expired' ? styles.activeList : styles.hiddenList}`}>
                     {currentExpiredTickets.length > 0 
                         ? currentExpiredTickets.map((exTicket) => (
-                            <li key={exTicket.id}>
-                                    <Ticket ticket={exTicket} isExpired={true}/>
+                            <li 
+                                key={exTicket.id} 
+                                onMouseEnter={() => setHoveredTicketId(exTicket.id)} 
+                                onMouseLeave={() => setHoveredTicketId(null)}
+                            >
+                                <Ticket 
+                                    ticket={exTicket} 
+                                    isExpired={true} 
+                                    onDelete={handleDeleteTicket} 
+                                    isHovered={hoveredTicketId === exTicket.id} 
+                                />
                             </li>
                     )) : <h1>No expired tickets yet</h1>
                 }

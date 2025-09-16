@@ -50,4 +50,19 @@ export default {
             throw error;
         }
     },
+
+    async deleteExpiredTicketById(ticketId) {
+        try {
+            const accessToken = localStorage.getItem("accessToken");
+            const result = await request.delete(`${BASE_URL}/tickets/ticket-delete/${ticketId}`, null, {
+                headers: {
+                    Authorization: `Bearer ${accessToken}`,
+                  },
+            });
+            return result;
+        } catch (error) {
+            console.error(`Error deleting ticket with id ${ticketId}:`, error);
+            throw error;
+        }
+    },
 }
