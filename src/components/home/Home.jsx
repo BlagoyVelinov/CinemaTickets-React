@@ -5,6 +5,7 @@ import MovieHome from './movie/MovieHome';
 import { useEffect, useRef, useState } from 'react';
 import useTrailerModal from '../../hooks/useTrailerModal';
 import { isChangeMovie } from '../../utils/checkIsChangeMovie';
+import styles from './Home.module.css';
 
 export default function HomeTab() {
     const { premieres, loadPremieres, refreshPremieres } = useMovies();
@@ -48,7 +49,9 @@ export default function HomeTab() {
                     <div className="border-left">
                         <div className="inner">
                         <h3>Welcome to <b>Cinema</b> <span>Tickets</span></h3>
-                        <img className="start-img" src="/images/insideout.png" alt="Inside Out" />
+                        <div className={styles.imageContainer}>
+                            <img className="start-img" src="/images/avatar-3.jpg" alt="Avatar III" />
+                        </div>
 
                             <div className="content">
                                 <h3>Upcoming <span>Premieres</span></h3>
