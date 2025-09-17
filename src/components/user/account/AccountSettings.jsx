@@ -2,11 +2,12 @@ import { useEffect, useState } from 'react';
 import { useNavigate } from "react-router";
 
 import styles from './AccountSettings.module.css';
-import { useDeleteUser, useEditUser, useUser } from '../../../api/authApi';
+import { useChangePassword, useDeleteUser, useEditUser, useUser } from '../../../api/authApi';
 import { formatBirthdate } from '../../../utils/formatDate';
 import ProfileImagePickerModal from '../image-picker/ProfileImagePickerModal';
 import ImageService from '../../../services/imageService';
 import { useUserContext } from '../../../contexts/UserContext';
+import ChangePassword from '../password/ChangePassword';
 
 export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin }) {
     const { user } = useUser(userId);
@@ -14,10 +15,14 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
     const [profile, setProfile] = useState(null);
     const { editUserData } = useEditUser();
     const { deleteUser } = useDeleteUser();
+    const { editUserPassword } = useChangePassword();
     const [isEditing, setIsEditing] = useState(false);
     const [isDirty, setIsDirty] = useState(false);
     const [initialProfile, setInitialProfile] = useState(null);
     const [isImageModalOpen, setIsImageModalOpen] = useState(false);
+    const [showChangePasswordForm, setShowChangePasswordForm] = useState(false);
+    const [passwordChangeError, setPasswordChangeError] = useState(null);
+    const [passwordChangeSuccessMessage, setPasswordChangeSuccessMessage] = useState(null);
     const navigate = useNavigate();
 
     const fieldsToCompare = ['username', 'name', 'email'];
@@ -137,6 +142,30 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
             console.error('Error deleting account:', error);
         }
     };
+
+    const handleChangeUserPassword = () => {
+        setShowChangePasswordForm(prev => !prev);
+    };
+
+    const handleConfirmPasswordChange = async (passwords) => {
+        setPasswordChangeError(null);
+        try {
+            const { rawPassword, ...passwordData } = passwords;
+            await editUserPassword(profile?.id, passwordData);
+            setShowChangePasswordForm(false);
+            setPasswordChangeSuccessMessage('Password changed successfully!');
+            setTimeout(() => {
+                setPasswordChangeSuccessMessage(null);
+            }, 3000);
+        } catch (error) {
+            console.error('Error changing password:', error);
+            setPasswordChangeError(error.message);
+        }
+    };
+
+    const handleCancelPasswordChange = () => {
+        setShowChangePasswordForm(false);
+    };
     
     return (
         <div className={styles.mainScreen}>
@@ -163,20 +192,41 @@ export default function AccountSettings({ userId, onSubmit, onCancel, onAdmin })
                         </button>
 
                     </article>
-                    {!onAdmin 
-                    ?   <button className={`${styles.btn} ${styles.changePassBtn}`}>
-                            Change password
-                        </button> 
-                    : null }
                     
-                    {!onAdmin 
-                    ?   <button 
-                            className={`${styles.btn} ${styles.deleteBtn}`}
-                            onClick={() => handleDeleteUser(profile?.id)}
-                        >
-                            Delete account
-                        </button>
-                    : null}
+                        {!onAdmin 
+                        ?   <button 
+                                className={`${styles.btn} ${styles.changePassBtn}`}
+                                onClick={handleChangeUserPassword}
+                            >
+                                {showChangePasswordForm ? 'Cancel' : 'Change password'}
+                            </button> 
+                        : null }
+                        
+                        {showChangePasswordForm && !onAdmin && (
+                            <ChangePassword 
+                                onConfirm={handleConfirmPasswordChange} 
+                                onCancel={handleCancelPasswordChange} 
+                                passwordChangeError={passwordChangeError}
+                                clearPasswordChangeError={() => setPasswordChangeError(null)}
+                            />
+                        )}
+                    <div className={styles.buttonsContainer}>
+                        {!showChangePasswordForm && passwordChangeSuccessMessage && (
+                            <div className={styles.successMessage}>
+                                {passwordChangeSuccessMessage}
+                            </div>
+                        )}
+
+                        {!onAdmin 
+                        ?   <button 
+                                className={`${styles.btn} ${styles.deleteBtn}`}
+                                onClick={() => handleDeleteUser(profile?.id)}
+                            >
+                                Delete account
+                            </button>
+                        : null}
+                    </div>
+ 
                     
 
                 </section>
