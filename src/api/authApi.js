@@ -319,3 +319,52 @@ export const useDeleteUser = () => {
         deleteUser,
     }
 };
+
+export const useChangePassword = () => {
+    const abortRef = useRef(new AbortController());
+    
+    const editUserPassword = async ( id, userData ) => {
+        const accessToken = localStorage.getItem('accessToken');
+        try {
+            if (!accessToken) {
+                return;
+            }
+
+            if (abortRef.current) {
+                abortRef.current.abort();
+            }
+
+            const controller = new AbortController();
+            abortRef.current = controller;
+
+            const options = {
+                headers: { Authorization: `Bearer ${accessToken}`},
+                signal: controller.signal,
+            }
+            
+            const result = await request.post(
+                `${BASE_URL}/users/change-password/${id}`, userData, options);
+            
+            return result;
+        } catch (error) {
+            if (error && (error.name === 'AbortError' || error.code === 'ERR_CANCELED')) {
+                return;
+            }
+            console.error('Edit failed:', error);
+            throw error;
+        }
+    }
+    
+    useEffect(() => {
+        return () => {
+            const currentController = abortRef.current;
+            if (currentController && !currentController.signal.aborted) {
+                currentController.abort();
+            }
+        };
+    }, []);
+    
+    return {
+        editUserPassword,
+    }
+};
