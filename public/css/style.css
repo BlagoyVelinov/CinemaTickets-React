@@ -759,7 +759,6 @@ a {
 #header .row-1 .logged-user {
     font-size: 33px;
     line-height: 0.2em;
-    /*padding: 10px 1px 0px 61px;*/
     float: left;
     text-decoration: none;
     color: rgba(255, 255, 255, 0.51);
@@ -839,7 +838,6 @@ p .imax-pic {
     display: flex;
     justify-content: space-between;
     flex-direction: row-reverse;
-    /* align-items: center; */
 }
 .banner-content > .col-sm-4 {
     flex: 1 0 44%;
@@ -1470,273 +1468,6 @@ element.style {
     text-decoration: underline;
 }
 
-/* Add Movie Styles */
-
-.movie-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.movie-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.movie-form-group label {
-    font-size: 16px;
-    color: #162938;
-    font-weight: 500;
-}
-
-.movie-form-group input,
-.movie-form-group textarea,
-.movie-form-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-}
-
-.movie-form-group input:focus,
-.movie-form-group textarea:focus,
-.movie-form-group select:focus {
-    border-color: #162938;
-    outline: none;
-}
-
-.movie-form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.movie-form-group .movie-file-input {
-    display: none;
-}
-
-.movie-form-group .movie-file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #162938;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.movie-form-group .movie-file-label:hover {
-    background: #1a3447;
-}
-
-.movie-form-group .movie-file-name {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #666;
-}
-
-.movie-btn {
-    padding: 12px 24px;
-    background: #162938;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background 0.3s ease;
-}
-
-.movie-btn:hover {
-    background: #1a3447;
-}
-
-.movie-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-} */
-
-.movie-preview {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.movie-preview h3 {
-    margin-bottom: 15px;
-    color: #162938;
-}
-
-.movie-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.movie-error {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.movie-success {
-    color: #28a745;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-/* Add Offer Styles */
-.offer-container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
-
-.offer-form {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-}
-
-.offer-form-group {
-    display: flex;
-    flex-direction: column;
-    gap: 5px;
-}
-
-.offer-form-group label {
-    font-size: 16px;
-    color: #162938;
-    font-weight: 500;
-}
-
-.offer-form-group input,
-.offer-form-group textarea,
-.offer-form-group select {
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    font-size: 14px;
-    transition: border-color 0.3s ease;
-}
-
-.offer-form-group input:focus,
-.offer-form-group textarea:focus,
-.offer-form-group select:focus {
-    border-color: #162938;
-    outline: none;
-}
-
-.offer-form-group textarea {
-    min-height: 100px;
-    resize: vertical;
-}
-
-.offer-form-group .offer-file-input {
-    display: none;
-}
-
-.offer-form-group .offer-file-label {
-    display: inline-block;
-    padding: 10px 20px;
-    background: #162938;
-    color: #fff;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.offer-form-group .offer-file-label:hover {
-    background: #1a3447;
-}
-
-.offer-form-group .offer-file-name {
-    margin-top: 5px;
-    font-size: 14px;
-    color: #666;
-}
-
-.offer-btn {
-    padding: 12px 24px;
-    background: #162938;
-    color: #fff;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-    font-weight: 500;
-    transition: background 0.3s ease;
-}
-
-.offer-btn:hover {
-    background: #1a3447;
-}
-
-.offer-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-}
-
-.offer-preview {
-    margin-top: 20px;
-    padding: 20px;
-    border: 1px solid #ddd;
-    border-radius: 5px;
-}
-
-.offer-preview h3 {
-    margin-bottom: 15px;
-    color: #162938;
-}
-
-.offer-preview img {
-    max-width: 100%;
-    height: auto;
-    border-radius: 5px;
-}
-
-.offer-error {
-    color: #dc3545;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.offer-success {
-    color: #28a745;
-    font-size: 14px;
-    margin-top: 5px;
-}
-
-.offer-date-group {
-    display: flex;
-    gap: 10px;
-}
-
-.offer-date-group .offer-form-group {
-    flex: 1;
-}
-
-.offer-price-group {
-    display: flex;
-    gap: 10px;
-    align-items: center;
-}
-
-.offer-price-group .offer-form-group {
-    flex: 1;
-}
-
-.offer-price-group .offer-currency {
-    font-size: 16px;
-    color: #162938;
-    font-weight: 500;
-}
-
 /* Order Styles */
 
 div.modal-overlay {
@@ -2012,12 +1743,12 @@ div.modal-overlay {
     padding: 0;
     margin: 0;
   }
-  
+
   .ticket-section-summary{
     display: flex;
     flex-direction: column;
   }
-  
+
   .count-tickets-summary {
     position: relative;
     display: flex;
@@ -2031,31 +1762,32 @@ div.modal-overlay {
     color: #fff;
     border: 0.1px solid #9b9494;
     top: 73%;
-    
+
   }
-  
+
   .admin-fee {
     display: flex;
     justify-content: end;
     margin-top: 0.4em;
   }
-  
+
   .price-text {
         display: flex;
         flex-direction: column;
         align-items: flex-end;
+
   }
-  
+
 .title-payment {
     margin-bottom: 1em;
 }
-  
+
   .text {
     border: 0.15em solid #fff;
     padding: 1em;
     border-radius: 0.5em;
   }
-  
+
   .text-and-icon {
     width: 100%;
     display: flex;
@@ -2094,12 +1826,12 @@ input[type=checkbox] {
   .text-payment {
     margin: 0;
   }
-  
+
   .fa-regular.fa-credit-card {
     padding: 0 0.3em;
     font-size: 1.2em;
   }
-  
+
   .payment-button {
     width: 100%;
     border: 0.15em solid #fff;
@@ -2351,10 +2083,8 @@ header.navigation ul li a:hover {
     font-size: 14px;
 }
 
-/* ======================= edit projection time styles ======================= */
-
 .browser-default.custom-select {
-    width: 100%;
+    width: 92%;
     padding: 0.8em 1.5em;
     border: 1px solid #ddd;
     border-radius: 4px;
@@ -2362,25 +2092,30 @@ header.navigation ul li a:hover {
     background-color: #fff;
     margin-top: 0.5em;
 }
+
 .custom-select.movie-add {
     width: 97%;
     margin-top: 0;
 }
+
 .movie-info-program {
     display: flex;
     flex-direction: column;
     align-items: start;
     margin: 0.3em 0 0.1em 0
 }
+
 .info-booking-times {
     display: flex;
     gap: 0.5em;
 }
+
 .info-booking-times > a.h4 {
     font-size: 1.5em;
     margin-top: 0.5em;
     color: #ca6218;
 }
+
 .qb-movie-info-column {
     width: 100%;
     display: flex;
@@ -2497,8 +2232,8 @@ header.navigation ul li a:hover {
     padding: 2px 0;
     color: #c5c1c1;
     border-radius: 3px;
-    margin: 0.5em 0 0 0;
-    font-size: 1.4em;
+    margin-top: 1em;
+    font-size: 1.2em;
     font-weight: 700;
 }
 
@@ -2526,12 +2261,6 @@ header.navigation ul li a:hover {
     font-size: 12px;
     color: #ccc;
     margin-top: 10px;
-}
-
-@keyframes admin-btn-spin {
-    to {
-        transform: rotate(360deg);
-    }
 }
 
 /* Trailer modal */
@@ -2649,6 +2378,75 @@ header a.active {
 #header .row-2 ul li a.active {
   color: #d72a18;
   background-image: url(/images/nav-act.gif);
+}
+
+.ticket-type-dialog-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.ticket-type-dialog {
+    background: rgb(43 41 41 / 95%);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 12px;
+    padding: 2rem;
+    width: 90%;
+    max-width: 500px;
+    color: #fff;
+}
+
+.ticket-type-dialog h3 {
+    margin-bottom: 1.5rem;
+    text-align: center;
+    color: #fff;
+}
+
+.ticket-type-options {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-bottom: 1.5rem;
+}
+
+.ticket-type-option {
+    padding: 1rem;
+    border: 1px solid #ff9800;
+    border-radius: 8px;
+    background: transparent;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.ticket-type-option:hover {
+    background: #ff9800;
+    color: #fff;
+}
+
+.ticket-type-dialog .btn-cancel {
+    width: 100%;
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    background: #ff5722;
+    color: #fff;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: background 0.3s ease;
+}
+
+.ticket-type-dialog .btn-cancel:hover {
+    background: #f4511e;
 }
 
 @media (max-width: 600px) {
