@@ -121,7 +121,6 @@ ul, ol {
 .btn {
     width: 100%;
     padding: 0.8em 0;
-    /* background: linear-gradient(90deg, #ffb347 0%, #ffcc80 100%); */
     color: #222;
     border: none;
     border-radius: 8px;
@@ -132,7 +131,6 @@ ul, ol {
     transition: background 0.2s, color 0.2s;
 }
 .btn:hover {
-    /* background: linear-gradient(90deg, #ff9800 0%, #ffb347 100%); */
     color: #fff;
 }
 
@@ -220,12 +218,10 @@ ul, ol {
     background-size: cover;
 
     background: url(/images/tail-top.gif) left top repeat-x #1d1d1d;
-    /*background: url(../images/cinema-hall2.jpg) no-repeat center;*/
 
 }
 
 .tail-bottom {
-    /*background: url(../images/cinema-hall2.jpg) no-repeat center;*/
     background: url(/images/cinema-hall2.jpg) no-repeat fixed center;
     background-size: cover;
 }
@@ -540,7 +536,6 @@ h4 {
 #header .row-1 {
     height: 112px;
     width: 100%;
-    /* overflow: hidden; */
 }
 
 #header .row-1 .fleft {
@@ -1036,9 +1031,7 @@ a.card * {
     transition: all 0.3s ease;
     -webkit-backface-visibility: hidden;
 }
-/* .visible-xs, .visible-sm, .visible-md, .visible-lg {
-    display: none !important;
-} */
+
 .img-responsive, .thumbnail > img, .thumbnail a > img, .carousel-inner > .item > img, .carousel-inner > .item > a > img {
     display: block;
     width: 100% \9;
@@ -1478,14 +1471,6 @@ element.style {
 }
 
 /* Add Movie Styles */
-.movie-container {
-    max-width: 800px;
-    margin: 50px auto;
-    padding: 20px;
-    background: #fff;
-    border-radius: 10px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-}
 
 .movie-form {
     display: flex;
@@ -1570,7 +1555,7 @@ element.style {
 .movie-btn:disabled {
     background: #ccc;
     cursor: not-allowed;
-}
+} */
 
 .movie-preview {
     margin-top: 20px;
@@ -1799,35 +1784,6 @@ div.modal-overlay {
     color: #fff;
   }
 
-  /* .movie-info {
-    display: flex;
-    gap: 2rem;
-    margin-bottom: 2rem;
-    align-items: center;
-  }
-
-  .movie-poster {
-    width: 140px;
-    height: 200px;
-    border-radius: 8px;
-    background: #333;
-    object-fit: cover;
-  }
-
-  .movie-details h2 {
-    margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
-    text-transform: none;
-  }
-
-  .movie-details .info-row {
-    margin: 0.2rem 0;
-    font-size: 1rem;
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-  } */
-
   .hall-scheme {
     margin: 0 auto;
     text-align: center;
@@ -1957,12 +1913,6 @@ div.modal-overlay {
     font-weight: bold;
     cursor: pointer;
   }
-
-  .btn-cancel { background: #ff5722; color: #fff; }
-
-  .btn-confirm { background: #4caf50; color: #fff; }
-
-  .btn-confirm:disabled { background: #888; }
 
   /* Order - second tab */
   .section {
@@ -2248,7 +2198,6 @@ header.navigation ul li a:hover {
 .wrapper .input-box {
     position: relative;
     width: 100%;
-    /* height: 50px; */
     margin: 30px 0;
 }
 
@@ -2403,9 +2352,6 @@ header.navigation ul li a:hover {
 }
 
 /* ======================= edit projection time styles ======================= */
-.update-projection-time-section {
-    width: 20em;
-}
 
 .browser-default.custom-select {
     width: 100%;
@@ -2440,22 +2386,7 @@ header.navigation ul li a:hover {
     display: flex;
     justify-content: space-between;
 }
-.admin-program-buttons {
-    display: flex;
-    gap: 1em;
-    align-items: end;
-}
-.admin-program-buttons > .btn-lg {
-    padding: 0.5em 1em;
-    background-color: #d76c0f;
-    color: #fff;
-    border-radius: 0.3em;
-    transition: background-color 0.3s ease;
-}
-.admin-program-buttons > .btn-lg:hover {
-    background-color: #9c4e1b;
-    color: #fff;
-}
+
 .button-holder.d-flex-add {
     width: 97%;
     display: flex;
@@ -2471,53 +2402,6 @@ header.navigation ul li a:hover {
 
 .label-holder {
     margin-bottom: 0.4em;
-}
-
-
-.btn {
-    padding: 10px 20px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
-    transition: background-color 0.3s ease;
-}
-
-
-.btn-primary {
-    background-color: #d76c0f;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #9c4e1b;
-    transition: background-color 0.3s ease;
-    
-}
-.btn-primary.btn-lg {
-    color: #fff;
-    margin-bottom: 0;
-}
-.btn-primary.btn-lg:hover {
-    color: #fff;
-}
-
-.btn-info {
-    background-color: #cf3535;
-    color: #fff;
-}
-
-.btn-cancel {
-    background-color: #c06418;
-    color: #fff;
-}
-
-.btn-cancel:hover {
-    color: #fff;
-}
-
-.btn-info:hover {
-    background-color: #720202;
 }
 
 .text-danger {
@@ -2613,8 +2497,8 @@ header.navigation ul li a:hover {
     padding: 2px 0;
     color: #c5c1c1;
     border-radius: 3px;
-    margin: 0.5em 0 0.5em 0;
-    font-size: 1.2em;
+    margin: 0.5em 0 0 0;
+    font-size: 1.4em;
     font-weight: 700;
 }
 
@@ -2644,128 +2528,13 @@ header.navigation ul li a:hover {
     margin-top: 10px;
 }
 
-/* Admin Only Elements */
-.admin-only {
-    display: none;
-}
-
-.admin-only.visible {
-    display: flex;
-    gap: 10px;
-    margin: 10px 0;
-}
-
-.admin-btn {
-    padding: 8px 16px;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    transition: all 0.3s ease;
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-}
-
-.admin-btn i {
-    font-size: 16px;
-}
-
-.admin-btn-add {
-    background-color: #28a745;
-    color: #fff;
-}
-
-.admin-btn-add:hover {
-    background-color: #136f27;
-}
-
-.admin-btn-edit {
-    background-color: #17a2b8;
-    color: #fff;
-}
-
-.admin-btn-edit:hover {
-    background-color: #138496;
-}
-
-.admin-btn-delete {
-    background-color: #dc3545;
-    color: #fff;
-}
-
-.admin-btn-delete:hover {
-    background-color: #c82333;
-}
-
-.admin-btn-times {
-    background-color: #ffc107;
-    color: #000;
-}
-
-.admin-btn-times:hover {
-    background-color: #e0a800;
-}
-
-/* Admin Actions Container */
-.admin-actions {
-    display: flex;
-    gap: 10px;
-    margin: 10px 0;
-    flex-wrap: wrap;
-}
-
-/* Admin Button Groups */
-.admin-btn-group {
-    display: flex;
-    gap: 5px;
-}
-
-/* Admin Button with Icon */
-.admin-btn i {
-    margin-right: 5px;
-}
-
-/* Admin Button States */
-.admin-btn:disabled {
-    opacity: 0.65;
-    cursor: not-allowed;
-}
-
-.admin-btn:focus {
-    outline: none;
-    box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.25);
-}
-
-/* Admin Button Loading State */
-.admin-btn.loading {
-    position: relative;
-    color: transparent;
-}
-
-.admin-btn.loading::after {
-    content: '';
-    position: absolute;
-    width: 16px;
-    height: 16px;
-    top: 50%;
-    left: 50%;
-    margin: -8px 0 0 -8px;
-    border: 2px solid #fff;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: admin-btn-spin 0.75s linear infinite;
-}
-
 @keyframes admin-btn-spin {
     to {
         transform: rotate(360deg);
     }
 }
 
-/* Трейлър модален прозорец - стилове */
+/* Trailer modal */
 .trailer-modal {
   display: none;
   position: fixed;
@@ -2880,75 +2649,6 @@ header a.active {
 #header .row-2 ul li a.active {
   color: #d72a18;
   background-image: url(/images/nav-act.gif);
-}
-
-.ticket-type-dialog-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 1000;
-}
-
-.ticket-type-dialog {
-    background: rgb(43 41 41 / 95%);
-    backdrop-filter: blur(8px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 2rem;
-    width: 90%;
-    max-width: 500px;
-    color: #fff;
-}
-
-.ticket-type-dialog h3 {
-    margin-bottom: 1.5rem;
-    text-align: center;
-    color: #fff;
-}
-
-.ticket-type-options {
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-}
-
-.ticket-type-option {
-    padding: 1rem;
-    border: 1px solid #ff9800;
-    border-radius: 8px;
-    background: transparent;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.ticket-type-option:hover {
-    background: #ff9800;
-    color: #fff;
-}
-
-.ticket-type-dialog .btn-cancel {
-    width: 100%;
-    padding: 0.8rem;
-    border: none;
-    border-radius: 8px;
-    background: #ff5722;
-    color: #fff;
-    font-size: 1rem;
-    cursor: pointer;
-    transition: background 0.3s ease;
-}
-
-.ticket-type-dialog .btn-cancel:hover {
-    background: #f4511e;
 }
 
 @media (max-width: 600px) {
