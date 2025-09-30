@@ -1,0 +1,109 @@
+@media screen and (max-width: 600px) {
+  
+
+    #main {
+        display: flex;
+        font-size: 0.875em;
+        margin: 0 auto;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-content: center;
+        justify-content: center;
+    }
+
+    .language {
+        display: none;
+    }
+    header#nav {
+        position: relative;
+        width: 73%;
+    }
+
+    #header .row-1 {
+        display: flex;
+    }
+
+    #header .row-2 {
+        display: flex;
+        flex-direction: column;
+    }
+
+    #header .row-2 ul {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        align-items: baseline;
+    }
+
+    .icon-menu {
+        position: absolute;
+        top: 23%;
+        right: 23%;
+        display: block;
+        border: 1px solid #fff;
+        border-radius: 1em;
+        padding: 0.6em 1em;
+    }
+
+    .icon-menu .fa-bars {
+        display: block;
+       font-size: 2.4em;
+    }
+
+
+    #slogan {
+        width: 70%;
+        border-radius: 0.7em;
+    }
+
+    #slogan .image {
+        display: none;
+    }
+
+    .box {
+        background: #000;
+        width: 70%;
+    }
+
+    .movies {
+        width: 100%;
+        display: flex;
+        flex-wrap: wrap;
+        padding: 0;
+        flex-direction: column;
+        align-content: center;
+    }
+
+    #movie-app{
+        margin: 0;
+    }
+
+    .movies li img {
+        position: relative;
+        width: 100%;
+        height: auto;
+    }
+
+    .movies li p {
+        padding-right: 0;
+    }
+
+    .link2 {
+        display: block;
+        padding: 0.2em 0.7em;
+    }
+
+    .content-section {
+        height: auto;
+        padding-bottom: 0;
+    }
+
+    #footer {
+        background: url(/images/footer-tail.gif) repeat-x left top #bfbfbf;
+        width: 58.5%;
+        color: #1d1d1d;
+        font-size: .86em;
+        line-height: 1.667em;
+        text-align: center;
+    }
+}
