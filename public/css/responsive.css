@@ -1,14 +1,25 @@
 @media screen and (max-width: 600px) {
-  
+    html, body {
+        max-width: 599px;
+        min-width: auto;
+    }
+    
+    body {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 100%;
+        line-height: 1em;
+        color: #969393;
+        background: none;
+    }
 
     #main {
         display: flex;
         font-size: 0.875em;
-        margin: 0 auto;
         flex-direction: column;
         flex-wrap: wrap;
         align-content: center;
         justify-content: center;
+        width: auto;
     }
 
     .language {
@@ -16,7 +27,7 @@
     }
     header#nav {
         position: relative;
-        width: 73%;
+        width: auto;
     }
 
     #header .row-1 {
@@ -29,16 +40,44 @@
     }
 
     #header .row-2 ul {
+        position: static;
+        top: auto;
+        right: auto;
+        box-shadow: none;
+        z-index: auto;
+        display: block;
+        flex-direction: column;
+        width: auto;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease-in-out;
+        background-color: black;
+    }
+    #header .row-2 ul.mobile-nav-active {
+        min-height: 51px;
+        height: auto;
+        width: auto;
         display: flex;
         flex-direction: column;
-        flex-wrap: wrap;
-        align-items: baseline;
+        z-index: 20000;
+    }
+    #header .row-2 ul li {
+        border-bottom: 1px solid #333;
+        text-align: right;
+    }
+    #header .row-2 ul li:last-child {
+        border-bottom: none;
+    }
+    #header .row-2 ul li a {
+        color: #ff9800;
+        text-decoration: none;
+        display: block;
     }
 
     .icon-menu {
         position: absolute;
         top: 23%;
-        right: 23%;
+        right: 3%;
         display: block;
         border: 1px solid #fff;
         border-radius: 1em;
@@ -52,7 +91,7 @@
 
 
     #slogan {
-        width: 70%;
+        width: auto;
         border-radius: 0.7em;
     }
 
@@ -62,11 +101,11 @@
 
     .box {
         background: #000;
-        width: 70%;
+        width: auto;
     }
 
     .movies {
-        width: 100%;
+        width: auto;
         display: flex;
         flex-wrap: wrap;
         padding: 0;
@@ -99,8 +138,7 @@
     }
 
     #footer {
-        background: url(/images/footer-tail.gif) repeat-x left top #bfbfbf;
-        width: 58.5%;
+        width: auto;
         color: #1d1d1d;
         font-size: .86em;
         line-height: 1.667em;

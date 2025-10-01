@@ -6,3 +6,18 @@
     gap: 1em;
 
 }
+
+@media screen and (max-width: 600px) {
+    .topItems {
+        gap: 0;
+        width: 10em;
+    }
+    .topItems div {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0;
+        justify-content: space-around;
+        align-items: flex-start;  
+    }
+}

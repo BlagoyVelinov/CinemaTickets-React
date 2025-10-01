@@ -155,14 +155,6 @@ ul, ol {
     text-align: center;
 }
 
-@media (max-width: 600px) {
-  .wrapper {
-    width: 98vw;
-    max-width: 98vw;
-    padding: 18px 2vw;
-  }
-}
-
 #header {
     height: 12.3em;
     margin-bottom: -8px;
@@ -2447,4 +2439,8 @@ header a.active {
 
 .ticket-type-dialog .btn-cancel:hover {
     background: #f4511e;
+}
+
+.icon-menu {
+    display: none;
 }
