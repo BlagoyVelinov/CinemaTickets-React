@@ -53,7 +53,8 @@ ul, ol {
 }
 
 #main {
-    width: 940px;
+    width: 100%;
+    max-width: 67.3em;
     margin: 0 auto;
     font-size: 0.875em;
     min-height: 60vh;
@@ -155,14 +156,6 @@ ul, ol {
     text-align: center;
 }
 
-@media (max-width: 600px) {
-  .wrapper {
-    width: 98vw;
-    max-width: 98vw;
-    padding: 18px 2vw;
-  }
-}
-
 #header {
     height: 12.3em;
     margin-bottom: -8px;
@@ -228,7 +221,8 @@ ul, ol {
 
 #contacts-form {
     clear: right;
-    width: 842px;
+    width: 100%;
+    max-width: 842px;
     overflow: hidden;
 }
 
@@ -246,15 +240,16 @@ ul, ol {
 
 #contacts-form label {
     float: left;
-    width: 112px !important;
-    width: 109px;
+    width: 100%;
+    max-width: 112px;
     line-height: 18px;
     padding-bottom: 8px;
     color: #fff;
 }
 
 #contacts-form input {
-    width: 293px;
+    width: 100%;
+    max-width: 293px;
     padding: 5px 1px 7px 7px;
     background: #000;
     border: 1px solid #3a3a3a;
@@ -263,7 +258,8 @@ ul, ol {
 }
 
 #contacts-form textarea {
-    width: 674px;
+    width: 100%;
+    max-width: 674px;
     height: 174px;
     padding: 2px 28px 1px 28px;
     background: url(/images/textarea-bg.gif) no-repeat left top;
@@ -287,7 +283,8 @@ ul, ol {
 
 .movies li {
     float: left;
-    width: 280px;
+    width: 100%;
+    max-width: 280px;
 }
 
 .movies li .movie-1-pic {
@@ -413,7 +410,7 @@ a:hover {
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 2.8em;
     line-height: 1.2em;
     text-transform: uppercase;
     margin-bottom: 12px;
@@ -426,7 +423,7 @@ h2 span {
 }
 
 h3 {
-    font-size: 30px;
+    font-size: 2.4em;
     line-height: 1.2em;
     color: #bfbfbf;
     margin-bottom: 20px;
@@ -442,7 +439,7 @@ h3 span {
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 1.43em;
     line-height: 1.2em;
     letter-spacing: -1px;
     color: #2c6d9a;
@@ -507,7 +504,8 @@ h4 {
     overflow: hidden;
     font-size: 0;
     line-height: 0;
-    width: 918px;
+    width: 100%;
+    max-width: 918px;
     height: 8px;
     margin-left: 11px;
     background: url(/images/line-hor.gif) repeat-x left top;
@@ -539,13 +537,23 @@ h4 {
 }
 
 #header .row-1 .fleft {
-    font-size: 40px;
+    font-size: clamp(8px, 5vw, 40px);
     line-height: 1.2em;
     padding: 26px 0 0 47px;
 }
 
 #header .row-1 .fleft a {
     text-decoration: none;
+    background: linear-gradient(#bfbfbf, #919191);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+#header .row-1 .fleft a span {
+    background: linear-gradient(#d72a18, #b60803);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 #header .row-1 ul {
@@ -615,7 +623,8 @@ h4 {
 }
 
 #slogan {
-    width: 940px;
+    width: auto;
+    max-width: 940px;
     height: 322px;
     position: relative;
     background: url(/images/banner-bg.gif) no-repeat left top;
@@ -627,14 +636,16 @@ h4 {
     right: -30px;
     top: -11px;
     z-index: 100;
-    width: 572px;
+    width: auto;
+    max-width: 572px;
     height: 348px;
     background: url(/images/banner-img.png) no-repeat left top;
 }
 
 #slogan .inside {
     padding: 36px 0 0 50px;
-    width: 390px;
+    width: auto;
+    max-width: 390px;
 }
 
 #slogan h2 {
@@ -746,7 +757,8 @@ a {
 .npm-quickbook .qb-movie .play-icon {
     height: 64px;
     position: absolute;
-    width: 64px;
+    width: auto;
+    max-width: 64px;
     top: 0;
     bottom: 0;
     right: 0;
@@ -832,7 +844,8 @@ strong {
 
 p .imax-pic {
     height: 300px;
-    width: 840px;
+    width: 100%;
+    max-width:  840px;
 }
 .banner-content {
     display: flex;
@@ -875,14 +888,15 @@ div p {
 /*================== 4-DX */
 
 p ._4-dx-pic {
-    height: 300px;
-    width: 840px;
+    width: 100%;
+    max-width: 840px;
+    height: auto;
 }
 
 /*================== offers */
 .container, .container-fluid {
-    max-width: 980px;
     width: 100%;
+    max-width: 980px;
     padding: 0 20px;
 }
 
@@ -1101,7 +1115,8 @@ element.style {
     padding-left: 2em;
     font-size: 0.9em;
     border-radius: 4px;
-    width: 60%;
+    flex: 1 1 auto;
+    min-width: 0;
     color: #fff;
     gap: 0.3em
 }
@@ -1336,7 +1351,8 @@ element.style {
 }
 
 .auth-btnLogin-popup {
-    width: 130px;
+    width: 100%;
+    max-width: 130px;
     height: 50px;
     background: transparent;
     border: 2px solid #fff;
@@ -1357,7 +1373,8 @@ element.style {
 
 .auth-wrapper {
     position: relative;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
     height: 440px;
     background: transparent;
     border: 2px solid rgba(255, 255, 255, .5);
@@ -2154,7 +2171,8 @@ header.navigation ul li a:hover {
     display: flex;
     margin: 1em 0;
     padding: 1em 0;
-    align-items: center;
+    align-items: flex-start;
+    gap: 1rem;
     border-top: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -2449,9 +2467,6 @@ header a.active {
     background: #f4511e;
 }
 
-@media (max-width: 600px) {
-  .wrapper {
-    width: 95vw;
-    padding: 20px 5vw;
-  }
+.icon-menu {
+    display: none;
 }

@@ -4,5 +4,36 @@
     align-content: stretch;
     flex-wrap: wrap;
     gap: 1em;
+    font-size: clamp(12px, 2.8vw, 16px);
+}
 
+@media screen and (max-width: 600px) {
+    .topItems div {
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        gap: 0.5em;
+        justify-content: space-around;
+        align-items: flex-start;  
+    }
+}
+
+@media (max-width: 500px) {
+    .topItems div {
+        gap: 0.5em;
+    }
+
+    .topItems a img {
+        width: 80%;
+    }
+}
+
+@media (max-width: 400px) {
+    .topItems div {
+        gap: 0.5em;
+    }
+
+    .topItems a img {
+        width: 80%;
+    }
 }

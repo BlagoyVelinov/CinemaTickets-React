@@ -113,3 +113,35 @@
     width: 100%;
     height: 100%;
 }
+
+@media screen and (max-width: 600px) {
+    .userDropdownWrapper {
+        margin-left: 6em;
+    }
+
+    .userDropdownMenu {
+        left: -63%;
+        top: 95%;
+        background-color: #00000046;
+    }
+
+    .topItems {
+        gap: 0;
+    }
+
+    .userInfo span {
+        display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .userDropdownWrapper {
+        margin-left: 4em;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .userDropdownWrapper {
+        margin-left: 3em;
+    }
+}
