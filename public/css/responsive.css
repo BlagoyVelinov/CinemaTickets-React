@@ -1,9 +1,21 @@
 @media screen and (max-width: 600px) {
     html, body {
-        max-width: 599px;
+        max-width: 600px;
         min-width: auto;
     }
+
+    h2 {
+        font-size: clamp(10px, 5vw, 40px);
+    }
+
+    h3{
+        font-size: clamp(8px, 5vw, 30px);
+    }
     
+    h4 {
+        font-size: clamp(6px, 5vw, 20px);
+    }
+
     body {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 100%;
@@ -22,16 +34,19 @@
         width: auto;
     }
 
-    .language {
+    .language, .nav-item {
         display: none;
     }
+
     header#nav {
         position: relative;
-        width: auto;
+        width: 100%;
     }
 
     #header .row-1 {
         display: flex;
+        align-items: center;
+        width: 100%;
     }
 
     #header .row-2 {
@@ -40,14 +55,11 @@
     }
 
     #header .row-2 ul {
-        position: static;
-        top: auto;
-        right: auto;
         box-shadow: none;
         z-index: auto;
         display: block;
         flex-direction: column;
-        width: auto;
+        width: 100%;
         max-height: 0;
         overflow: hidden;
         transition: max-height 0.3s ease-in-out;
@@ -101,11 +113,11 @@
 
     .box {
         background: #000;
-        width: auto;
+        width: 100%;
     }
 
     .movies {
-        width: auto;
+        width: 100%;
         display: flex;
         flex-wrap: wrap;
         padding: 0;
@@ -115,6 +127,7 @@
 
     #movie-app{
         margin: 0;
+        width: 100%;
     }
 
     .movies li img {
@@ -143,5 +156,26 @@
         font-size: .86em;
         line-height: 1.667em;
         text-align: center;
+    }
+}
+
+@media (max-width: 500px) {
+    html, body {
+        max-width: 500px;
+        min-width: auto;
+    }
+
+    .icon-menu .fa-bars {
+        font-size: 2em;
+    }
+}
+
+@media (max-width: 400px) {
+    html, body {
+        max-width: 400px;
+        min-width: auto;
+    }
+    .icon-menu .fa-bars {
+        font-size: 1.7em;
     }
 }

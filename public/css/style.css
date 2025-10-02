@@ -405,7 +405,7 @@ a:hover {
 }
 
 h2 {
-    font-size: 30px;
+    font-size: 2.8em;
     line-height: 1.2em;
     text-transform: uppercase;
     margin-bottom: 12px;
@@ -418,7 +418,7 @@ h2 span {
 }
 
 h3 {
-    font-size: 30px;
+    font-size: 2.4em;
     line-height: 1.2em;
     color: #bfbfbf;
     margin-bottom: 20px;
@@ -434,7 +434,7 @@ h3 span {
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 1.43em;
     line-height: 1.2em;
     letter-spacing: -1px;
     color: #2c6d9a;
@@ -531,13 +531,23 @@ h4 {
 }
 
 #header .row-1 .fleft {
-    font-size: 40px;
+    font-size: clamp(8px, 5vw, 40px);
     line-height: 1.2em;
     padding: 26px 0 0 47px;
 }
 
 #header .row-1 .fleft a {
     text-decoration: none;
+    background: linear-gradient(#bfbfbf, #919191);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+#header .row-1 .fleft a span {
+    background: linear-gradient(#d72a18, #b60803);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
 }
 
 #header .row-1 ul {

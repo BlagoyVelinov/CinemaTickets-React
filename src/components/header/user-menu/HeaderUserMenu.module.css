@@ -116,8 +116,7 @@
 
 @media screen and (max-width: 600px) {
     .userDropdownWrapper {
-        position: relative;
-        display: inline-block;
+        margin-left: 6em;
     }
 
     .userDropdownMenu {
@@ -132,5 +131,17 @@
 
     .userInfo span {
         display: none;
+    }
+}
+
+@media screen and (max-width: 500px) {
+    .userDropdownWrapper {
+        margin-left: 4em;
+    }
+}
+
+@media screen and (max-width: 400px) {
+    .userDropdownWrapper {
+        margin-left: 3em;
     }
 }
