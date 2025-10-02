@@ -1,7 +1,9 @@
 @media screen and (max-width: 600px) {
-    html, body {
-        max-width: 600px;
-        min-width: auto;
+    html, body { 
+        width: 100%;
+        max-width: 100%; 
+        min-width: 0; 
+        overflow-x: hidden;
     }
 
     h2 {
@@ -31,7 +33,7 @@
         flex-wrap: wrap;
         align-content: center;
         justify-content: center;
-        width: auto;
+        width: 100%;
     }
 
     .language, .nav-item {
@@ -42,22 +44,26 @@
         position: relative;
         width: 100%;
     }
+    #header { height: auto; }
 
     #header .row-1 {
         display: flex;
         align-items: center;
         width: 100%;
+        margin-bottom: 1.5em;
     }
 
     #header .row-2 {
         display: flex;
         flex-direction: column;
+        width: 100%;
+        height: auto;
     }
 
     #header .row-2 ul {
         box-shadow: none;
         z-index: auto;
-        display: block;
+        display: flex;
         flex-direction: column;
         width: 100%;
         max-height: 0;
@@ -65,40 +71,68 @@
         transition: max-height 0.3s ease-in-out;
         background-color: black;
     }
+
+    #header .row-2 ul::after {
+        position: absolute;
+        top: 2.8em;
+        right: 0;
+        display: block;
+        content: '';
+        width: 6.2em;
+        height: 7em;
+        background-color: #000000;
+    }
+
     #header .row-2 ul.mobile-nav-active {
         min-height: 51px;
         height: auto;
-        width: auto;
+        width: 100%;
+        overflow: visible;   
         display: flex;
         flex-direction: column;
         z-index: 20000;
+        max-height: 80vh;
     }
+
     #header .row-2 ul li {
         border-bottom: 1px solid #333;
         text-align: right;
+        width: 100%;
     }
+
     #header .row-2 ul li:last-child {
         border-bottom: none;
     }
+
     #header .row-2 ul li a {
         color: #ff9800;
         text-decoration: none;
         display: block;
+        width: 100%;
+        height: auto;
+        box-sizing: border-box;
+        padding: 10px 0;
+        line-height: 1.4;
+    }
+
+    #header .row-2 ul li a:hover,
+    #header .row-2 ul li a.active {
+        background-color: #eee;
+        background-image: none;
     }
 
     .icon-menu {
         position: absolute;
-        top: 23%;
-        right: 3%;
+        top: 51px;
+        right: 12px;
         display: block;
-        border: 1px solid #fff;
-        border-radius: 1em;
         padding: 0.6em 1em;
+        z-index: 30000;
     }
 
     .icon-menu .fa-bars {
         display: block;
-       font-size: 2.4em;
+       font-size: 2.8em;
     }
 
 
@@ -123,6 +157,7 @@
         padding: 0;
         flex-direction: column;
         align-content: center;
+        margin-left: 0.8em;
     }
 
     #movie-app{
@@ -134,6 +169,26 @@
         position: relative;
         width: 100%;
         height: auto;
+    }
+
+    /* Program list */
+    .movieList {
+        align-items: flex-start;
+    }
+
+    .movieList > a {
+        flex: 0 0 auto;
+    }
+
+    .movie-details {
+        padding-left: 0.8em;
+        width: 100%;
+    }
+
+    .movie-info-program .info-booking-times {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.4em;
     }
 
     .movies li p {
@@ -150,6 +205,14 @@
         padding-bottom: 0;
     }
 
+    .movie-details {
+        flex-wrap: wrap;
+    }
+
+    p .imax-pic {
+        height: auto;
+    }
+
     #footer {
         width: auto;
         color: #1d1d1d;
@@ -160,22 +223,39 @@
 }
 
 @media (max-width: 500px) {
-    html, body {
-        max-width: 500px;
-        min-width: auto;
+
+    #header .row-2 ul::after {
+        top: 2.8em;
+        right: 0;
+        display: block;
+        content: '';
+        width: 5.7em;
+        height: 7em;
+        background-color: #000000;
     }
 
     .icon-menu .fa-bars {
-        font-size: 2em;
+        font-size: 2.2em;
     }
 }
 
 @media (max-width: 400px) {
-    html, body {
-        max-width: 400px;
-        min-width: auto;
+
+    #header {
+        width: 100%;
     }
+
+    #header .row-2 ul::after {
+        top: 2.8em;
+        right: 0;
+        display: block;
+        content: '';
+        width: 5.2em;
+        height: 7em;
+        background-color: #000000;
+    }
+
     .icon-menu .fa-bars {
-        font-size: 1.7em;
+        font-size: 1.9em;
     }
 }

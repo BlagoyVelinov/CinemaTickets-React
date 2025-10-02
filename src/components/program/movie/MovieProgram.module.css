@@ -12,7 +12,11 @@
     box-shadow: 0 0 10px #eee;
     border-radius: 0.25em;
     border: 0 none;
-    display: block;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    flex: none;
  }
 
  .bookingTimeBtn:hover {

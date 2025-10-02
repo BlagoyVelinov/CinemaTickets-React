@@ -82,7 +82,7 @@ export default function ContactUs() {
                             </div>
                             <div className="field">
                             <label>Your Message:</label>
-                            <textarea name="message" cols="30" rows="5" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
+                            <textarea name="message" cols="310" rows="5" value={message} onChange={(e) => setMessage(e.target.value)}></textarea>
                             </div>
                             <div className="button-about-us">
                             <button type="submit" className="link2">
