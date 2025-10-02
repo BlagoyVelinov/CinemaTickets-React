@@ -44,3 +44,9 @@ a {
 .offerItem:hover .offerImg {
     filter: brightness(0.8);
 }
+
+@media screen and (max-width: 600px) {
+    .offerContainer {
+        flex-direction: column;
+    }
+}

@@ -81,6 +81,7 @@
         width: 6.2em;
         height: 7em;
         background-color: #000000;
+        z-index: -1;
     }
 
     #header .row-2 ul.mobile-nav-active {
@@ -117,8 +118,9 @@
 
     #header .row-2 ul li a:hover,
     #header .row-2 ul li a.active {
-        background-color: #eee;
+        background-color: #000;
         background-image: none;
+        color: #fff !important;
     }
 
     .icon-menu {
@@ -232,6 +234,7 @@
         width: 5.7em;
         height: 7em;
         background-color: #000000;
+        z-index: -1;
     }
 
     .icon-menu .fa-bars {
@@ -253,6 +256,7 @@
         width: 5.2em;
         height: 7em;
         background-color: #000000;
+        z-index: -1;
     }
 
     .icon-menu .fa-bars {
