@@ -35,3 +35,49 @@
 .closeButton:hover {
     color: #00bcd4;
 }
+
+/* Responsive Design for Modal */
+@media (max-width: 768px) {
+    .modalContent {
+        max-width: 90%;
+        max-height: 80%;
+        padding: 1.5em;
+        margin: 1em;
+    }
+    
+    .closeButton {
+        font-size: 1.8em;
+        top: 8px;
+        right: 8px;
+    }
+}
+
+@media (max-width: 480px) {
+    .modalContent {
+        max-width: 95%;
+        max-height: 85%;
+        padding: 1em;
+        margin: 0.5em;
+    }
+    
+    .closeButton {
+        font-size: 1.6em;
+        top: 6px;
+        right: 6px;
+    }
+}
+
+@media (max-width: 320px) {
+    .modalContent {
+        max-width: 98%;
+        max-height: 90%;
+        padding: 0.8em;
+        margin: 0.2em;
+    }
+    
+    .closeButton {
+        font-size: 1.4em;
+        top: 4px;
+        right: 4px;
+    }
+}

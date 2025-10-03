@@ -166,3 +166,16 @@ input {
     margin-top: 2em;
     font-size: 1.2em;
 }
+
+@media (max-width: 600px) {
+    .userDetailsContainer {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+    }
+
+    .rightPart {
+        padding: 2em;
+        width: 100%;
+    }
+}

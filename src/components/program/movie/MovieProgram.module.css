@@ -1,10 +1,10 @@
 
 .bookingTimeBtn {background-image: linear-gradient(to right, #ff4b1f 0%, #fcaa8c  51%, #ff4b1f  100%)}
 .bookingTimeBtn {
-    margin: 1em 0.8em 1em 0;
+    margin: 1em 0.4em 1em 0;
     padding: 0.7em 1em;
     text-align: center;
-    font-size: 14px;
+    font-size: clamp(8px, 2.5vw, 14px);
     text-transform: uppercase;
     transition: 0.5s;
     background-size: 200% auto;
