@@ -108,3 +108,56 @@
     background-color: #00bcd4;
     color: #fff;
 }
+
+@media (max-width: 600px) {
+    .container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 0.5em;
+    }
+
+    .ticketsContent {
+        position: relative;
+        width: 100%;
+        overflow: hidden;
+        margin-top: 2em;
+    }
+    
+    .ticketsList {
+        gap: 10px;
+        padding: 0 0.5em;
+    }
+    
+    .btn {
+        width: 12em;
+        font-size: 1em;
+        padding: 0.5em 1.5em;
+    }
+    
+    .navTickets {
+        gap: 0.5em;
+    }
+}
+
+@media (max-width: 400px) {
+    .container h1 {
+        font-size: 1.8em;
+        margin: 0 0 1.5em 0;
+    }
+    
+    .btn {
+        width: 10em;
+        font-size: 0.9em;
+        padding: 0.4em 1em;
+    }
+    
+    .ticketsList {
+        gap: 8px;
+        padding: 0 0.2em;
+    }
+    
+    .pageButton {
+        padding: 8px 12px;
+        font-size: 0.9em;
+    }
+}
