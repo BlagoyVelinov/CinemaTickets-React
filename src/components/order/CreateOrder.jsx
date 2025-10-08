@@ -274,6 +274,9 @@ export default function CreateOrder({ onClose, bookingTime }) {
   if (isLoading) return <div>Loading...</div>;
   if (hasError) return <div>Error: {debugInfo}</div>;
 
+
+  
+
   return (
     <div className="order-tickets-wrapper">
         <div className="order-tickets-content">
@@ -317,81 +320,83 @@ export default function CreateOrder({ onClose, bookingTime }) {
 				<div className={styles.screenLabel}>
           <img src="/images/screenSVG.svg" alt="screen-image" />
         </div>
-				<div className="hall-scheme">
-					<div className="seats">
-					{[...Array(ROWS)].map((_, rowIdx) => (
-						<div key={rowIdx + 1} className="seat-row">
-						<div className="row-number">{rowIdx + 1}</div>
-						{[...Array(COLS)].map((_, colIdx) => {
-							const row = rowIdx + 1;
-							const col = colIdx + 1;
-							return (
-							<div
-								key={col}
-								className={
-								"seat" +
-								(isSeatSelected(row, col) ? " selected" : "") +
-								(isSeatOccupied(row, col) ? " occupied" : "") +
-								(isWheelchairSeat(row, col) ? " wheelchair" : "")
-								}
-								onClick={() => onSeatClick(row, col)}
-							>
-								{col}
-							</div>
-							);
-						})}
-						</div>
-					))}
-					</div>
-					<div className="legend">
-						<p>
-							<span className="legend-item legend-free"></span> free seats
-						</p>
-						<p>
-							<span className="legend-item legend-selected"></span> your choice
-						</p>
-						<p>
-							<span className="legend-item legend-occupied"></span> occupied seats
-						</p>
-						<p>
-							<span className="legend-item legend-wheelchair"></span> wheelchair spaces
-						</p>
-					</div>
-					<div className="seat-counter">
-						<article className="seats-info">
-							{selectedSeats.length === 0 ? (
-								<span></span>
-							) : (
-								<span>
-								{Object.entries(
-									selectedSeats.reduce((acc, seat) => {
-									acc[seat.row] = acc[seat.row] || [];
-									acc[seat.row].push(seat.col);
-									return acc;
-									}, {})
-								).map(([row, cols]) => (
-									<span className="seats-text" key={row}>
-									<span style={{ color: "#d3c9c9" }}>Row:</span>{" "} {row} {" "}
-									<span style={{ color: "#d3c9c9" }}>{cols.length === 1 ? 'Place' : 'Places'}:</span>{" "}  {cols.join(",")}&nbsp;
-									</span>
-								))}
-								</span>
-							)}
-						</article>
-						<article className="ticket-count-icon">
-							<img className="ticket-icon" src="/images/icons/ticket-100.png" alt="ticket-icon" />
-							<span>{selectedSeats.length}</span>
-						</article>
-					</div>
-					<div className="actions">
-						<button className={`${styles.btnCancel} ${styles.btn}`} onClick={onClose}>Cancel</button>
-						<button className={`${styles.btnConfirm} ${styles.btn}`} 
-							disabled={selectedSeats.length === 0} 
-							onClick={confirmSelection}>
-								Confirm
-            			</button>
-					</div>
-				</div>
+        <div className="hall-scheme-wrapper">
+          <div className="hall-scheme">
+            <div className="seats">
+            {[...Array(ROWS)].map((_, rowIdx) => (
+              <div key={rowIdx + 1} className="seat-row">
+              <div className="row-number">{rowIdx + 1}</div>
+              {[...Array(COLS)].map((_, colIdx) => {
+                const row = rowIdx + 1;
+                const col = colIdx + 1;
+                return (
+                <div
+                  key={col}
+                  className={
+                  "seat" +
+                  (isSeatSelected(row, col) ? " selected" : "") +
+                  (isSeatOccupied(row, col) ? " occupied" : "") +
+                  (isWheelchairSeat(row, col) ? " wheelchair" : "")
+                  }
+                  onClick={() => onSeatClick(row, col)}
+                >
+                  {col}
+                </div>
+                );
+              })}
+              </div>
+            ))}
+            </div>
+            <div className="legend">
+              <p>
+                <span className="legend-item legend-free"></span> free seats
+              </p>
+              <p>
+                <span className="legend-item legend-selected"></span> your choice
+              </p>
+              <p>
+                <span className="legend-item legend-occupied"></span> occupied seats
+              </p>
+              <p>
+                <span className="legend-item legend-wheelchair"></span> wheelchair spaces
+              </p>
+            </div>
+            <div className="seat-counter">
+              <article className="seats-info">
+                {selectedSeats.length === 0 ? (
+                  <span></span>
+                ) : (
+                  <span>
+                  {Object.entries(
+                    selectedSeats.reduce((acc, seat) => {
+                    acc[seat.row] = acc[seat.row] || [];
+                    acc[seat.row].push(seat.col);
+                    return acc;
+                    }, {})
+                  ).map(([row, cols]) => (
+                    <span className="seats-text" key={row}>
+                    <span style={{ color: "#d3c9c9" }}>Row:</span>{" "} {row} {" "}
+                    <span style={{ color: "#d3c9c9" }}>{cols.length === 1 ? 'Place' : 'Places'}:</span>{" "}  {cols.join(",")}&nbsp;
+                    </span>
+                  ))}
+                  </span>
+                )}
+              </article>
+              <article className="ticket-count-icon">
+                <img className="ticket-icon" src="/images/icons/ticket-100.png" alt="ticket-icon" />
+                <span>{selectedSeats.length}</span>
+              </article>
+            </div>
+            <div className="actions">
+              <button className={`${styles.btnCancel} ${styles.btn}`} onClick={onClose}>Cancel</button>
+              <button className={`${styles.btnConfirm} ${styles.btn}`} 
+                disabled={selectedSeats.length === 0} 
+                onClick={confirmSelection}>
+                  Confirm
+                    </button>
+            </div>
+          </div>
+        </div>
 				</div>
 			)}
 			{/* Ticket Selection */}
