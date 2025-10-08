@@ -203,7 +203,6 @@
 
     .link2 {
         display: block;
-        padding: 0.2em 0.7em;
     }
 
     .content-section {
@@ -221,6 +220,11 @@
 
     #trailer-app {
         max-width: 90%;
+    }
+
+    div.modal-overlay {
+        width: 100%;
+        height: auto;
     }
 
     #footer {
