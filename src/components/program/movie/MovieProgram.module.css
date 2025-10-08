@@ -53,3 +53,9 @@
 .movieImage:hover::after {
     opacity: 0.5; 
 }
+
+@media (max-width: 600px) {
+    .bookingTimeBtn {
+        box-shadow: 0 0 5px #eee;
+    }
+}

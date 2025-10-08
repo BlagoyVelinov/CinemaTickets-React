@@ -48,6 +48,11 @@
     gap: 1.2rem;
 }
 
+.infoRow {
+    display: flex;
+    flex-wrap: wrap;
+}
+
 .infoRow .infoData {
     display: flex;
     flex-direction: column;
@@ -147,4 +152,25 @@
     cursor: pointer;
     color: #b7b7b7;
     border: 2px #b7b7b7 solid;
+}
+
+@media (max-width: 600px) {
+    .movieInfo {
+        margin-right: 1em;
+    }
+
+    .movieDetails .infoRow {
+        gap: 0.7em;
+    }
+}
+
+@media (max-width: 500px) {
+
+    .movieDetails .infoRow {
+        gap: 0.4em;
+    }
+
+    .infoData.infoClock {
+        flex-direction: column;
+    }
 }

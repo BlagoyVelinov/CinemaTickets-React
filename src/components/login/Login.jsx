@@ -61,7 +61,7 @@ export default function Login() {
                     <h2>Login</h2>
 
                     <form id="login-form" action={loginAction} className="auth-form-box">
-                        {/* Error message */}
+
                         {errors.length > 0 && (
                             <div className="alert alert-danger" role="alert">
                                 {errors.map((error, index) => (
