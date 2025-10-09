@@ -177,6 +177,15 @@
         height: auto;
     }
 
+    .address {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .banner-content {
+        flex-wrap: wrap;
+    }
+
     /* Program list */
     .movieList {
         align-items: flex-start;
