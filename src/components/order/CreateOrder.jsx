@@ -488,7 +488,13 @@ export default function CreateOrder({ onClose, bookingTime }) {
 						<span>Payment with credit card</span>
 					</button>
 					{showPaymentForm && <PaymentForm onValidationChange={setIsPaymentFormValid} forceValidation={triggerPaymentFormValidation} />}
-					<button className={styles.paymentButton} onClick={confirmSelection}>Pay Now</button>
+					<button 
+            className={isPaymentFormValid && isTermsAccepted
+              ? `${styles.paymentButton} ${styles.paymentReady}`
+              : `${styles.paymentButton}`} 
+            onClick={confirmSelection}
+          >Pay Now
+            </button>
 				</section>
 				<div className="actions">
 					<button className={`${styles.btnBack} ${styles.btn}`} onClick={goBack}>Back</button>

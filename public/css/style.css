@@ -403,6 +403,8 @@ p {
 }
 
 .address {
+    /* display: flex;
+    flex-wrap: wrap; */
     width: 100%;
     overflow: hidden;
     line-height: 1.714em;
