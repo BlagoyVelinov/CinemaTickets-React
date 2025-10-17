@@ -30,7 +30,6 @@ The app expects both backends to be available at configurable URLs (see “Envir
 
 ## 🖼️ Screenshots
 
-> Place your images here. Below are sample placeholders — replace with actual paths/files.
 
 ![PLACEHOLDER – Home](public/images/screenshots/Home.png)
 
@@ -86,8 +85,8 @@ Make sure both backends are running and match the URLs configured in `.env`.
 
 ## 🗄️ Backend services (overview)
 
-- Main Backend – `Spring-Project` (users, orders, tickets, offers)
-  - Code and docs: [GitHub – Spring-Project](https://github.com/BlagoyVelinov/Spring-Project)
+- Main Backend – `Spring-Project-API` (users, orders, tickets, offers)
+  - Code and docs: [GitHub – Spring-Project-API](https://github.com/BlagoyVelinov/Spring-Project)
   - Docker image: `docker pull blagoyvelinov/cinema-tickets`  
     See details in the backend README.
   - Note: Uses Mailjet for email verification on registration — configure environment variables as per backend docs.
