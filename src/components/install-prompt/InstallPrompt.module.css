@@ -4,7 +4,6 @@
     top: 1em;
     left: 50%;
     justify-content: space-between;
-    transform: translateX(-50%);
     background: #8f8e8e;
     color: #fff;
     padding: 1em 2.5em;
@@ -16,11 +15,17 @@
     gap: 10px;
     cursor: grab;
     user-select: none;
-    transition: transform 0.2s ease;
+    touch-action: pan-x;
+    transform: translateX(calc(-50% + var(--drag-offset, 0px)));
+    transition: transform 0.3s ease-out;
 }
 
 .prompt:active {
     cursor: grabbing;
+}
+
+.promptDragging {
+    transition: none;
 }
 
 .installBtn {
