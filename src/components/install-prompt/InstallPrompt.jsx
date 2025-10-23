@@ -66,12 +66,6 @@ export default function InstallPrompt() {
                 <div className={styles.iosInstructions}>
                     <p>Tap the share button and select "Add to Home Screen"</p>
                 </div>
-                <button 
-                    className={styles.dismissBtn}
-                    onClick={handleDismiss}
-                >
-                    ×
-                </button>
             </div>
         );
     }
@@ -86,12 +80,6 @@ export default function InstallPrompt() {
                 onClick={handleInstallClick}
             >
                 Install
-            </button>
-            <button 
-                className={styles.dismissBtn}
-                onClick={handleDismiss}
-            >
-                ×
             </button>
         </div>
     );
