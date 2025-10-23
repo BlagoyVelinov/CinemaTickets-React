@@ -1,28 +1,29 @@
 .prompt {
     display: flex;
     position: fixed;
-    top: 2em;
+    top: 1em;
     left: 50%;
+    justify-content: space-between;
     transform: translateX(-50%);
-    background: #acabab;
+    background: #8f8e8e;
     color: #fff;
     padding: 12px 20px;
     border-radius: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.2);
     align-items: center;
-    z-index: 1800;
+    z-index: 18000;
     width: 90%;
     gap: 10px;
 }
 
 .installBtn {
     background: transparent;
-    color: #00cc66;
+    color: #308b02;
     border: none;
     padding: 6px 12px;
     cursor: pointer;
-    font-size: 2em;
-    font-weight: 700;
+    font-size: 1.4em;
+    font-weight: 600;
 }
 
 .iosInstructions {
