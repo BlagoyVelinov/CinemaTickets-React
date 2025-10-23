@@ -9,6 +9,8 @@ export default function InstallPrompt() {
     const [isStandalone, setIsStandalone] = useState(false);
     const [touchStart, setTouchStart] = useState(null);
     const [touchEnd, setTouchEnd] = useState(null);
+    const [isDragging, setIsDragging] = useState(false);
+    const [dragOffset, setDragOffset] = useState(0);
     const promptRef = useRef(null);
 
     useEffect(() => {
@@ -62,21 +64,44 @@ export default function InstallPrompt() {
     const handleTouchStart = (e) => {
         setTouchEnd(null);
         setTouchStart(e.targetTouches[0].clientX);
+        setIsDragging(true);
+        setDragOffset(0);
     };
 
     const handleTouchMove = (e) => {
-        setTouchEnd(e.targetTouches[0].clientX);
+        if (!isDragging) return;
+        
+        const currentX = e.targetTouches[0].clientX;
+        const offset = currentX - touchStart;
+        setDragOffset(offset);
+        setTouchEnd(currentX);
     };
 
     const handleTouchEnd = () => {
-        if (!touchStart || !touchEnd) return;
+        if (!isDragging) return;
+        
+        setIsDragging(false);
+        
+        if (!touchStart || !touchEnd) {
+            setDragOffset(0);
+            return;
+        }
         
         const distance = touchStart - touchEnd;
         const isLeftSwipe = distance > 50;
         const isRightSwipe = distance < -50;
 
         if (isLeftSwipe || isRightSwipe) {
-            handleDismiss();
+            // Animate out
+            const direction = isLeftSwipe ? -window.innerWidth : window.innerWidth;
+            setDragOffset(direction);
+            
+            setTimeout(() => {
+                handleDismiss();
+            }, 300);
+        } else {
+            // Snap back to center
+            setDragOffset(0);
         }
     };
 
@@ -87,12 +112,15 @@ export default function InstallPrompt() {
         return (
             <div 
                 ref={promptRef}
-                className={styles.prompt}
+                className={`${styles.prompt} ${isDragging ? styles.promptDragging : ''}`}
+                style={{ 
+                    '--drag-offset': `${dragOffset}px`
+                }}
                 onTouchStart={handleTouchStart}
                 onTouchMove={handleTouchMove}
                 onTouchEnd={handleTouchEnd}
             >
-                <span>Install Cinema Tickets! <span style={{fontSize: '0.8em', opacity: 0.8}}>(swipe to dismiss)</span></span>
+                <span>Install Cinema Tickets!</span>
                 <div className={styles.iosInstructions}>
                     <p>Tap the share button and select "Add to Home Screen"</p>
                 </div>
@@ -105,12 +133,15 @@ export default function InstallPrompt() {
     return (
         <div 
             ref={promptRef}
-            className={styles.prompt}
+            className={`${styles.prompt} ${isDragging ? styles.promptDragging : ''}`}
+            style={{ 
+                '--drag-offset': `${dragOffset}px`
+            }}
             onTouchStart={handleTouchStart}
             onTouchMove={handleTouchMove}
             onTouchEnd={handleTouchEnd}
         >
-            <span>Install Cinema Tickets! <span style={{fontSize: '0.8em', opacity: 0.8}}>(swipe to dismiss)</span></span>
+            <span>Install Cinema Tickets!</span>
             <button 
                 className={styles.installBtn}
                 onClick={handleInstallClick}
