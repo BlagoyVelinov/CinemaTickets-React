@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 
 import styles from "./InstallPrompt.module.css";
 
@@ -7,6 +7,9 @@ export default function InstallPrompt() {
     const [showBanner, setShowBanner] = useState(false);
     const [isIOS, setIsIOS] = useState(false);
     const [isStandalone, setIsStandalone] = useState(false);
+    const [touchStart, setTouchStart] = useState(null);
+    const [touchEnd, setTouchEnd] = useState(null);
+    const promptRef = useRef(null);
 
     useEffect(() => {
 
@@ -55,14 +58,41 @@ export default function InstallPrompt() {
         setShowBanner(false);
     };
 
-    // Don't show banner if already installed
+    // Touch handlers for swipe gestures
+    const handleTouchStart = (e) => {
+        setTouchEnd(null);
+        setTouchStart(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchMove = (e) => {
+        setTouchEnd(e.targetTouches[0].clientX);
+    };
+
+    const handleTouchEnd = () => {
+        if (!touchStart || !touchEnd) return;
+        
+        const distance = touchStart - touchEnd;
+        const isLeftSwipe = distance > 50;
+        const isRightSwipe = distance < -50;
+
+        if (isLeftSwipe || isRightSwipe) {
+            handleDismiss();
+        }
+    };
+
     if (isStandalone) return null;
 
     // For iOS, show different message
     if (isIOS && !showBanner) {
         return (
-            <div className={styles.prompt}>
-                <span>Install Cinema Tickets!</span>
+            <div 
+                ref={promptRef}
+                className={styles.prompt}
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+            >
+                <span>Install Cinema Tickets! <span style={{fontSize: '0.8em', opacity: 0.8}}>(swipe to dismiss)</span></span>
                 <div className={styles.iosInstructions}>
                     <p>Tap the share button and select "Add to Home Screen"</p>
                 </div>
@@ -73,8 +103,14 @@ export default function InstallPrompt() {
     if (!showBanner) return null;
 
     return (
-        <div className={styles.prompt}>
-            <span>Install Cinema Tickets!</span>
+        <div 
+            ref={promptRef}
+            className={styles.prompt}
+            onTouchStart={handleTouchStart}
+            onTouchMove={handleTouchMove}
+            onTouchEnd={handleTouchEnd}
+        >
+            <span>Install Cinema Tickets! <span style={{fontSize: '0.8em', opacity: 0.8}}>(swipe to dismiss)</span></span>
             <button 
                 className={styles.installBtn}
                 onClick={handleInstallClick}
