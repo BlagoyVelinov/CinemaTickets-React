@@ -284,11 +284,25 @@
     }
 
     .seat-row {
+        position: relative;
         display: flex;
         justify-content: flex-start;
         margin-bottom: 0.3em;
+        padding-left: 2.2rem;
         white-space: nowrap;
     }
+
+    .row-number {
+      position: absolute;
+      right: 95%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 2rem;
+      text-align: right;
+      margin-right: 0; 
+      line-height: 1;
+    }
+  
       
     .seat {
         line-height: 30px;
@@ -305,7 +319,6 @@
 }
 
 @media (max-width: 500px) {
-
     #header .row-2 ul::after {
         top: 2.8em;
         right: 0;
@@ -324,10 +337,13 @@
     .box .inner {
         padding: 3em 2em 3.5em 2.5em;
     }
+
+    .row-number {
+        right: 93%;
+      }
 }
 
 @media (max-width: 400px) {
-
     #header {
         width: 100%;
     }
@@ -346,4 +362,9 @@
     .icon-menu .fa-bars {
         font-size: 1.9em;
     }
+
+    .row-number {
+        right: 92%;
+      }
+    
 }

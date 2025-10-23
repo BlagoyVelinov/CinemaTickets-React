@@ -26,6 +26,7 @@ import { OfferProvider } from './providers/OfferProvider';
 import ShowOffer from './components/offers/offer/ShowOffer';
 import TicketModal from './components/ticket/ticket-modal/TicketModal';
 import OrderSuccessTickets from './components/order/order-success/OrderSuccessTickets';
+import InstallPrompt from './components/install-prompt/InstallPrompt';
 const Admin = lazy(() => import('./components/admin/Admin'));
 
 
@@ -36,6 +37,7 @@ function App() {
 
   return (
     <UserProvider>
+                        <InstallPrompt />
             <div className="tail-top">
                 <div className="tail-bottom">
                     <div id="main">

@@ -1,0 +1,61 @@
+.prompt {
+    display: flex;
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: #fff;
+    padding: 12px 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+    align-items: center;
+    z-index: 1800;
+    max-width: 90%;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.installBtn {
+    background: #ff6600;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    padding: 6px 12px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.installBtn:hover {
+    background: #e55a00;
+}
+
+.dismissBtn {
+    background: #ccc;
+    color: #333;
+    border: none;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+    font-size: 16px;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: 10px;
+}
+
+.dismissBtn:hover {
+    background: #999;
+}
+
+.iosInstructions {
+    font-size: 12px;
+    color: #666;
+    margin-top: 5px;
+}
+
+.iosInstructions p {
+    margin: 0;
+}
